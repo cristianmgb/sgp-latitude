@@ -1,0 +1,263 @@
+// String Replace
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace +
+        str-replace(
+            str-slice($string, $index + str-length($search)),
+            $search,
+            $replace
+        );
+    }
+
+    @return $string;
+}
+
+// Font Face
+@mixin font-face(
+    $name,
+    $path,
+    $weight: null,
+    $style: null,
+    $exts: eot woff2 woff ttf svg
+) {
+    $src: null;
+
+    $extmods: (
+        eot: '?',
+        svg: '#' + str-replace($name, ' ', '_')
+    );
+
+    $formats: (
+        otf: 'opentype',
+        ttf: 'truetype'
+    );
+
+    @each $ext in $exts {
+    $extmod: if(
+            map-has-key($extmods, $ext),
+            $ext + map-get($extmods, $ext),
+            $ext
+        );
+        $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+        $src: append(
+            $src,
+            url(quote($path + '.' + $extmod)) format(quote($format)),
+            comma
+        );
+    }
+
+    @font-face {
+        font-family: quote($name);
+        font-style: $style;
+        font-weight: $weight;
+        src: $src;
+    }
+}
+
+//usage: @include font($family, 1.1875rem, 300, normal, normal);
+@mixin font($family, $size, $weight, $style, $stretch) {
+    font: {
+        family: $family;
+        size: $size !important;
+        weight: $weight !important;
+        style: $style;
+        stretch: $stretch;
+    }
+}
+
+//usage: @include opacity(.4);
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity = $opacity-ie); //IE8
+}
+
+//usage: @include background-opacity([color],[opacity]);
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color;
+    background: rgba($color, $opacity);
+}
+
+//usage: @include transition([property],[duration],[easing]);
+@mixin transition($property: all, $duration: .5s, $ease: linear){
+    -webkit-transition: $property $duration $ease;
+       -moz-transition: $property $duration $ease;
+         -o-transition: $property $duration $ease;
+            transition: $property $duration $ease;
+}
+
+//usage: @include box-shadow(0, 15px, 20px, 0, $color);
+@mixin box-shadow($top, $left, $blur, $spread, $color, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow: $top $left $blur $spread $color inset;
+           -moz-box-shadow: $top $left $blur $spread $color inset;
+                box-shadow: $top $left $blur $spread $color inset;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $spread $color;
+           -moz-box-shadow: $top $left $blur $spread $color;
+                box-shadow: $top $left $blur $spread $color;
+    }
+}
+
+//usage: @include background-image('/my/img/path.png');
+@mixin background-image($imgpath, $position:0 0, $repeat: no-repeat) {
+    background: {
+       image: url($imgpath);
+       position: $position;
+       repeat: $repeat;
+    }
+}
+
+//use: @include retina("img/logo@2x.png", 100px, 21px);
+@mixin retina($image, $width, $height) {
+    @media (min--moz-device-pixel-ratio: 1.3),
+    (-o-min-device-pixel-ratio: 2.6/2),
+    (-webkit-min-device-pixel-ratio: 1.3),
+    (min-device-pixel-ratio: 1.3),
+    (min-resolution: 1.3dppx) {
+        /* Serving 2x image on Retina display */
+        background-image: url($image);
+        background-size: $width $height;
+    }
+}
+
+//usage: @include linearGradient($color-from, $color-to);
+@mixin linearGradient($top, $bottom){
+    background: $top; /* Old browsers */
+    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$white', endColorstr='$black',GradientType=0 ); /* IE6-9 */
+}
+
+//usage: @include border-radius ( $value: 3px );
+@mixin border-radius ( $value: 3px ) {
+    -webkit-border-radius: $value;
+       -moz-border-radius: $value;
+            border-radius: $value;
+    // keeps background from busting out of border
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+}
+
+//usage: @include x-user-select;
+@mixin x-user-select ($value: none) {
+    -webkit-user-select: $value;
+       -moz-user-select: $value;
+        -ms-user-select: $value;
+            user-select: $value;
+}
+
+//usage: @include padding(0, 0, 0, 0);
+@mixin padding($top: null, $right: null, $bottom: null, $left: null) {
+    padding: {
+        top   : $top;
+        right : $right;
+        bottom: $bottom;
+        left  : $left;
+    }
+}
+
+//usage: @include margin(0, 0, 0, 0);
+@mixin margin($top: null, $right: null, $bottom: null, $left: null) {
+    margin: {
+        top   : $top;
+        right : $right;
+        bottom: $bottom;
+        left  : $left;
+    }
+}
+
+//usage: @include input-placeholder() { color: red; font-weight: 300; padding-top: 5px; };
+@mixin input-placeholder() {
+    $selector: '';
+    $prefixes: (
+        moz   : "::-moz",
+        webkit: "::-webkit",
+        ie    : ":-ms"
+    );
+
+    @each $prop, $value in $prefixes {
+
+        @if $prop != "moz" {
+            $selector: #{$value}-input-placeholder;
+        } @else {
+            $selector: #{$value}-placeholder;
+        }
+
+        @if & {
+            &#{$selector} {
+                @content;
+            }
+        } @else {
+            #{$selector} {
+                @content;
+            }
+        }
+    }
+
+    &::placeholder {
+        @content;
+    }
+}
+
+//usage: @include backface-visibility; for default the state is hidden
+@mixin backface-visibility($visibility: hidden) {
+    -webkit-backface-visibility: $visibility;
+       -moz-backface-visibility: $visibility;
+        -ms-backface-visibility: $visibility;
+         -o-backface-visibility: $visibility;
+            backface-visibility: $visibility;
+}
+
+//usage: @include transform(rotate(20deg));
+@mixin transform($transformation) {
+    -webkit-transform: $transformation;
+       -moz-transform: $transformation;
+        -ms-transform: $transformation;
+         -o-transform: $transformation;
+            transform: $transformation;
+}
+
+//usage: @include transform-style(preserve-3d);
+@mixin transform-style($style){
+    -webkit-transform-style: $style;
+       -moz-transform-style: $style;
+         -o-transform-style: $style;
+        -ms-transform-style: $style;
+            transform-style: $style;
+}
+
+//usage: @include border(left, 1px, solid, $color)
+@mixin border($direction: '', $width: 1px, $style: solid, $color: #000) {
+    //border-$direction-width: medium|thin|thick|length|initial|inherit;
+    //border-$direction-style: none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit;
+    //border-$direction-color: color|transparent|initial|inherit;
+    @if $direction == '' {
+        border-width: $width;
+        border-style: $style;
+        border-color: $color;
+    } @else if $direction == left {
+        border-left-width: $width;
+        border-left-style: $style;
+        border-left-color: $color;
+    } @else if $direction == top {
+        border-top-width: $width;
+        border-top-style: $style;
+        border-top-color: $color;
+    } @else if $direction == right {
+        border-right-width: $width;
+        border-right-style: $style;
+        border-right-color: $color;
+    } @else if  $direction == bottom {
+        border-bottom-width: $width;
+        border-bottom-style: $style;
+        border-bottom-color: $color;
+    }
+}

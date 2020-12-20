@@ -1,0 +1,15 @@
+// Mixins
+@import 'mixins';
+
+// Settings dashboard
+// i you want to setup a theme, you should to remove this line for active the custome styles
+// @import 'settings-dashboard';
+
+// Custom styles dashboard
+@import 'custom-dashboard';
+
+// CoreUi
+@import '~@coreui/coreui/scss/coreui';
+
+// FontAwesome
+@import 'fontawesome';

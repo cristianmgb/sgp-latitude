@@ -1,0 +1,133 @@
+FROM  php:7.4-apache
+LABEL name="PHP 7.4 última versión estable en español + Apache" \
+    maintainer="jesus@jesusguerreiro.es"
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    APP_ENV=development \
+    APP_BASE_DIR=/web \
+    APP_SERVER_ADMIN=nomail@example.org \
+    APP_TIMEZONE=Europe/Madrid \
+    APP_WEB_DOMAIN=localhost \
+    APACHE_DOCUMENT_ROOT=/web/public \
+    APACHE_RUN_USER=usuario \
+    APACHE_RUN_GROUP=usuario
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
+    sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && apt-get --force-yes update \
+    && apt-get -y upgrade \
+    && apt-get -y dist-upgrade \
+    && apt-get -y install apt-utils \
+        bash-completion \
+        libicu-dev \
+        libpq-dev \
+        less \
+        locales \
+        multitail \
+        nano \
+        ssl-cert \
+        sudo \
+        tzdata \
+        unzip \
+        wget \
+        curl \
+    && localedef -i es_ES -c -f UTF-8 -A /usr/share/locale/locale.alias es_ES.UTF-8 \
+    && echo "${APACHE_RUN_USER}   ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/allsudo \
+    && make-ssl-cert generate-default-snakeoil \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get -y install nodejs \
+    && true
+ENV LANG es_ES.UTF-8
+
+RUN rm /etc/localtime
+RUN echo "$APP_TIMEZONE" > /etc/timezone \
+    && ln -s /usr/share/zoneinfo/"$APP_TIMEZONE" /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
+    && true
+RUN groupadd "${APACHE_RUN_GROUP}" --gid=1000 \
+    && useradd -m -s /bin/bash -g "${APACHE_RUN_GROUP}" -G adm,ssl-cert,www-data --uid=1000 "${APACHE_RUN_USER}" \
+    && echo 'umask 0002' >> /home/"${APACHE_RUN_USER}"/.bashrc \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apt/archive/*.deb \
+    && docker-php-ext-install -j$(nproc) pdo \
+        intl \
+    && true
+
+COPY bin/get-composer.sh /tmp/
+
+RUN a2dismod mpm_event \
+        status \
+        && set -eux; \
+    { \
+        echo 'ServerName ${APP_WEB_DOMAIN}'; \
+    } > /etc/apache2/conf-available/server-name.conf \
+    && a2enmod rewrite \
+        ssl \
+        headers \
+        setenvif \
+        expires \
+        unique_id \
+        mpm_prefork \
+    && a2dissite 000-default \
+    && a2disconf charset \
+        localized-error-pages \
+        serve-cgi-bin \
+    && a2enconf server-name \
+    && set -eux; \
+    { \
+        echo '    <VirtualHost *:80>'; \
+        echo '    	ServerName ${APP_WEB_DOMAIN}'; \
+        echo '    	ServerAdmin ${APP_SERVER_ADMIN}'; \
+        echo '    	DocumentRoot ${APACHE_DOCUMENT_ROOT}'; \
+        echo '    	AddDefaultCharset utf-8'; \
+        echo '    	SetEnv CI_ENVIRONMENT ${APP_ENV}'; \
+        echo '    	ErrorLog ${APACHE_LOG_DIR}/app.error.log'; \
+        echo '    	CustomLog ${APACHE_LOG_DIR}/app.log common'; \
+        echo '    	ServerSignature Off'; \
+        echo '    	<Directory ${APACHE_DOCUMENT_ROOT}>'; \
+        echo '    		AllowOverride All'; \
+        echo '    		Options -Indexes +FollowSymLinks'; \
+        echo '    		Require all granted'; \
+        echo '    	</Directory>'; \
+        echo '    </VirtualHost>'; \
+    } > /etc/apache2/sites-enabled/app.conf \
+    && set -eux; \
+    { \
+        echo '<IfModule mod_ssl.c>'; \
+        echo '  <VirtualHost *:443>'; \
+        echo '      ServerName ${APP_WEB_DOMAIN}'; \
+        echo '		ServerAdmin ${APP_SERVER_ADMIN}'; \
+        echo '		DocumentRoot ${APACHE_DOCUMENT_ROOT}'; \
+        echo '		AddDefaultCharset utf-8'; \
+        echo '		ErrorLog ${APACHE_LOG_DIR}/app-ssl.error.log'; \
+        echo '		CustomLog ${APACHE_LOG_DIR}/app-ssl.access.log common'; \
+        echo '		SetEnv CI_ENVIRONMENT ${APP_ENV}'; \
+        echo '		SSLEngine on'; \
+        echo '		SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem'; \
+        echo '		SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key'; \
+        echo '		ServerSignature Off'; \
+        echo '		<Directory ${APACHE_DOCUMENT_ROOT}>'; \
+        echo '			AllowOverride All'; \
+        echo '			Options -Indexes +FollowSymLinks'; \
+        echo '			Require all granted'; \
+        echo '		</Directory>'; \
+        echo '		<FilesMatch "\.(php)$">'; \
+        echo '			SSLOptions +StdEnvVars'; \
+        echo '		</FilesMatch>'; \
+        echo '	</VirtualHost>'; \
+        echo '</IfModule>'; \
+    } > /etc/apache2/sites-enabled/app-ssl.conf \
+    && set -eux; \
+    { \
+        echo 'date.timezone = "${APP_TIMEZONE}"'; \
+    } > $PHP_INI_DIR/conf.d/timezone.ini \
+    && cp $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini \
+    && /tmp/get-composer.sh \
+    && rm /tmp/get-composer.sh \
+    && true
+
+WORKDIR ${APP_BASE_DIR}
+
+EXPOSE 80
+EXPOSE 443

@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    env_file: ./web.env
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../:/web/app
+    container_name: starter-web
+    image: starter:web
+    hostname: starterweb
+    networks:
+      - starter
+
+networks:
+  starter:
+    driver: bridge

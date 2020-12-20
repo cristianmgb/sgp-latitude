@@ -1,0 +1,62 @@
+::selection {
+	background-color: $orange;
+	color: $white;
+}
+
+::-moz-selection {
+	background-color: $orange;
+	color: $white;
+}
+
+a{
+	&:hover {
+	   color: $orange;
+	   text-decoration: none;
+	}
+}
+
+.card {
+	box-shadow: 0 0 8px $gray-200;
+	border-radius: 0px;
+
+	.card-header {
+		color: $white;
+		background-color: $orange;
+		font-size: 22px;
+		font-weight: bold;
+		margin: 0 0 14px 0;
+		padding: 5px 10px;
+		line-height: 40px;
+
+		&:first-child,
+		&:last-child {
+		    border-radius: 0px;
+		}
+	}
+
+	.card-footer {
+		text-align: right;
+		font-size: 12px;
+		line-height: 32px;
+		padding: 0 10px 0 10px;
+		background: $gray-600;
+		color: $white;
+
+		&:last-child {
+			border-radius: 0;
+		}
+	}
+}
+
+h2 {
+	margin:0;
+	padding:0 0 10px 0;
+}
+
+.text-warning {
+	color: $orange;
+}
+
+ul > li {
+	list-style: none;
+}

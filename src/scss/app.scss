@@ -1,0 +1,21 @@
+// Mixins
+@import 'mixins';
+
+// Settings App
+// i you want to setup a theme, you should to remove this line for active the custome styles
+// @import 'settings-app';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// FontAwesome
+@import 'fontawesome';
+
+// Toastr notifications
+@import 'toastr';
+
+// Welcome styles
+@import 'welcome';
+
+// Custom styles app
+@import 'custom-app';

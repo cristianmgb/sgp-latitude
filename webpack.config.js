@@ -29,7 +29,6 @@ module.exports = {
     // "production" | "development" | "none"
     mode : isDevelopment ? 'production' : 'development',
     entry: {
-        app  : path.resolve(__dirname, 'src/js/app'),
         dash : path.resolve(__dirname, 'src/js/dashboard/index'),
         auth : path.resolve(__dirname, 'src/js/auth/index')
     },

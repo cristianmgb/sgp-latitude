@@ -43,7 +43,60 @@ $routes->get('/change', 'Auth::change_password');
  * */
 $routes->group('admin', function($routes)
 {
-	$routes->get('home', 'Admin::index');
+	$routes->get('inicio', 'Admin::index');
+
+	// Asociados
+	$routes->get('asociados',                   'Associate::index');
+	$routes->get('asociado/nuevo',              'Associate::new');
+	$routes->post('asociado/create',            'Associate::create');
+	$routes->post('asociado',                   'Associate::create');   // alias
+	$routes->get('asociado/show/(:segment)',    'Associate::show/$1');
+	$routes->get('asociado/(:segment)',         'Associate::show/$1');  // alias
+	$routes->get('asociado/edit/(:segment)',    'Associate::edit/$1');
+	$routes->post('asociado/update/(:segment)', 'Associate::update/$1');
+	$routes->get('asociado/remove/(:segment)',  'Associate::remove/$1');
+	$routes->post('asociado/delete/(:segment)', 'Associate::delete/$1');
+
+	// Contratistas
+	$routes->get('contratistas',                   'Constractor::index');
+	$routes->get('contratista/nuevo',              'Constractor::new');
+	$routes->post('contratista/create',            'Constractor::create');
+	$routes->post('contratista',                   'Constractor::create');   // alias
+	$routes->get('contratista/show/(:segment)',    'Constractor::show/$1');
+	$routes->get('contratista/(:segment)',         'Constractor::show/$1');  // alias
+	$routes->get('contratista/edit/(:segment)',    'Constractor::edit/$1');
+	$routes->post('contratista/update/(:segment)', 'Constractor::update/$1');
+	$routes->get('contratista/remove/(:segment)',  'Constractor::remove/$1');
+	$routes->post('contratista/delete/(:segment)', 'Constractor::delete/$1');
+
+	$routes->get('impuestos', 'Tax::index');
+	$routes->get('polizas', 'Policies::index');
+
+	// Proyectos4e
+	$routes->get('proyectos',                   'Project::index');
+	$routes->get('proyecto/nuevo',              'Project::new');
+	$routes->post('proyecto/create',            'Project::create');
+	$routes->post('proyecto',                   'Project::create');   // alias
+	$routes->get('proyecto/show/(:segment)',    'Project::show/$1');
+	$routes->get('proyecto/(:segment)',         'Project::show/$1');  // alias
+	$routes->get('proyecto/edit/(:segment)',    'Project::edit/$1');
+	$routes->post('proyecto/update/(:segment)', 'Project::update/$1');
+	$routes->get('proyecto/remove/(:segment)',  'Project::remove/$1');
+	$routes->post('proyecto/delete/(:segment)', 'Project::delete/$1');
+
+	$routes->get('roles', 'Rol::index');
+	
+	// Usuarios
+	$routes->get('usuarios',                   'User::index');
+	$routes->get('usuario/nuevo',              'User::new');
+	$routes->post('usuario/create',            'User::create');
+	$routes->post('usuario',                   'User::create');   // alias
+	$routes->get('usuario/show/(:segment)',    'User::show/$1');
+	$routes->get('usuario/(:segment)',         'User::show/$1');  // alias
+	$routes->get('usuario/edit/(:segment)',    'User::edit/$1');
+	$routes->post('usuario/update/(:segment)', 'User::update/$1');
+	$routes->get('usuario/remove/(:segment)',  'User::remove/$1');
+	$routes->post('usuario/delete/(:segment)', 'User::delete/$1');
 });
 
 /**

@@ -43,11 +43,8 @@ module.exports = {
         ],
         // directories where to look for modules
         extensions: [
-            '.js', '.json', '.jsx',
-            '.ts', '.tsx',
-            '.scss', '.css', '.less', '.styl',            
-            '.gif', '.png', '.jpg', '.jpeg', '.svg',
-            '.vue'
+            '.js', '.json', '.jsx','.ts', '.tsx', '.vue',
+            '.scss', '.css', '.gif', '.png', '.jpg', '.jpeg', '.svg'
         ],
         alias: {
             vue: 'vue/dist/vue.js'
@@ -113,7 +110,7 @@ module.exports = {
                 ]
             },
             {
-                test   : /\.(gif|png|jpe?g|mp3|svg)$/i,
+                test   : /\.(ico|gif|png|jpe?g|mp3|svg)$/i,
                 use: [
                     {
                         loader: 'file-loader',

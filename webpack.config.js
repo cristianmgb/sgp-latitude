@@ -29,7 +29,7 @@ module.exports = {
     // "production" | "development" | "none"
     mode : isDevelopment ? 'production' : 'development',
     entry: {
-        dash : path.resolve(__dirname, 'src/js/dashboard/index'),
+        dash : path.resolve(__dirname, 'src/js/index'),
         auth : path.resolve(__dirname, 'src/js/auth/index')
     },
     output: {

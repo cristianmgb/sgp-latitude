@@ -1,46 +1,8 @@
-<div class="topbar">
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <a href="mailto:info@cihispano.org?subject=feedback" class="my-auto text-dark">
-                    <i class="far fa-envelope"></i> info@cihispano.org
-                </a>
-            </div><!-- /.col-12 col-md-6 col-lg-6 col-xl-6 -->
-            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <ul class="float-right mb-0">
-                    <li class="d-inline">
-                        <a class="btn btn-ci btn-sm" href="" data-toggle="modal" data-target="#login">
-                            Iniciar Sesión
-                        </a>
-                    </li>
-                    <li class="d-inline">
-                        <a class="btn btn-ci btn-sm" href="" data-toggle="modal" data-target="#register">
-                            Registrarse
-                        </a>
-                    </li>
-                </ul>
-            </div><!-- /.col-12 col-md-6 col-lg-6 col-xl-6 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</div><!-- /.topbar -->
-
-<!-- Modal login -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+    <div class="c-sidebar-brand d-lg-down-none">
+        <img src="<?php echo base_url('/dist/img/brand-full.png'); ?>" alt="Logo Lattitude"  class="c-sidebar-brand-full w-50 mx-auto">
+        <img src="<?php echo base_url('/dist/img/brand-minimized.png'); ?>" alt="Logo Lattitude"  class="c-sidebar-brand-minimized">
     </div>
+    <?= $this->include('partials/sidebar') ?>
+    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
 </div>

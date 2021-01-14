@@ -2,8 +2,7 @@
 @import 'mixins';
 
 // Settings dashboard
-// i you want to setup a theme, you should to remove this line for active the custome styles
-// @import 'settings-dashboard';
+@import 'settings-dashboard';
 
 // Custom styles dashboard
 @import 'custom-dashboard';

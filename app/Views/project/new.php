@@ -32,14 +32,14 @@
 							</div>
 							<div class="col">
 								<div class="form-group">
-									<label for="name">Nombre</label>
-									<input type="text" class="form-control" id="name" name="name">
+									<label for="value">Valor</label>
+									<input type="text" class="form-control" id="value" name="value">
 								</div>
 							</div>
 							<div class="col">
 								<div class="form-group">
-									<label for="name">Nombre</label>
-									<input type="text" class="form-control" id="name" name="name">
+									<label for="name">Tiempo</label>
+									<input type="text" class="form-control" id="time" name="time">
 								</div>
 							</div>
 						</div>

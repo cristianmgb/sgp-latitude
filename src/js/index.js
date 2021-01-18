@@ -2,6 +2,21 @@ import 'core-js/stable'
 import Vue from 'vue'
 import '@coreui/coreui'
 
+// Installing whole package
+import CoreuiVue from '@coreui/vue';
+Vue.use(CoreuiVue);
+
+// Vue Toast Notification
+import VueToast from 'vue-toast-notification';
+Vue.use(VueToast, {
+  	position: 'top-right',
+  	duration: 3500,
+    dismissible: true
+});
+
+// // VeeValidate
+// import 'vee-validate';
+
 // Import Main styles for this application
 import '../scss/dashboard'
 import '../img/brand-full.png'
@@ -31,6 +46,16 @@ import '../img/favicon/favicon-96x96.png'
 import '../img/favicon/ms-icon-70x70.png'
 import '../img/favicon/ms-icon-144x144.png'
 import '../img/favicon/favicon.ico'
+
+// Componentes
+Vue.component('sgp-rol-form', require('./components/RolFormComponent').default)
+Vue.component('sgp-policy-form', require('./components/PolicyFormComponent').default)
+Vue.component('sgp-tax-form', require('./components/TaxFormComponent').default)
+Vue.component('sgp-contractor-form', require('./components/ContractorFormComponent').default)
+Vue.component('sgp-associate-form', require('./components/AssociateFormComponent').default)
+Vue.component('sgp-associate-table', require('./components/AssociateTableComponent').default)
+Vue.component('sgp-user-form', require('./components/UserFormComponent').default)
+Vue.component('sgp-user-table', require('./components/UserTableComponent').default)
 
 /**
  * [dash description]: Instanciamos Vue en 'dash'

@@ -4,15 +4,11 @@ import '@coreui/coreui'
 
 // Styles for Auth views
 import '../../scss/auth'
+
 // Login
 Vue.component(
     'ci-login',
     require('../components/LoginComponent').default
-)
-// Forget
-Vue.component(
-    'ci-forget',
-    require('../components/ForgetComponent').default
 )
 
 /**

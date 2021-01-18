@@ -40,13 +40,6 @@
 									<hr>
 								</div>
 							</div>
-							<div class="row justify-content-end">
-								<div class="col-6">
-									<a :href="btnForget.url" class="btn btn-outline-light btn-block text-dark" role="button">
-										{{ btnForget.title }}
-									</a>
-								</div>
-							</div>
 						</form>
 					</div>
 				</div>
@@ -72,10 +65,6 @@
 			btnLogin  : {
 				url   : 'login',
 				title : 'Inicio'
-			},
-			btnForget : {
-				url   : 'forget',
-				title : 'Olvide la clave'
 			}
 		}),
 		methods: {

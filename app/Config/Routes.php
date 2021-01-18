@@ -30,73 +30,83 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Admin::index');
+$routes->get('/admin', 'Admin::index');
 
 // Auth routes
 $routes->get('/login', 'Auth::login');
-$routes->get('/forget', 'Auth::forget');
-$routes->get('/forget', 'Auth::add');
-$routes->get('/change', 'Auth::change_password');
 
 /**
  *  Admin Routes
  * */
 $routes->group('admin', function($routes)
 {
-	$routes->get('inicio', 'Admin::index');
-
 	// Asociados
 	$routes->get('asociados',                   'Associate::index');
 	$routes->get('asociado/nuevo',              'Associate::new');
 	$routes->post('asociado/create',            'Associate::create');
-	$routes->post('asociado',                   'Associate::create');   // alias
 	$routes->get('asociado/show/(:segment)',    'Associate::show/$1');
-	$routes->get('asociado/(:segment)',         'Associate::show/$1');  // alias
 	$routes->get('asociado/edit/(:segment)',    'Associate::edit/$1');
 	$routes->post('asociado/update/(:segment)', 'Associate::update/$1');
-	$routes->get('asociado/remove/(:segment)',  'Associate::remove/$1');
 	$routes->post('asociado/delete/(:segment)', 'Associate::delete/$1');
+	$routes->get('asociado/getAll', 			'Associate::get_all_associates');
+	$routes->get('asociado/getById/(:segment)', 'Associate::get_associate_by_id/$1');
 
 	// Contratistas
-	$routes->get('contratistas',                   'Constractor::index');
-	$routes->get('contratista/nuevo',              'Constractor::new');
-	$routes->post('contratista/create',            'Constractor::create');
-	$routes->post('contratista',                   'Constractor::create');   // alias
-	$routes->get('contratista/show/(:segment)',    'Constractor::show/$1');
-	$routes->get('contratista/(:segment)',         'Constractor::show/$1');  // alias
-	$routes->get('contratista/edit/(:segment)',    'Constractor::edit/$1');
-	$routes->post('contratista/update/(:segment)', 'Constractor::update/$1');
-	$routes->get('contratista/remove/(:segment)',  'Constractor::remove/$1');
-	$routes->post('contratista/delete/(:segment)', 'Constractor::delete/$1');
+	$routes->get('contratistas',                   'Contractor::index');
+	$routes->post('contratista/create',            'Contractor::create');
+	$routes->post('contratista/update/(:segment)', 'Contractor::update/$1');
+	$routes->post('contratista/delete/(:segment)', 'Contractor::delete/$1');
+	$routes->get('contratista/getAll', 			   'Contractor::get_all_contractors');
+	$routes->get('contratista/getById/(:segment)', 'Contractor::get_contractor_by_id/$1');
 
-	$routes->get('impuestos', 'Tax::index');
-	$routes->get('polizas', 'Policies::index');
+	// Impuestos
+	$routes->get('impuestos',                   'Tax::index');
+	$routes->get('impuesto/nuevo',              'Tax::new');
+	$routes->post('impuesto/create',            'Tax::create');
+	$routes->get('impuesto/show/(:segment)',    'Tax::show/$1');
+	$routes->get('impuesto/edit/(:segment)',    'Tax::edit/$1');
+	$routes->post('impuesto/update/(:segment)', 'Tax::update/$1');
+	$routes->post('impuesto/delete/(:segment)', 'Tax::delete/$1');
+	$routes->get('impuesto/getAll', 			'Tax::get_all_taxes');
+	$routes->get('impuesto/getById/(:segment)', 'Tax::get_tax_by_id/$1');
 
-	// Proyectos4e
+	// Pólizas
+	$routes->get('polizas',                   'Policies::index');
+	$routes->post('poliza/create',            'Policies::create');
+	$routes->get('poliza/edit/(:segment)',    'Policies::edit/$1');
+	$routes->post('poliza/update/(:segment)', 'Policies::update/$1');
+	$routes->post('poliza/delete/(:segment)', 'Policies::delete/$1');
+	$routes->get('poliza/getAll', 			  'Policies::get_all_policies');
+	$routes->get('poliza/getById/(:segment)', 'Policies::get_policy_by_id/$1');
+
+	// Proyectos
 	$routes->get('proyectos',                   'Project::index');
 	$routes->get('proyecto/nuevo',              'Project::new');
 	$routes->post('proyecto/create',            'Project::create');
-	$routes->post('proyecto',                   'Project::create');   // alias
 	$routes->get('proyecto/show/(:segment)',    'Project::show/$1');
-	$routes->get('proyecto/(:segment)',         'Project::show/$1');  // alias
 	$routes->get('proyecto/edit/(:segment)',    'Project::edit/$1');
 	$routes->post('proyecto/update/(:segment)', 'Project::update/$1');
-	$routes->get('proyecto/remove/(:segment)',  'Project::remove/$1');
 	$routes->post('proyecto/delete/(:segment)', 'Project::delete/$1');
 
-	$routes->get('roles', 'Rol::index');
+	// Roles
+	$routes->get('roles',                  'Rol::index');
+	$routes->post('rol/create',            'Rol::create');
+	$routes->get('rol/edit/(:segment)',    'Rol::edit/$1');
+	$routes->post('rol/update/(:segment)', 'Rol::update/$1');
+	$routes->post('rol/delete/(:segment)', 'Rol::delete/$1');
+	$routes->get('rol/getAll', 			   'Rol::get_all_roles');
+	$routes->get('rol/getById/(:segment)', 'Rol::get_rol_by_id/$1');
 	
 	// Usuarios
 	$routes->get('usuarios',                   'User::index');
 	$routes->get('usuario/nuevo',              'User::new');
 	$routes->post('usuario/create',            'User::create');
-	$routes->post('usuario',                   'User::create');   // alias
 	$routes->get('usuario/show/(:segment)',    'User::show/$1');
-	$routes->get('usuario/(:segment)',         'User::show/$1');  // alias
 	$routes->get('usuario/edit/(:segment)',    'User::edit/$1');
 	$routes->post('usuario/update/(:segment)', 'User::update/$1');
-	$routes->get('usuario/remove/(:segment)',  'User::remove/$1');
 	$routes->post('usuario/delete/(:segment)', 'User::delete/$1');
+	$routes->get('usuarios/getAll', 		   'User::get_all_users');
+	$routes->get('usuarios/getById/(:segment)','User::get_user_by_id/$1');
 });
 
 /**

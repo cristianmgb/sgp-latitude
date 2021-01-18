@@ -20,7 +20,6 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="<?php echo base_url('/dist/img/favicon/ms-icon-144x144.png'); ?>">
         <meta name="theme-color" content="#ffffff">
-
         <!--  App CSS (Do not remove) -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('/dist/css/dash.css'); ?>">
     </head>

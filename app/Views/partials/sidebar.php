@@ -1,6 +1,6 @@
 <ul class="c-sidebar-nav">
     <li class="c-sidebar-nav-item">
-        <?= anchor('admin/inicio', '<i class="fas fa-tachometer-alt c-sidebar-nav-icon"></i> Inicio', 'class="c-sidebar-nav-link"') ?>
+        <?= anchor('admin', '<i class="fas fa-tachometer-alt c-sidebar-nav-icon"></i> Inicio', 'class="c-sidebar-nav-link"') ?>
     </li>
     <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
         <?= anchor('#', '<i class="fas fa-user-friends c-sidebar-nav-icon"></i> Asociados', 'class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle"') ?>

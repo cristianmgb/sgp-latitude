@@ -14,10 +14,20 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
+use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 
 class BaseController extends Controller
 {
+	use ResponseTrait;
+
+	/**
+	 * @var string[]
+	 */
+	public $supportedResponseFormats = [
+		'application/json'
+	];
+
 
 	/**
 	 * An array of helpers to be loaded automatically upon
@@ -26,7 +36,7 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = ['url', 'form', 'html'];
+	protected $helpers = ['security', 'url', 'form', 'html'];
 
 	/**
 	 * Constructor.
@@ -41,6 +51,43 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+	}
+
+	/**
+	 * [successResponse description]
+	 * @param  [type] $message [description]
+	 * @param  [type] $data    [description]
+	 * @return [type]          [description]
+	 */
+	public function successResponse ( $message, $data ){
+
+		$options = [
+		    'status' 	 => 'OK',
+			'statusCode' => 200,
+			'message'    => $message,
+			'data'       => $data
+		];
+
+		return $this->response->setJSON($options);
+	}
+
+	/**
+	 * [failResponse description]
+	 * @param  [type] $cod     [description]
+	 * @param  [type] $message [description]
+	 * @param  [type] $data    [description]
+	 * @return [type]          [description]
+	 */
+	public function failResponse ( $cod, $message, $data ){
+
+		$options = [
+		    'status' 	 => 'ERROR',
+			'statusCode' => $cod,
+			'message'    => $message,
+			'data'       => $data
+		];
+
+		return $this->response->setJSON($options);
 	}
 
 }

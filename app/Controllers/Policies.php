@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\PolicyModel;
+
 class Policies extends BaseController
 {
 	public function index()
@@ -9,22 +11,63 @@ class Policies extends BaseController
 		return view('policies');
 	}
 
-	// Add a new item
-	public function add()
+	/**
+	 * [create description]
+	 * @return [type] [description]
+	 */
+	public function create()
+	{
+		$request = \Config\Services::request();
+		$data    = $request->getJSON(true);
+		$policy 	 = new TaxModel();
+        $policy->insert( $data );
+
+        return ( $policy->insertID ) ? $this->successResponse( 'Póliza creada exitosamente', $data ) : $this->failResponse( 'No se pudo crear la póliza', 404, $policy );
+	}
+
+	/**
+	 * [update description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function update( $id )
 	{
 
 	}
 
-	//Update one item
-	public function update( $id = NULL )
+	/**
+	 * [delete description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function delete( $id )
 	{
 
 	}
 
-	//Delete one item
-	public function delete( $id = NULL )
+	/**
+	 * [get_all_policies description]
+	 * @return [type] [description]
+	 */
+	public function get_all_policies()
 	{
+		$policyModel = new PolicyModel();
+		$policies 	  = $policyModel->orderBy('id', 'asc')->findAll();
 
+		return ( $policies ) ? $this->successResponse( '', $policies ) : $this->failResponse( 'Sin datos', 404, $policies );
+	}
+
+	/**
+	 * [get_policy_by_id description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function get_policy_by_id ( $id )
+	{
+		$policyModel = new PolicyModel();
+		$policy 	  =  $policyModel->find($id);
+
+		return ( $policy ) ? $this->successResponse( 'Póliza encontrada', $policy ) : $this->failResponse( 'Póliza no encontrada', 404, $policy );
 	}
 }
 

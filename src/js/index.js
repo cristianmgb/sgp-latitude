@@ -56,6 +56,8 @@ Vue.component('sgp-associate-form', require('./components/AssociateFormComponent
 Vue.component('sgp-associate-table', require('./components/AssociateTableComponent').default)
 Vue.component('sgp-user-form', require('./components/UserFormComponent').default)
 Vue.component('sgp-user-table', require('./components/UserTableComponent').default)
+Vue.component('sgp-taxes-table-project', require('./components/TaxesTableProjectComponent').default)
+Vue.component('sgp-project-form', require('./components/ProjectFormComponent').default)
 
 /**
  * [dash description]: Instanciamos Vue en 'dash'

@@ -31,10 +31,10 @@ class Database extends \CodeIgniter\Database\Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => '',
-		'username' => '',
-		'password' => '',
-		'database' => '',
+		'hostname' => 'mysql1006.mochahost.com',
+		'username' => 'olberutr_sgp',
+		'password' => 'TzczyhfelJ{H',
+		'database' => 'olberutr_sgp_latitude',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,

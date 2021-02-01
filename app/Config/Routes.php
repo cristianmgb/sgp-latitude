@@ -54,6 +54,7 @@ $routes->group('admin', function($routes)
 	// Contratistas
 	$routes->get('contratistas',                   'Contractor::index');
 	$routes->post('contratista/create',            'Contractor::create');
+	$routes->get('contratista/edit/(:segment)',    'Contractor::edit/$1');
 	$routes->post('contratista/update/(:segment)', 'Contractor::update/$1');
 	$routes->post('contratista/delete/(:segment)', 'Contractor::delete/$1');
 	$routes->get('contratista/getAll', 			   'Contractor::get_all_contractors');
@@ -105,8 +106,8 @@ $routes->group('admin', function($routes)
 	$routes->get('usuario/edit/(:segment)',    'User::edit/$1');
 	$routes->post('usuario/update/(:segment)', 'User::update/$1');
 	$routes->post('usuario/delete/(:segment)', 'User::delete/$1');
-	$routes->get('usuarios/getAll', 		   'User::get_all_users');
-	$routes->get('usuarios/getById/(:segment)','User::get_user_by_id/$1');
+	$routes->get('usuario/getAll', 		       'User::get_all_users');
+	$routes->get('usuario/getById/(:segment)', 'User::get_user_by_id/$1');
 });
 
 /**

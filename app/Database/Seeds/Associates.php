@@ -17,11 +17,7 @@ class Associates extends Seeder
 			['first_name' => 'ANDRES', 'last_name' => 'MERA', 'email' => '', 'phone' => '', 'state' => 1],
 			['first_name' => 'JOSE', 'last_name' => 'TEMOCHE', 'email' => '', 'phone' => '', 'state' => 1],
 			['first_name' => 'ANDRES', 'last_name' => 'LLANES', 'email' => '', 'phone' => '', 'state' => 1],
-			['first_name' => 'ANDRES', 'last_name' => 'GRAJALES', 'email' => '', 'phone' => '', 'state' => 1],
-			['first_name' => 'PARTICIPANTE 1', 'last_name' => '', 'email' => '', 'phone' => '', 'state' => 1],
-			['first_name' => 'PARTICIPANTE 2', 'last_name' => '', 'email' => '', 'phone' => '', 'state' => 1],
-			['first_name' => 'PARTICIPANTE 3', 'last_name' => '', 'email' => '', 'phone' => '', 'state' => 1],
-			['first_name' => 'PARTICIPANTE 4', 'last_name' => '', 'email' => '', 'phone' => '', 'state' => 1]
+			['first_name' => 'ANDRES', 'last_name' => 'GRAJALES', 'email' => '', 'phone' => '', 'state' => 1]
 		];
 
 	    foreach ($data as $value) {

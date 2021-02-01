@@ -7,15 +7,51 @@ class Contractors extends Seeder
 	public function run()
 	{
 		$data = [
-			['name' => 'Ingeniería eléctrica'],
-	        ['name' => 'Ingeniería hidrosanitaria'],
-	        ['name' => 'Ingeniería estructural'],
-	        ['name' => 'Estudio de suelos'],
-	        ['name' => 'Estudio topográfico'],
-	        ['name' => 'Estudio ambiental'],
-	        ['name' => 'Presupuestos'],
-	        ['name' => 'Bioclimáticos'],
-	        ['name' => 'Otros']
+			[
+				'name' => 'Ingeniería eléctrica',
+				'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+			],
+	        [
+	        	'name' => 'Ingeniería hidrosanitaria',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Ingeniería estructural',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Estudio de suelos',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Estudio topográfico',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Estudio ambiental',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Presupuestos',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Bioclimáticos',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	],
+	        [
+	        	'name' => 'Otros',
+	        	'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua.'
+	    	]
 	    ];
 	    
 	    foreach ($data as $value) {

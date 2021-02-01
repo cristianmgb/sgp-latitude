@@ -8,16 +8,20 @@ class Roles extends Seeder
 	{
 		$data = [
 			[
-	            'name'        => 'Super Admin',
-	            'description' => 'El super administrador es aquel rol e el sistema que pueda hacer cualquier tipo de acción en el sistema'
+	            'name'        => 'Super Administrador',
+	            'description' => 'El Super Administrador tiene privilegios completos para administrar la organización y a otros usuarios'
 	        ],
 	        [
-	            'name'        => 'Admin',
-	            'description' => 'El super administrador es aquel rol e el sistema que pueda hacer cualquier tipo de acción en el sistema'
+	            'name'        => 'Administrador',
+	            'description' => 'El Administrador tiene privilegios de habilitar y deshabilitar secciones y cargar contenidos, así como gestionar los usuarios dentro de su grupo.'
 	        ],
 	        [
 	            'name'        => 'Revisor',
-	            'description' => 'El super administrador es aquel rol e el sistema que pueda hacer cualquier tipo de acción en el sistema'
+	            'description' => 'El Revisor tiene privilegios para cerciorarse de que las operaciones que se celebren o cumplan por cuenta de la sociedad se ajustan a las prescripciones de los estatutos, a las decisiones de la asamblea general y de la junta directiva'
+	        ],
+	        [
+	            'name'        => 'Usuario',
+	            'description' => 'El Usuario tiene privilegios limitados los cuales son asignados por el Adminsitrador del sistema'
 	        ]
 	    ];
 

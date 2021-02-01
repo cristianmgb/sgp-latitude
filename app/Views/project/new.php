@@ -16,59 +16,11 @@
 
 <?= $this->section('content') ?>
 	<div class="row">
-		<div class="col">
-			<div class="card card-accent-primary">
-				<div class="card-header">
-					<i class="fa fa-user-plus"></i> Nuevo Proyecto
-				</div>
-				<div class="card-body">
-					<form>
-						<div class="row">
-							<div class="col">
-								<div class="form-group">
-									<label for="name">Nombre</label>
-									<input type="text" class="form-control" id="name" name="name">
-								</div>
-							</div>
-							<div class="col">
-								<div class="form-group">
-									<label for="value">Valor</label>
-									<input type="text" class="form-control" id="value" name="value">
-								</div>
-							</div>
-							<div class="col">
-								<div class="form-group">
-									<label for="name">Tiempo</label>
-									<input type="text" class="form-control" id="time" name="time">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<hr>
-							</div>
-						</div>
-						<div class="row justify-content-center">
-							<div class="col-8">
-								<div class="form-group">
-						      		<div class="row">
-										<div class="col">
-								        	<button type="button" class="btn btn-block btn-secondary">
-								        		<i class="far fa-times-circle"></i> Cancelar
-								        	</button>
-								        </div>
-								        <div class="col">
-								        	<button type="button" class="btn btn-block btn-primary">
-								        		<i class="far fa-check-circle"></i> Guardar
-								        	</button>
-								        </div>
-								    </div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+		<div class="col-10">
+			<sgp-project-form></sgp-project-form>
+		</div>
+		<div class="col-2">
+			<sgp-taxes-table-project></sgp-taxes-table-project>
 		</div>
 	</div>
 <?= $this->endSection() ?>

@@ -22,7 +22,7 @@ class Contractor extends BaseController
 		$contractor = new ContractorModel();
         $contractor->insert( $data );
 
-        return ( $contractor->insertID ) ? $this->successResponse( 'Póliza creada exitosamente', $data ) : $this->failResponse( 'No se pudo crear la póliza', 404, $contractor );
+        return ( $contractor->insertID ) ? $this->successResponse( 'Contratista creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el contratista', 404, $contractor );
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Contractor extends BaseController
 		$contractorModel = new ContractorModel();
 		$contrators 	 = $contractorModel->orderBy('id', 'asc')->findAll();
 
-		return ( $contrators ) ? $this->successResponse( '', $contrators ) : $this->failResponse( 'Sin datos', 404, $contrators );
+		return ( $contrators ) ? $this->successResponse( 'Datos caragdos exitosamente', $contrators ) : $this->failResponse( 'Sin datos', 404, $contrators );
 	}
 
 	/**

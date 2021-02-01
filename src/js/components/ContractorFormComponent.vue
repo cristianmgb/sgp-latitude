@@ -24,18 +24,18 @@
 							</div>
 							<div class="form-group">
 								<hr>
-					      		<div class="row">
-									<div class="col">
-							        	<CButton class="btn btn-block btn-secondary">
-								            <i class="far fa-times-circle"></i> Cancelar
-								        </CButton>
-							        </div>
-							        <div class="col">
+					      		<CRow>
+									<CCol>
+										<CButton class="btn btn-block btn-secondary">
+											<i class="far fa-times-circle"></i> Cancelar
+										</CButton>
+							        </CCol>
+							        <CCol>
 							        	<CButton class="btn btn-block btn-primary" @click="addContractor">
 								            <i class="far fa-check-circle"></i> Guardar
 								        </CButton>
-							        </div>
-							    </div>
+							        </CCol>
+								</CRow>
 							</div>
 						</CForm>
 		          	</CCardBody>
@@ -112,12 +112,11 @@
 					{ value: '1', text: 'Activo' },
 					{ value: '0', text: 'Inactivo' }
 				],
-				id: '',
 				contractors: []
 			}
 	  	},
 		created () {
-			this.getPolicies()
+			this.getContractors()
 		},
 		methods: {
 		    getStateBadge (state) {
@@ -126,7 +125,7 @@
 		    getValueState (state) {
 		      	return ( state === '0') ? 'Inactivo' : 'Activo'	
 		    },
-		    getPolicies () {
+		    getContractors () {
 		    	fetch('contratista/getAll')
 				  	.then( response => response.json() )
 				  	.then( data => {
@@ -142,9 +141,6 @@
     				state 	   : ''
 			    }
 		    },
-		    setId(value) {
-                this.id = value
-            },
 		    addContractor () {
 		    	const config = {
 			        method: 'POST',
@@ -152,7 +148,7 @@
 			        	'Content-Type': 'application/json',
 			        	'X-Requested-With': 'XMLHttpRequest'
 			        },
-			        body: JSON.stringify(this.policy),
+			        body: JSON.stringify(this.contractor),
 			        cache: 'no-cache'
 			    }
 
@@ -163,7 +159,7 @@
 				    	if ( result.statusCode === 200 ) {
 					        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
 				    		this.resetForm()
-					        this.getPolicies()
+					        this.getContractors()
 
 					        return ;
 				    	}
@@ -175,9 +171,6 @@
 				    }).catch(function(err) {
 				        console.error(err)
 				    });
-			},
-		    deleteContractor ( id ) {
-		    	//
 			}
 		}
 	};

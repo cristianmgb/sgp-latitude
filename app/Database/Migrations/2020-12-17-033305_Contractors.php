@@ -22,6 +22,11 @@ class Contractors extends Migration
 				'constraint' => 250,
 				'null'       => FALSE
 			],
+			'description' => [
+				'type'       => 'varchar',
+				'constraint' => 250,
+				'null'       => FALSE
+			],
 			'state' => [
 				'type'       => 'INT',
                 'default'    => "1",

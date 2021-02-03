@@ -6,9 +6,16 @@ use App\Models\RolModel;
 
 class Rol extends BaseController
 {
+	public $rol;
+
+	public function __construct()
+	{
+		$this->rol = new RolModel();
+	}
+
 	public function index()
 	{
-		return view('rol');
+		return view('rol/index');
 	}
 
 	/**
@@ -19,10 +26,22 @@ class Rol extends BaseController
 	{
 		$request = \Config\Services::request();
 		$data    = $request->getJSON(true);
-		$rol 	 = new RolModel();
-        $rol->insert( $data );
+        $this->rol->insert( $data );
 
-        return ( $rol->insertID ) ? $this->successResponse( 'Rol creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el rol', 404, $rol );
+        return ( $this->rol->insertID ) ? $this->successResponse( 'Rol creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el rol', 404, $this->rol );
+	}
+
+	/**
+	 * [edit description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function edit( $id )
+	{
+		$rol  = $this->rol->where('id', $id)->first();
+		$data = ['rol' => $rol];
+
+		return view('rol/edit', $data);
 	}
 
 	/**
@@ -32,17 +51,11 @@ class Rol extends BaseController
 	 */
 	public function update( $id )
 	{
-		$request  = \Config\Services::request();
-		$data     = $request->getJSON(true);
-		$rolModel = new RolModel();
-		$rol      = $rolModel->find( $id );
+		$request = \Config\Services::request();
+		$data    = $request->getJSON(true);
+		$rol     = $this->rol->update($id, $data);
 
-		if ( $rol ) {
-			$rol->update( $id, $data);
-			return $this->successResponse( 'Rol editado exitosamente', $rol );
-		} else {
-			return $this->failResponse( 'No se pudo editar el rol', 404, 'Rol no encontrado' );
-		}
+		return ( $rol ) ? $this->successResponse( 'Rol editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el rol', 404, $rol );
 	}
 
 	/**
@@ -52,10 +65,9 @@ class Rol extends BaseController
 	 */
 	public function delete( $id )
 	{
-		$rol = new RolModel();
-		$rol->where('id', $id)->delete();
+		$rol = $this->rol->where('id', $id)->delete();
 
-		return $this->successResponse( 'Rol eliminado exitosamente', $rol );
+		return ( $rol ) ? $this->successResponse( 'Rol eliminado exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar el rol', 404, '' );
 	}
 
 	/**
@@ -64,10 +76,9 @@ class Rol extends BaseController
 	 */
 	public function get_all_roles()
 	{
-		$rolModel = new RolModel();
-		$roles 	  = $rolModel->orderBy('id', 'asc')->findAll();
+		$roles = $this->rol->orderBy('id', 'asc')->findAll();
 
-		return ( $roles ) ? $this->successResponse( 'Datos cargados exitosamente', $roles ) : $this->failResponse( 'Sin datos', 404, $roles );
+		return ( $roles ) ? $this->successResponse( 'Datos cargados exitosamente', $roles ) : $this->failResponse( 'Sin datos disponibles', 404, $roles );
 	}
 
 	/**
@@ -77,8 +88,7 @@ class Rol extends BaseController
 	 */
 	public function get_rol_by_id ( $id )
 	{
-		$rolModel = new RolModel();
-		$rol 	  =  $rolModel->find($id);
+		$rol = $this->rol->find($id);
 
 		return ( $rol ) ? $this->successResponse( 'Rol encontrado', $rol ) : $this->failResponse( 'Rol no encontrado', 404, $rol );
 	}

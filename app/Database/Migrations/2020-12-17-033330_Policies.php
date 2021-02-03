@@ -22,8 +22,9 @@ class Policies extends Migration
 				'constraint' => 250,
 				'null'       => FALSE
 			],
-			'value' => [
-				'type'       => 'DECIMAL',
+			'description' => [
+				'type'       => 'varchar',
+				'constraint' => 250,
 				'null'       => FALSE
 			],
 			'state' => [

@@ -6,9 +6,16 @@ use App\Models\PolicyModel;
 
 class Policies extends BaseController
 {
+	public $policy;
+
+	public function __construct()
+	{
+		$this->policy = new PolicyModel();
+	}
+
 	public function index()
 	{
-		return view('policies');
+		return view('policy/index');
 	}
 
 	/**
@@ -19,10 +26,22 @@ class Policies extends BaseController
 	{
 		$request = \Config\Services::request();
 		$data    = $request->getJSON(true);
-		$policy 	 = new TaxModel();
-        $policy->insert( $data );
+        $this->policy->insert( $data );
 
         return ( $policy->insertID ) ? $this->successResponse( 'Póliza creada exitosamente', $data ) : $this->failResponse( 'No se pudo crear la póliza', 404, $policy );
+	}
+
+	/**
+	 * [edit description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function edit( $id )
+	{
+		$policy = $this->policy->where('id', $id)->first();
+		$data   = ['policy' => $policy];
+
+		return view('policy/edit', $data);
 	}
 
 	/**
@@ -32,7 +51,11 @@ class Policies extends BaseController
 	 */
 	public function update( $id )
 	{
+		$request = \Config\Services::request();
+		$data    = $request->getJSON(true);
+		$policy  = $this->policy->update($id, $data);
 
+		return ( $policy ) ? $this->successResponse( 'Póliza editada exitosamente', $data ) : $this->failResponse( 'No se pudo editar la póliza', 404, $policy );
 	}
 
 	/**
@@ -42,7 +65,9 @@ class Policies extends BaseController
 	 */
 	public function delete( $id )
 	{
+		$policy = $this->policy->where('id', $id)->delete();
 
+		return ( $policy ) ? $this->successResponse( 'Póliza eliminada exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar la póliza', 404, '' );
 	}
 
 	/**
@@ -51,10 +76,9 @@ class Policies extends BaseController
 	 */
 	public function get_all_policies()
 	{
-		$policyModel = new PolicyModel();
-		$policies 	  = $policyModel->orderBy('id', 'asc')->findAll();
+		$policies = $this->policy->orderBy('id', 'asc')->findAll();
 
-		return ( $policies ) ? $this->successResponse( '', $policies ) : $this->failResponse( 'Sin datos', 404, $policies );
+		return ( $policies ) ? $this->successResponse( 'Datos encontrados', $policies ) : $this->failResponse( 'Sin datos disponibles', 404, $policies );
 	}
 
 	/**
@@ -64,8 +88,7 @@ class Policies extends BaseController
 	 */
 	public function get_policy_by_id ( $id )
 	{
-		$policyModel = new PolicyModel();
-		$policy 	  =  $policyModel->find($id);
+		$policy = $this->policy->find($id);
 
 		return ( $policy ) ? $this->successResponse( 'Póliza encontrada', $policy ) : $this->failResponse( 'Póliza no encontrada', 404, $policy );
 	}

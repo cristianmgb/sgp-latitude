@@ -55,7 +55,7 @@
 									<th>Creado</th>
 									<th>Modificado</th>
 									<th width="100px">Estado</th>
-									<!-- <th width="100px">Acción</th> -->
+									<th width="100px">Acción</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -77,16 +77,20 @@
 							          		{{ getValueState(policy.state) }}
 							          	</CBadge>
 							        </td>
-						    		<!-- <td class="text-center">
+						    		<td class="text-center">
 						    			<CButtonGroup class="btn-group btn-group-sm">
-									      	<CButton variant="outline" color="info" data-toggle="modal" :data-target="`#editRolModal${rol.id}`" @on="setId( rol.id )">
-									      		<i class="far fa-edit"></i>
-									      	</CButton>
-									      	<CButton variant="outline" color="danger" data-toggle="modal" data-target="#deleteRolModal">
+						    				<CLink class="btn btn-outline-info" :href="`poliza/edit/${policy.id}`">
+										        <i class="far fa-edit"></i>
+										    </CLink>
+									      	<CButton
+									      		variant="outline" color="danger"
+									      		@click="getId(policy.id)"
+									      		data-toggle="modal" data-target="#deleteModal"
+									      	>
 									      		<i class="far fa-trash-alt"></i>
 									      	</CButton>
 									    </CButtonGroup>
-						    		</td> -->
+						    		</td>
 						    	</tr>
 							</tbody>
 						</table>
@@ -94,6 +98,41 @@
 		        </CCard>
 	      	</CCol>
 	    </CRow>
+
+	    <div class="modal fade modal-danger" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteTitle" aria-hidden="true">
+		  	<div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      	<div class="modal-header">
+				        <h5 class="modal-title" id="deleteTitle">
+				        	<i class="far fa-trash-alt"></i> Eliminar
+				        </h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+			      	</div>
+			      	<div class="modal-body text-center">
+		      			<CRow>
+							<CCol>
+								<h4>¿ Está seguro de eliminar este registro ?</h4>
+							</CCol>
+						</CRow>
+						<hr>
+			        	<CRow>
+							<CCol>
+					        	<CButton color="secondary" class="btn-block" data-dismiss="modal">
+						            <i class="far fa-times-circle"></i> Cancelar
+						        </CButton>
+					        </CCol>
+					        <CCol>
+					        	<CButton color="danger" class="btn-block" @click="deletePolicy()">
+						            <i class="far fa-check-circle"></i> Eliminar
+						        </CButton>
+					        </CCol>
+					    </CRow>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
   	</div>
 </template>
 
@@ -120,6 +159,9 @@
 			this.getPolicies()
 		},
 		methods: {
+			getId ( val ) {
+    			return this.id = val
+    		},
 		    getStateBadge (state) {
 				return ( state === '0') ? 'secondary' : 'success'	
 		    },
@@ -176,8 +218,36 @@
 				        console.error(err)
 				    });
 			},
-		    deleteRol ( id ) {
-		    	//
+		    deletePolicy() {
+				const config = {
+			        method: 'POST',
+			        headers: {
+			        	'Content-Type': 'application/json',
+			        	'X-Requested-With': 'XMLHttpRequest'
+			        },
+			        cache: 'no-cache'
+			    }
+
+				fetch('poliza/delete/'+ this.id, config)
+				    .then( response => response.json() )
+				    .then( result   => {
+
+				    	if ( result.statusCode === 200 ) {
+				    		$('#deleteModal').modal('hide')
+				    		this.getPolicies()
+				    		this.id = ''
+				    		this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
+
+					        return ;
+				    	}
+
+				    	if ( result.statusCode === 500 ) {
+							this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
+							return ;
+				    	}
+				    }).catch(function(err) {
+				        console.error(err)
+				    });
 			}
 		}
 	};

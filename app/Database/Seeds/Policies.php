@@ -7,14 +7,38 @@ class Policies extends Seeder
 	public function run()
 	{
 		$data = [
-			['name' => 'Cliente no pide póliza', 'value' => 0],
-	        ['name' => 'Póliza por responsabilidad civil', 'value' => 0],
-	        ['name' => 'Póliza buen manejo del anticipo', 'value' => 0],
-	        ['name' => 'Cumplimiento', 'value' => 0],
-	        ['name' => 'Calidad del servicio', 'value' => 0],
-	        ['name' => 'Pagos de salarios', 'value' => 0],
-	        ['name' => 'Responsabilidad civil extracontractual', 'value' => 0],
-	        ['name' => 'Otras', 'value' => 0]
+			[
+				'name' => 'Cliente no pide póliza',
+				'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+			],
+	        [
+	        	'name' => 'Póliza por responsabilidad civil',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Póliza buen manejo del anticipo',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Cumplimiento',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Calidad del servicio',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Pagos de salarios',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Responsabilidad civil extracontractual',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ],
+	        [
+	        	'name' => 'Otras',
+	        	'description' => 'Editado Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+	        ]
 	    ];
 	    
 	    foreach ($data as $value) {

@@ -6,9 +6,16 @@ use App\Models\ContractorModel;
 
 class Contractor extends BaseController
 {
+	public $contractor;
+
+	public function __construct()
+	{
+		$this->contractor = new ContractorModel();
+	}
+
 	public function index()
 	{
-		return view('contractor');
+		return view('contractor/index');
 	}
 
 	/**
@@ -17,22 +24,11 @@ class Contractor extends BaseController
 	 */
 	public function create()
 	{
-		$request    = \Config\Services::request();
-		$data       = $request->getJSON(true);
-		$contractor = new ContractorModel();
-        $contractor->insert( $data );
+		$request = \Config\Services::request();
+		$data    = $request->getJSON(true);
+        $this->contractor->insert( $data );
 
-        return ( $contractor->insertID ) ? $this->successResponse( 'Contratista creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el contratista', 404, $contractor );
-	}
-
-	/**
-	 * [show description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function show( $id )
-	{
-
+        return ( $this->contractor->insertID ) ? $this->successResponse( 'Contratista creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el contratista', 404, $this->contractor );
 	}
 
 	/**
@@ -42,7 +38,10 @@ class Contractor extends BaseController
 	 */
 	public function edit( $id )
 	{
+		$contractor = $this->contractor->where('id', $id)->first();
+		$data       = ['contractor' => $contractor];
 
+		return view('contractor/edit', $data);
 	}
 
 	/**
@@ -52,17 +51,11 @@ class Contractor extends BaseController
 	 */
 	public function update( $id )
 	{
+		$request    = \Config\Services::request();
+		$data       = $request->getJSON(true);
+		$contractor = $this->contractor->update($id, $data);
 
-	}
-
-	/**
-	 * [remove description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function remove( $id )
-	{
-
+		return ( $contractor ) ? $this->successResponse( 'Contratista editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el contratista', 404, $contractor );
 	}
 
 	/**
@@ -72,7 +65,9 @@ class Contractor extends BaseController
 	 */
 	public function delete( $id )
 	{
+		$contractor = $this->contractor->where('id', $id)->delete();
 
+		return ( $contractor ) ? $this->successResponse( 'Contratista eliminado exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar el contratista', 404, '' );
 	}
 
 	/**
@@ -81,10 +76,9 @@ class Contractor extends BaseController
 	 */
 	public function get_all_contractors()
 	{
-		$contractorModel = new ContractorModel();
-		$contrators 	 = $contractorModel->orderBy('id', 'asc')->findAll();
+		$contrators = $this->contractor->orderBy('id', 'asc')->findAll();
 
-		return ( $contrators ) ? $this->successResponse( 'Datos caragdos exitosamente', $contrators ) : $this->failResponse( 'Sin datos', 404, $contrators );
+		return ( $contrators ) ? $this->successResponse( 'Datos encontrados', $contrators ) : $this->failResponse( 'Sin datos disponibles', 404, $contrators );
 	}
 
 	/**
@@ -94,8 +88,7 @@ class Contractor extends BaseController
 	 */
 	public function get_contractor_by_id ( $id )
 	{
-		$contractorModel = new ContractorModel();
-		$contrator 	     =  $contractorModel->find($id);
+		$contrator = $this->contractor->find($id);
 
 		return ( $contrator ) ? $this->successResponse( 'Contratista encontrado', $contrator ) : $this->failResponse( 'Contratista no econtrado', 404, $contrator );
 	}

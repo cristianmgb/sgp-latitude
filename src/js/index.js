@@ -58,6 +58,13 @@ Vue.component('sgp-user-form', require('./components/UserFormComponent').default
 Vue.component('sgp-user-table', require('./components/UserTableComponent').default)
 Vue.component('sgp-taxes-table-project', require('./components/TaxesTableProjectComponent').default)
 Vue.component('sgp-project-form', require('./components/ProjectFormComponent').default)
+Vue.component('sgp-modal-delete', require('./components/ModalDeleteComponent').default)
+Vue.component('sgp-associate-edit-form', require('./components/AssociateEditFormComponent').default)
+Vue.component('sgp-contractor-edit-form', require('./components/ContractorEditFormComponent').default)
+Vue.component('sgp-tax-edit-form', require('./components/TaxEditFormComponent').default)
+Vue.component('sgp-policy-edit-form', require('./components/PolicyEditFormComponent').default)
+Vue.component('sgp-rol-edit-form', require('./components/RolEditFormComponent').default)
+Vue.component('sgp-user-edit-form', require('./components/UserEditFormComponent').default)
 
 /**
  * [dash description]: Instanciamos Vue en 'dash'

@@ -6,10 +6,16 @@ use App\Models\AssociateModel;
 
 class Associate extends BaseController
 {
+	public $associate;
+
+	public function __construct()
+	{
+		$this->associate = new AssociateModel();
+	}
 
 	public function index()
 	{
-		return view('associate/all');
+		return view('associate/index');
 	}
 
 	/**
@@ -27,22 +33,12 @@ class Associate extends BaseController
 	 */
 	public function create()
 	{
-		$request   = \Config\Services::request();
-		$data      = $request->getJSON(true);
-		$associate = new AssociateModel();
-        $associate->insert( $data );
+		$request = \Config\Services::request();
+		$data    = $request->getJSON(true);
 
-        return ( $associate->insertID ) ? $this->successResponse( 'Asociado creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el asociado', 404, $associate );
-	}
+        $this->associate->insert( $data );
 
-	/**
-	 * [show description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function show( $id )
-	{
-
+        return ( $this->associate->insertID ) ? $this->successResponse( 'Asociado creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el asociado', 404, $this->associate );
 	}
 
 	/**
@@ -52,7 +48,10 @@ class Associate extends BaseController
 	 */
 	public function edit( $id )
 	{
+		$associate = $this->associate->where('id', $id)->first();
+		$data      = ['associate' => $associate];
 
+		return view('associate/edit', $data);
 	}
 
 	/**
@@ -62,25 +61,23 @@ class Associate extends BaseController
 	 */
 	public function update( $id )
 	{
+		$request   = \Config\Services::request();
+		$data      = $request->getJSON(true);
+		$associate = $this->associate->update($id, $data);
 
+		return ( $associate ) ? $this->successResponse( 'Asociado editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el asociado', 404, $associate );
 	}
-
-	/**
-	 * [remove description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function remove( $id )
-	{
 
 	/**
 	 * [delete description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	}public function delete( $id )
+	public function delete( $id )
 	{
+		$associate = $this->associate->where('id', $id)->delete();
 
+		return ( $associate ) ? $this->successResponse( 'Asociado eliminado exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar el asociado', 404, '' );
 	}
 
 	/**

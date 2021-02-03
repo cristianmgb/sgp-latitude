@@ -44,7 +44,6 @@ $routes->group('admin', function($routes)
 	$routes->get('asociados',                   'Associate::index');
 	$routes->get('asociado/nuevo',              'Associate::new');
 	$routes->post('asociado/create',            'Associate::create');
-	$routes->get('asociado/show/(:segment)',    'Associate::show/$1');
 	$routes->get('asociado/edit/(:segment)',    'Associate::edit/$1');
 	$routes->post('asociado/update/(:segment)', 'Associate::update/$1');
 	$routes->post('asociado/delete/(:segment)', 'Associate::delete/$1');
@@ -62,9 +61,7 @@ $routes->group('admin', function($routes)
 
 	// Impuestos
 	$routes->get('impuestos',                   'Tax::index');
-	$routes->get('impuesto/nuevo',              'Tax::new');
 	$routes->post('impuesto/create',            'Tax::create');
-	$routes->get('impuesto/show/(:segment)',    'Tax::show/$1');
 	$routes->get('impuesto/edit/(:segment)',    'Tax::edit/$1');
 	$routes->post('impuesto/update/(:segment)', 'Tax::update/$1');
 	$routes->post('impuesto/delete/(:segment)', 'Tax::delete/$1');

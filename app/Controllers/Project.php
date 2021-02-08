@@ -2,8 +2,14 @@
 
 namespace App\Controllers;
 
+public $project;
+
 class Project extends BaseController
 {
+	public function __construct()
+	{
+		$this->project = new ProjectModel();
+	}
 	
 	public function index()
 	{
@@ -74,6 +80,29 @@ class Project extends BaseController
 	}public function delete( $id )
 	{
 
+	}
+
+	/**
+	 * [get_all description]
+	 * @return [type] [description]
+	 */
+	public function get_all()
+	{
+		$projects = $this->project->orderBy('id', 'asc')->findAll();
+
+		return ( $projects ) ? $this->successResponse( 'Datos encontrados', $projects ) : $this->failResponse( 'Sin datos disponibles', 404, $projects );
+	}
+
+	/**
+	 * [get_by_id description]
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function get_by_id ( $id = null )
+	{
+		$project = $this->project->find($id);
+
+		return ( $project ) ? $this->successResponse( 'Proyecto encontrado', $project ) : $this->failResponse( 'Proyecto no encontrada', 404, $project );
 	}
 }
 

@@ -5,88 +5,109 @@
 	          	<CCardHeader>
 					<i class="fa fa-user-friends"></i> Editar Impuesto
 				</CCardHeader>
-	          	<CCardBody :id="id">
-	            	<CForm>
-						<CRow>
-							<CCol>
-								<CInput
-								    id="name"
-					                label="Nombre"
-					                placeholder="Nombre"
-					                class="text-right"
-					                v-model="tax.name"
-					                horizontal
-					                required
-					                autocomplete="off"
-					            />
-					        </CCol>
-					    </CRow>
-					    <CRow>
-					        <CCol>
-					        	<CTextarea
-					        		id="description"
-					        		v-model="tax.description"
-					        		label="Descripción"
-					        		placeholder="Descripción del impuesto"
-					        		rows="8"
-					        		horizontal
-					        		requiered
-					        		autocomplete="off"
-					        	/>
-					        </CCol>
-						</CRow>
-					    <CRow>
-					        <CCol>
-								<CRow class="form-group">
-									<label class="col-md-3 col-form-label text-right" for="state">Estado</label>
-									<div class="col-md-9">
-										<select class="form-control" id="state" name="state" v-model="tax.state">
-											<option v-for="option in options" :value="option.value" :key="option.value">
-								             	{{ option.text }}
-								            </option>
-										</select>
-									</div>
-								</CRow>
-					        </CCol>
-					    </CRow>
-					    <CRow>
-					        <CCol>
-					        	<CInput
-								    id="created_at"
-					                label="Creado"
-					                class="text-right"
-					                v-model="tax.created_at"
-					                horizontal
-					                disabled
-					            />
-					        </CCol>
-					    </CRow>
-					     <CRow>
-					        <CCol>
-					        	<CInput
-								    id="updated_at"
-					                label="Actualizado"
-					                class="text-right"
-					                v-model="tax.updated_at"
-					                horizontal
-					                disabled
-					            />
-					        </CCol>
-					    </CRow>
-						<CRow><CCol><hr></CCol></CRow>
-						<CRow>
-							<CCol>
-								<CLink class="btn btn-block btn-secondary" href="../../impuestos">
-									<i class="far fa-times-circle"></i> Cancelar
-								</CLink>
-					        </CCol>
-					        <CCol>
-					        	<CButton class="btn btn-block btn-primary" @click="editTax(tax.id)">
-						            <i class="far fa-check-circle"></i> Editar
-						        </CButton>
-					        </CCol>
-						</CRow>
-					</CForm>
+	          	<CCardBody>
+	            	<ValidationObserver ref="form">
+		            	<CForm @submit.prevent="onSubmit">
+							<CRow>
+								<CCol>
+									<SgpInput
+				            			id="name"
+				            			label="Nombre"
+				            			type="text"
+				            			placeholder="Nombre"
+				            			rules="required|alpha_spaces"
+				            			v-model="tax.name"
+				            		/>
+						        </CCol>
+						    </CRow>
+						    <CRow>
+				            	<CCol>
+				            		<SgpTextArea
+				            			id="description"
+					                    label="Descripción"
+					                    rows="8"
+					                    rules="required|min:50"
+					                    v-model="tax.description"
+						            	placeholder="Descripción del impuesto"
+				            		/>
+								</CCol>
+		            		</CRow>
+		            		<CRow>
+								<CCol>
+									<SgpInput
+				            			id="value"
+				            			label="Nombre"
+				            			type="text"
+				            			placeholder="Nombre"
+				            			rules="required|numeric"
+				            			v-model="tax.value"
+				            		/>
+						        </CCol>
+						    </CRow>
+					    	<CRow>
+						        <CCol>
+				            		<CRow class="form-group">
+										<CCol sm="3">
+											<label class="col-form-label" for="state">Estado</label>
+										</CCol>
+										<CCol sm="9">
+											<ValidationProvider name="Estado" rules="required" v-slot="{ errors }">
+												<select
+													id="state"
+													name="Estado"
+													class="form-control"
+													v-model="tax.state"
+													:class="{ 'is-invalid': errors[0] }"
+												>
+													<option v-for="option in options" :value="option.value">
+										             	{{ option.text }}
+										            </option>
+												</select>
+												<AlertError :errors="errors[0]"></AlertError>
+											</ValidationProvider>
+								        </CCol>
+								    </CRow>
+						        </CCol>
+						    </CRow>
+						    <CRow>
+						        <CCol>
+						        	<CInput
+									    id="created_at"
+						                label="Creado"
+						                class="text-right"
+						                v-model="tax.created_at"
+						                horizontal
+						                disabled
+						            />
+						        </CCol>
+						    </CRow>
+						     <CRow>
+						        <CCol>
+						        	<CInput
+									    id="updated_at"
+						                label="Actualizado"
+						                class="text-right"
+						                v-model="tax.updated_at"
+						                horizontal
+						                disabled
+						            />
+						        </CCol>
+						    </CRow>
+							<CRow><CCol><hr></CCol></CRow>
+							<CRow>
+								<CCol>
+									<CLink class="btn btn-block btn-outline-danger" href="../../impuestos">
+										<i class="fas fa-undo-alt"></i> Regresar
+									</CLink>
+						        </CCol>
+						        <CCol>
+						        	<CButton type="submit" class="btn btn-block btn-primary">
+							            <i class="far fa-check-circle"></i> Editar
+							        </CButton>
+						        </CCol>
+							</CRow>
+						</CForm>
+					</ValidationObserver>
 				</CCardBody>
 			</CCard>
 		</CCol>
@@ -94,10 +115,18 @@
 </template>
 
 <script>
+	import SgpInput from './SgpInput'
+	import SgpTextArea from './SgpTextArea'
+	import AlertError from './AlertError'
+
 	export default {
 		name : 'tax-edit-form',
+		components: { SgpInput, SgpTextArea, AlertError },
 		props: {
-			id : {type: Number, required: true}
+			id : {
+				type: Number,
+				required: true
+			}
 		},
 		created () {
 			this.getTaxById( this.id )
@@ -139,36 +168,38 @@
 				        console.error(err)
 				    });
 			},
-		    editTax ( id ) {
+		    onSubmit() {
+				this.$refs.form.validate().then(success => {
+					if (!success) {
+			          	return;
+			        }
 
-		    	const config = {
-			        method: 'POST',
-			        headers: {
-			        	'Content-Type': 'application/json',
-			        	'X-Requested-With': 'XMLHttpRequest'
-			        },
-			        body: JSON.stringify(this.tax),
-			        cache: 'no-cache'
-			    }
+			        const config = {
+				        method: 'POST',
+				        headers: {
+				        	'Content-Type': 'application/json',
+				        	'X-Requested-With': 'XMLHttpRequest'
+				        },
+				        body: JSON.stringify(this.tax),
+				        cache: 'no-cache'
+				    }
 
-				fetch('../update/'+ id, config)
-				    .then( response => response.json() )
-				    .then( result   => {
+					fetch('../update/'+ this.id, config)
+					    .then( response => response.json() )
+					    .then( result   => {
 
-				    	if ( result.statusCode === 200 ) {
-					        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
-				    		this.tax = result.data
+					    	if ( result.statusCode === 200 ) {
+						        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
+					    		this.getTaxById( this.id )
+					    	}
 
-					        return ;
-				    	}
-
-				    	if ( result.statusCode === 500 ) {
-							this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
-							return ;
-				    	}
-				    }).catch(function(err) {
-				        console.error(err)
-				    });
+					    	if ( result.statusCode === 500 ) {
+								this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
+					    	}
+					    }).catch(function(err) {
+					        console.error(err)
+					    });
+				});
 		    }
 		}
 	};

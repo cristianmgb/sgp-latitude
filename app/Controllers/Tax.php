@@ -24,8 +24,7 @@ class Tax extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
+		$data = $this->request->getJSON(true);
         $this->tax->insert( $data );
 
         return ( $this->tax->insertID ) ? $this->successResponse( 'Impuesto creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el impuesto', 404, $this->tax );
@@ -36,10 +35,9 @@ class Tax extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
-		$tax  = $this->tax->where('id', $id)->first();
-		$data = ['tax' => $tax];
+		$data = ['tax' => $this->tax->where('id', $id)->first()];
 
 		return view('tax/edit', $data);
 	}
@@ -49,11 +47,10 @@ class Tax extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
-		$tax     = $this->tax->update($id, $data);
+		$data = $this->request->getJSON(true);
+		$tax  = $this->tax->update($id, $data);
 
 		return ( $tax ) ? $this->successResponse( 'Impuesto editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el impuesto', 404, $tax );
 	}
@@ -63,7 +60,7 @@ class Tax extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id )
+	public function delete( $id = null )
 	{
 		$tax = $this->tax->where('id', $id)->delete();
 
@@ -71,10 +68,10 @@ class Tax extends BaseController
 	}
 
 	/**
-	 * [get_all_taxes description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_taxes()
+	public function get_all()
 	{
 		$taxes = $this->tax->orderBy('id', 'asc')->findAll();
 
@@ -82,11 +79,11 @@ class Tax extends BaseController
 	}
 
 	/**
-	 * [get_tax_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_tax_by_id ( $id )
+	public function get_by_id ( $id )
 	{
 		$tax = $this->tax->find($id);
 

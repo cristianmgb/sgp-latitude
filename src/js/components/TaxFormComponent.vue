@@ -7,40 +7,73 @@
 		            	<i class="fas fa-plus-circle fa-lg"></i> Nuevo Impuesto
 		          	</CCardHeader>
 		          	<CCardBody>
-		            	<CForm accept-charset="UTF-8" id="formTax">
-							<div class="form-group">
-								<CInput id="name" v-model="tax.name" label="Nombre" placeholder="Nombre del impuesto" requiered/>
-							</div>
-							<div class="form-group">
-								<CTextarea id="description" v-model="tax.description" label="Descripción" placeholder="Descripción del impuesto" rows="8" requiered/>
-							</div>
-							<div class="form-group">
-								<CInput id="value" v-model="tax.value" label="Valor" placeholder="% del impuesto" requiered/>
-							</div>
-							<div class="form-group">
-								<label for="state">Estado</label>
-								<select class="form-control" id="state" name="state" v-model="tax.state" requiered>
-									<option v-for="option in options" :value="option.value" :key="option.value">
-						             	{{ option.text }}
-						            </option>
-								</select>
-							</div>
-							<div class="form-group">
-								<hr>
-					      		<div class="row">
-									<div class="col">
-							        	<CButton class="btn btn-block btn-secondary">
-								            <i class="far fa-times-circle"></i> Cancelar
+		            	<ValidationObserver ref="form">
+	            			<CForm @submit.prevent="onSubmit">
+	            				<CRow>
+									<CCol>
+					            		<SgpInputInline
+					            			id="name"
+					            			label="Nombre"
+					            			type="text"
+					            			placeholder="Nombre"
+					            			rules="required|alpha_spaces"
+					            			v-model="tax.name"
+					            		/>
+					            	</CCol>
+					            </CRow>
+					            <CRow>
+					            	<CCol>
+					            		<SgpTextAreaInline
+					            			id="description"
+						                    label="Descripción"
+						                    rows="8"
+						                    rules="required|min:50"
+						                    v-model="tax.description"
+							            	placeholder="Descripción del impuesto"
+					            		/>
+									</CCol>
+			            		</CRow>
+			            		<CRow>
+									<CCol>
+					            		<SgpInputInline
+					            			id="value"
+					            			label="Valor %"
+					            			type="text"
+					            			placeholder="% del impuesto"
+					            			rules="required|numeric"
+					            			v-model="tax.value"
+					            		/>
+					            	</CCol>
+					            </CRow>
+								<CRow>
+									<CCol>
+										<label class="col-form-label" for="state">Estado</label>
+										<ValidationProvider name="Estado" rules="required" v-slot="{ errors }">
+											<select
+												id="state"
+												name="Estado"
+												class="form-control"
+												v-model="tax.state"
+												:class="{ 'is-invalid': errors[0] }"
+											>
+												<option v-for="option in options" :value="option.value">
+									             	{{ option.text }}
+									            </option>
+											</select>
+											<AlertError :errors="errors[0]"></AlertError>
+										</ValidationProvider>
+							        </CCol>
+							    </CRow>
+							    <CRow><CCol><hr></CCol></CRow>
+								<CRow>
+							        <CCol>
+							        	<CButton type="submit" class="btn btn-block btn-primary">
+								            <i class="fas fa-save"></i> Guardar
 								        </CButton>
-							        </div>
-							        <div class="col">
-							        	<CButton class="btn btn-block btn-primary" @click="addTax">
-								            <i class="far fa-check-circle"></i> Guardar
-								        </CButton>
-							        </div>
-							    </div>
-							</div>
-						</CForm>
+							        </CCol>
+								</CRow>
+							</CForm>
+						</ValidationObserver>
 		          	</CCardBody>
 		        </CCard>
 	      	</CCol>
@@ -142,8 +175,13 @@
 </template>
 
 <script>
+	import SgpInputInline from './SgpInputInline'
+	import SgpTextAreaInline from './SgpTextAreaInline'
+	import AlertError from './AlertError'
+
 	export default {
 		name : 'tax-form',
+		components: { SgpInputInline, SgpTextAreaInline, AlertError },
 		data () {
     		return {
     			tax: {
@@ -189,36 +227,44 @@
     				state 	   : ''
 			    }
 		    },
-		    addTax () {
-		    	const config = {
-			        method: 'POST',
-			        headers: {
-			        	'Content-Type': 'application/json',
-			        	'X-Requested-With': 'XMLHttpRequest'
-			        },
-			        body: JSON.stringify(this.tax),
-			        cache: 'no-cache'
-			    }
+		    onSubmit() {
+				this.$refs.form.validate().then(success => {
+					if (!success) {
+			          	return;
+			        }
 
-		    	fetch('impuesto/create', config)
-				    .then( response => response.json() )
-				    .then( result   => {
+			    	const config = {
+				        method: 'POST',
+				        headers: {
+				        	'Content-Type': 'application/json',
+				        	'X-Requested-With': 'XMLHttpRequest'
+				        },
+				        body: JSON.stringify(this.tax),
+				        cache: 'no-cache'
+				    }
 
-				    	if ( result.statusCode === 200 ) {
-					        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
-				    		this.resetForm()
-					        this.getTaxes()
+			    	fetch('impuesto/create', config)
+					    .then( response => response.json() )
+					    .then( result   => {
 
-					        return ;
-				    	}
+					    	if ( result.statusCode === 200 ) {
+						        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
+						        this.getTaxes()
+					    		this.resetForm()
 
-				    	if ( result.statusCode === 500 ) {
-							this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
-							return ;
-				    	}
-				    }).catch(function(err) {
-				        console.error(err)
-				    });
+						        this.$nextTick(() => {
+						          	this.$refs.form.reset();
+						        });
+					    	}
+
+					    	if ( result.statusCode === 500 ) {
+								this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
+								return ;
+					    	}
+					    }).catch(function(err) {
+					        console.error(err)
+					    });
+				});
 			},
 			deleteTax() {
 				const config = {

@@ -4,6 +4,7 @@ import '@coreui/coreui'
 
 // Installing whole package
 import CoreuiVue from '@coreui/vue';
+import '@coreui/icons'
 Vue.use(CoreuiVue);
 
 // Vue Toast Notification
@@ -14,8 +15,28 @@ Vue.use(VueToast, {
     dismissible: true
 });
 
-// // VeeValidate
-// import 'vee-validate';
+// VeeValidate
+import { ValidationObserver, ValidationProvider, extend, localize, configure } from 'vee-validate';
+import es from 'vee-validate/dist/locale/es'
+import * as rules from 'vee-validate/dist/rules';
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
+localize('es', es);
+
+// Importamos todas las reglas de validacion
+Object.keys(rules).forEach(rule => {
+  	extend(rule, rules[rule]);
+});
+
+const config = {
+  	classes: {
+    	valid: 'is-valid',
+    	invalid: 'is-invalid'
+  	}
+};
+
+// Sets the options.
+configure(config);
 
 // Import Main styles for this application
 import '../scss/dashboard'
@@ -64,6 +85,7 @@ Vue.component('sgp-tax-edit-form', require('./components/TaxEditFormComponent').
 Vue.component('sgp-policy-edit-form', require('./components/PolicyEditFormComponent').default)
 Vue.component('sgp-rol-edit-form', require('./components/RolEditFormComponent').default)
 Vue.component('sgp-user-edit-form', require('./components/UserEditFormComponent').default)
+Vue.component('sgp-widget-section', require('./components/WidgetSectionComponent').default)
 
 /**
  * [dash description]: Instanciamos Vue en 'dash'

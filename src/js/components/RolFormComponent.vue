@@ -7,56 +7,61 @@
 		            	<i class="fas fa-plus-circle fa-lg"></i> Nuevo Rol
 		          	</CCardHeader>
 		          	<CCardBody>
-		            	<CForm>
-							<CRow>
-								<CCol>
-									<CInput
-										id="name"
-										v-model="rol.name"
-										label="Nombre"
-										placeholder="Nombre del rol"
-							            required
-							            autocomplete="off"
-									/>
-								</CCol>
-							</CRow>
-							<CRow>
-								<CCol>
-									<CTextarea
-										id="description"
-										v-model="rol.description"
-										label="Descripción"
-										placeholder="Descripción del rol"
-										rows="8"
-							            required
-							            autocomplete="off"
-									/>
-								</CCol>
-							</CRow>
-							<CCol>
-								<CRow class="form-group">
-									<label for="state">Estado</label>
-									<select class="form-control" id="state" name="state" v-model="rol.state">
-										<option v-for="option in options" :value="option.value" :key="option.value">
-							             	{{ option.text }}
-							            </option>
-									</select>
+		            	<ValidationObserver ref="form">
+	            			<CForm @submit.prevent="onSubmit">
+	            				<CRow>
+									<CCol>
+					            		<SgpInputInline
+					            			id="name"
+					            			label="Nombre"
+					            			type="text"
+					            			placeholder="Nombre"
+					            			rules="required|alpha_spaces"
+					            			v-model="rol.name"
+					            		/>
+					            	</CCol>
+					            </CRow>
+					            <CRow>
+					            	<CCol>
+					            		<SgpTextAreaInline
+					            			id="description"
+						                    label="Descripción"
+						                    rows="8"
+						                    rules="required|min:50"
+						                    v-model="rol.description"
+							            	placeholder="Descripción del rol"
+					            		/>
+									</CCol>
+			            		</CRow>
+								<CRow>
+									<CCol>
+										<label class="col-form-label" for="state">Estado</label>
+										<ValidationProvider name="Estado" rules="required" v-slot="{ errors }">
+											<select
+												id="state"
+												name="Estado"
+												class="form-control"
+												v-model="rol.state"
+												:class="{ 'is-invalid': errors[0] }"
+											>
+												<option v-for="option in options" :value="option.value">
+									             	{{ option.text }}
+									            </option>
+											</select>
+											<AlertError :errors="errors[0]"></AlertError>
+										</ValidationProvider>
+							        </CCol>
+							    </CRow>
+							    <CRow><CCol><hr></CCol></CRow>
+								<CRow>
+							        <CCol>
+							        	<CButton type="submit" class="btn btn-block btn-primary">
+								            <i class="fas fa-save"></i> Guardar
+								        </CButton>
+							        </CCol>
 								</CRow>
-						    </CCol>
-							<CRow><CCol><hr></CCol></CRow>
-							<CRow>
-								<CCol>
-									<CButton class="btn btn-block btn-secondary">
-										<i class="far fa-times-circle"></i> Cancelar
-									</CButton>
-						        </CCol>
-						        <CCol>
-						        	<CButton class="btn btn-block btn-primary" @click="addRol">
-							            <i class="far fa-check-circle"></i> Guardar
-							        </CButton>
-						        </CCol>
-							</CRow>
-						</CForm>
+							</CForm>
+						</ValidationObserver>
 		          	</CCardBody>
 		        </CCard>
 	      	</CCol>
@@ -156,8 +161,13 @@
 </template>
 
 <script>
+	import SgpInputInline from './SgpInputInline'
+	import SgpTextAreaInline from './SgpTextAreaInline'
+	import AlertError from './AlertError'
+
 	export default {
 		name : 'rol-form',
+		components: { SgpInputInline, SgpTextAreaInline, AlertError },
 		data () {
     		return {
     			rol: {
@@ -203,36 +213,44 @@
     				state 	   : ''
 			    }
 		    },
-		    addRol () {
-		    	const config = {
-			        method: 'POST',
-			        headers: {
-			        	'Content-Type': 'application/json',
-			        	'X-Requested-With': 'XMLHttpRequest'
-			        },
-			        body: JSON.stringify(this.rol),
-			        cache: 'no-cache'
-			    }
+		    onSubmit() {
+				this.$refs.form.validate().then(success => {
+					if (!success) {
+			          	return;
+			        }
 
-		    	fetch('rol/create', config)
-				    .then( response => response.json() )
-				    .then( result   => {
+			    	const config = {
+				        method: 'POST',
+				        headers: {
+				        	'Content-Type': 'application/json',
+				        	'X-Requested-With': 'XMLHttpRequest'
+				        },
+				        body: JSON.stringify(this.rol),
+				        cache: 'no-cache'
+				    }
 
-				    	if ( result.statusCode === 200 ) {
-					        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
-				    		this.resetForm()
-					        this.getRoles()
+			    	fetch('rol/create', config)
+					    .then( response => response.json() )
+					    .then( result   => {
 
-					        return ;
-				    	}
+					    	if ( result.statusCode === 200 ) {
+						        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
+						        this.getRoles()
+					    		this.resetForm()
 
-				    	if ( result.statusCode === 500 ) {
-							this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
-							return ;
-				    	}
-				    }).catch(function(err) {
-				        console.error(err)
-				    });
+						        this.$nextTick(() => {
+						          	this.$refs.form.reset();
+						        });
+					    	}
+
+					    	if ( result.statusCode === 500 ) {
+								this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
+								return ;
+					    	}
+					    }).catch(function(err) {
+					        console.error(err)
+					    });
+				});
 			},
 		    deleteRol() {
 				const config = {

@@ -24,8 +24,7 @@ class Rol extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
+		$data = $this->request->getJSON(true);
         $this->rol->insert( $data );
 
         return ( $this->rol->insertID ) ? $this->successResponse( 'Rol creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el rol', 404, $this->rol );
@@ -36,10 +35,9 @@ class Rol extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
-		$rol  = $this->rol->where('id', $id)->first();
-		$data = ['rol' => $rol];
+		$data = ['rol' => $this->rol->where('id', $id)->first()];
 
 		return view('rol/edit', $data);
 	}
@@ -49,11 +47,10 @@ class Rol extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
-		$rol     = $this->rol->update($id, $data);
+		$data = $this->request->getJSON(true);
+		$rol  = $this->rol->update($id, $data);
 
 		return ( $rol ) ? $this->successResponse( 'Rol editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el rol', 404, $rol );
 	}
@@ -63,7 +60,7 @@ class Rol extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id )
+	public function delete( $id = null )
 	{
 		$rol = $this->rol->where('id', $id)->delete();
 
@@ -71,10 +68,10 @@ class Rol extends BaseController
 	}
 
 	/**
-	 * [get_all_roles description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_roles()
+	public function get_all()
 	{
 		$roles = $this->rol->orderBy('id', 'asc')->findAll();
 
@@ -82,11 +79,11 @@ class Rol extends BaseController
 	}
 
 	/**
-	 * [get_rol_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_rol_by_id ( $id )
+	public function get_by_id ( $id = null )
 	{
 		$rol = $this->rol->find($id);
 

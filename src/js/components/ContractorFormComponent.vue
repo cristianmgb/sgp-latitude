@@ -7,37 +7,61 @@
 		            	<i class="fas fa-plus-circle fa-lg"></i> Nuevo Contratista
 		          	</CCardHeader>
 		          	<CCardBody>
-		            	<CForm accept-charset="UTF-8" id="formContractor">
-							<div class="form-group">
-								<CInput id="name" v-model="contractor.name" label="Nombre" placeholder="Nombre del contratista" requiered/>
-							</div>
-							<div class="form-group">
-								<CTextarea id="description" v-model="contractor.description" label="Descripción" placeholder="Descripción del contratista" rows="8" requiered/>
-							</div>
-							<div class="form-group">
-								<label for="state">Estado</label>
-								<select class="form-control" id="state" name="state" v-model="contractor.state" requiered>
-									<option v-for="option in options" :value="option.value" :key="option.value">
-						             	{{ option.text }}
-						            </option>
-								</select>
-							</div>
-							<div class="form-group">
-								<hr>
-					      		<CRow>
+		            	<ValidationObserver ref="form">
+	            			<CForm @submit.prevent="onSubmit">
+	            				<CRow>
 									<CCol>
-										<CButton class="btn btn-block btn-secondary">
-											<i class="far fa-times-circle"></i> Cancelar
-										</CButton>
+					            		<SgpInputInline
+					            			id="name"
+					            			label="Nombre"
+					            			type="text"
+					            			placeholder="Nombre"
+					            			rules="required|alpha_spaces"
+					            			v-model="contractor.name"
+					            		/>
+					            	</CCol>
+					            </CRow>
+					            <CRow>
+					            	<CCol>
+					            		<SgpTextAreaInline
+					            			id="description"
+						                    label="Descripción"
+						                    rows="8"
+						                    rules="required|min:50"
+						                    v-model="contractor.description"
+							            	placeholder="Descripción del contratista"
+					            		/>
+									</CCol>
+			            		</CRow>
+								<CRow>
+									<CCol>
+										<label class="col-form-label" for="state">Estado</label>
+										<ValidationProvider name="Estado" rules="required" v-slot="{ errors }">
+											<select
+												id="state"
+												name="Estado"
+												class="form-control"
+												v-model="contractor.state"
+												:class="{ 'is-invalid': errors[0] }"
+											>
+												<option v-for="option in options" :value="option.value">
+									             	{{ option.text }}
+									            </option>
+											</select>
+											<AlertError :errors="errors[0]"></AlertError>
+										</ValidationProvider>
 							        </CCol>
+							    </CRow>
+							    <CRow><CCol><hr></CCol></CRow>
+								<CRow>
 							        <CCol>
-							        	<CButton class="btn btn-block btn-primary" @click="addContractor">
-								            <i class="far fa-check-circle"></i> Guardar
+							        	<CButton type="submit" class="btn btn-block btn-primary">
+								            <i class="fas fa-save"></i> Guardar
 								        </CButton>
 							        </CCol>
 								</CRow>
-							</div>
-						</CForm>
+							</CForm>
+						</ValidationObserver>
 		          	</CCardBody>
 		        </CCard>
 	      	</CCol>
@@ -137,8 +161,13 @@
 </template>
 
 <script>
+	import SgpInputInline from './SgpInputInline'
+	import SgpTextAreaInline from './SgpTextAreaInline'
+	import AlertError from './AlertError'
+
 	export default {
 		name : 'contractor-form',
+		components: { SgpInputInline, SgpTextAreaInline, AlertError },
 		data () {
     		return {
     			contractor: {
@@ -184,36 +213,44 @@
     				state 	   : ''
 			    }
 		    },
-		    addContractor () {
-		    	const config = {
-			        method: 'POST',
-			        headers: {
-			        	'Content-Type': 'application/json',
-			        	'X-Requested-With': 'XMLHttpRequest'
-			        },
-			        body: JSON.stringify(this.contractor),
-			        cache: 'no-cache'
-			    }
+		    onSubmit() {
+				this.$refs.form.validate().then(success => {
+					if (!success) {
+			          	return;
+			        }
 
-		    	fetch('contratista/create', config)
-				    .then( response => response.json() )
-				    .then( result   => {
+			    	const config = {
+				        method: 'POST',
+				        headers: {
+				        	'Content-Type': 'application/json',
+				        	'X-Requested-With': 'XMLHttpRequest'
+				        },
+				        body: JSON.stringify(this.contractor),
+				        cache: 'no-cache'
+				    }
 
-				    	if ( result.statusCode === 200 ) {
-					        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
-				    		this.resetForm()
-					        this.getContractors()
+			    	fetch('contratista/create', config)
+					    .then( response => response.json() )
+					    .then( result   => {
 
-					        return ;
-				    	}
+					    	if ( result.statusCode === 200 ) {
+						        this.$toast.success('<i class="fas fa-check"></i> ' + result.message)
+						        this.getContractors()
+					    		this.resetForm()
 
-				    	if ( result.statusCode === 500 ) {
-							this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
-							return ;
-				    	}
-				    }).catch(function(err) {
-				        console.error(err)
-				    });
+						        this.$nextTick(() => {
+						          	this.$refs.form.reset();
+						        });
+					    	}
+
+					    	if ( result.statusCode === 500 ) {
+								this.$toast.info('<i class="fas fa-info-circle"></i> ' + result.message)
+								return ;
+					    	}
+					    }).catch(function(err) {
+					        console.error(err)
+					    });
+				});
 			},
 			deleteContractor() {
 				const config = {

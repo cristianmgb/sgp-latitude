@@ -24,8 +24,7 @@ class Contractor extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
+		$data = $this->request->getJSON(true);
         $this->contractor->insert( $data );
 
         return ( $this->contractor->insertID ) ? $this->successResponse( 'Contratista creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el contratista', 404, $this->contractor );
@@ -36,10 +35,9 @@ class Contractor extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
-		$contractor = $this->contractor->where('id', $id)->first();
-		$data       = ['contractor' => $contractor];
+		$data = ['contractor' => $this->contractor->where('id', $id)->first()];
 
 		return view('contractor/edit', $data);
 	}
@@ -49,10 +47,9 @@ class Contractor extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
-		$request    = \Config\Services::request();
-		$data       = $request->getJSON(true);
+		$data       = $this->request->getJSON(true);
 		$contractor = $this->contractor->update($id, $data);
 
 		return ( $contractor ) ? $this->successResponse( 'Contratista editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el contratista', 404, $contractor );
@@ -63,7 +60,7 @@ class Contractor extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id )
+	public function delete( $id = null )
 	{
 		$contractor = $this->contractor->where('id', $id)->delete();
 
@@ -71,10 +68,10 @@ class Contractor extends BaseController
 	}
 
 	/**
-	 * [get_all_contractors description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_contractors()
+	public function get_all()
 	{
 		$contrators = $this->contractor->orderBy('id', 'asc')->findAll();
 
@@ -82,11 +79,11 @@ class Contractor extends BaseController
 	}
 
 	/**
-	 * [get_contractor_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_contractor_by_id ( $id )
+	public function get_by_id ( $id = null )
 	{
 		$contrator = $this->contractor->find($id);
 

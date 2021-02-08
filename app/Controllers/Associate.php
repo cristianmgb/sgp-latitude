@@ -33,9 +33,7 @@ class Associate extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
-
+		$data = $this->request->getJSON(true);
         $this->associate->insert( $data );
 
         return ( $this->associate->insertID ) ? $this->successResponse( 'Asociado creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el asociado', 404, $this->associate );
@@ -46,10 +44,9 @@ class Associate extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
-		$associate = $this->associate->where('id', $id)->first();
-		$data      = ['associate' => $associate];
+		$data = ['associate' =>  $this->associate->where('id', $id)->first()];
 
 		return view('associate/edit', $data);
 	}
@@ -59,10 +56,9 @@ class Associate extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
-		$request   = \Config\Services::request();
-		$data      = $request->getJSON(true);
+		$data      = $this->request->getJSON(true);
 		$associate = $this->associate->update($id, $data);
 
 		return ( $associate ) ? $this->successResponse( 'Asociado editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el asociado', 404, $associate );
@@ -73,7 +69,7 @@ class Associate extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id )
+	public function delete( $id = null )
 	{
 		$associate = $this->associate->where('id', $id)->delete();
 
@@ -81,26 +77,24 @@ class Associate extends BaseController
 	}
 
 	/**
-	 * [get_all_associates description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_associates()
+	public function get_all()
 	{
-		$associateModel = new AssociateModel();
-		$associates 	= $associateModel->orderBy('id', 'asc')->findAll();
+		$associates = $this->associate->orderBy('id', 'asc')->findAll();
 
 		return ( $associates ) ? $this->successResponse( '', $associates ) : $this->failResponse( 'Sin datos', 404, $associates );
 	}
 
 	/**
-	 * [get_associate_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_associate_by_id ( $id )
+	public function get_by_id ( $id = null )
 	{
-		$associateModel = new AssociateModel();
-		$associate 	     =  $associateModel->find($id);
+		$associate =  $this->associate->find($id);
 
 		return ( $associate ) ? $this->successResponse( 'Asociado encontrado', $associate ) : $this->failResponse( 'Asociado no econtrado', 404, $associate );
 	}

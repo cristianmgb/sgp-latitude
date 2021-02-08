@@ -6,10 +6,16 @@ use App\Models\UserModel;
 
 class User extends BaseController
 {
-	
+	public $user;
+
+	public function __construct()
+	{
+		$this->user = new UserModel();
+	}
+
 	public function index()
 	{
-		return view('user/all');
+		return view('user/index');
 	}
 
 	/**
@@ -27,23 +33,10 @@ class User extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
-		$user 	 = new UserModel();
-        $user->insert( $data );
+		$data = $this->request->getJSON(true);
+        $this->user->insert( $data );
 
-        return ( $user->insertID ) ? $this->successResponse( 'Usuario creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el usuario', 404, $user );
-
-	}
-
-	/**
-	 * [show description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function show( $id )
-	{
-
+        return ( $this->user->insertID ) ? $this->successResponse( 'Usuario creado exitosamente', $data ) : $this->failResponse( 'No se pudo crear el usuario', 404, $this->user );
 	}
 
 	/**
@@ -51,9 +44,11 @@ class User extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
+		$data = ['user' => $this->user->where('id', $id)->first()];
 
+		return view('user/edit', $data);
 	}
 
 	/**
@@ -61,53 +56,48 @@ class User extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
+		$data = $this->request->getJSON(true);
+		$user = $this->user->update($id, $data);
 
+		return ( $user ) ? $this->successResponse( 'Usuario editado exitosamente', $data ) : $this->failResponse( 'No se pudo editar el rol', 404, $user );
 	}
-
-	/**
-	 * [remove description]
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function remove( $id )
-	{
 
 	/**
 	 * [delete description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	}public function delete( $id )
+	public function delete( $id = null )
 	{
+		$user = $this->user->where('id', $id)->delete();
 
+		return ( $user ) ? $this->successResponse( 'Usuario eliminado exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar el usuario', 404, '' );
 	}
 
 	/**
-	 * [get_all_users description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_users()
+	public function get_all()
 	{
-		$userModel = new UserModel();
-		$users     = $userModel->select('sgp_users.id as userId, sgp_users.first_name as first , sgp_users.last_name as last, sgp_users.email as email, sgp_users.phone as phone, sgp_users.state as userState, sgp_users.created_at as created, sgp_users.updated_at as updated, sgp_roles.id as rolId, sgp_roles.name as rolName, sgp_roles.state as rolState')
+		$users = $this->user->select('sgp_users.id as userId, sgp_users.first_name as first , sgp_users.last_name as last, sgp_users.email as email, sgp_users.phone as phone, sgp_users.state as userState, sgp_users.created_at as created, sgp_users.updated_at as updated, sgp_roles.id as rolId, sgp_roles.name as rolName, sgp_roles.state as rolState')
 					->join('sgp_roles', 'sgp_roles.id = sgp_users.id_rol', 'left')
                    	->orderBy('sgp_users.id', 'asc')
                    	->findAll();
 
-        return ( $users ) ? $this->successResponse( 'Usuarios encontrados', $users ) : $this->failResponse( 'Sin datos', 404, $users );
+        return ( $users ) ? $this->successResponse( 'Usuarios encontrados', $users ) : $this->failResponse( 'Sin datos disponibles', 404, $users );
 	}
 
 	/**
-	 * [get_user_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_user_by_id ( $id )
+	public function get_by_id ( $id = null )
 	{
-		$userModel = new UserModel();
-		$user 	   = $userModel->find($id);
+		$user = $this->user->find($id);
 
 		return ( $user ) ? $this->successResponse( 'Usuario encontrado', $user ) : $this->failResponse( 'Usuario no encontrado', 404, $user );
 	}

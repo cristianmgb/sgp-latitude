@@ -4,22 +4,39 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table      = 'sgp_users';
-    protected $primaryKey = 'id';
+        protected $DBGroup              = 'default';
+    protected $table                = 'sgp_users';
+    protected $primaryKey           = 'id';
+    protected $useAutoIncrement     = true;
+    protected $insertID             = 0;
+    protected $returnType           = 'array';
+    protected $useSoftDelete        = false;
+    protected $protectFields        = true;
+    protected $allowedFields        = ['id_rol', 'first_name', 'last_name', 'email', 'password', 'phone', 'state'];
 
-    protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
+    // Dates
+    protected $useTimestamps        = true;
+    protected $dateFormat           = 'datetime';
+    protected $createdField         = 'created_at';
+    protected $updatedField         = 'updated_at';
+    protected $deletedField         = 'deleted_at';
 
-    protected $allowedFields = ['id_rol', 'first_name', 'last_name', 'email', 'password', 'phone', 'state'];
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
 
-    protected $useTimestamps = true;
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;
+    // Callbacks
+    protected $allowCallbacks       = true;
+    protected $beforeInsert         = [];
+    protected $afterInsert          = [];
+    protected $beforeUpdate         = [];
+    protected $afterUpdate          = [];
+    protected $beforeFind           = [];
+    protected $afterFind            = [];
+    protected $beforeDelete         = [];
+    protected $afterDelete          = [];
 }
 
 /* End of file UserModel.php */

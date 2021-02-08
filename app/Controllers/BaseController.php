@@ -51,6 +51,7 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+		$this->request = \Config\Services::request();
 	}
 
 	/**
@@ -65,6 +66,7 @@ class BaseController extends Controller
 		    'status' 	 => 'OK',
 			'statusCode' => 200,
 			'message'    => $message,
+			'rows'		 => count($data),
 			'data'       => $data
 		];
 
@@ -89,5 +91,4 @@ class BaseController extends Controller
 
 		return $this->response->setJSON($options);
 	}
-
 }

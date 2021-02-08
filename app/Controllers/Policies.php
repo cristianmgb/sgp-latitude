@@ -24,8 +24,7 @@ class Policies extends BaseController
 	 */
 	public function create()
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
+		$data = $this->request->getJSON(true);
         $this->policy->insert( $data );
 
         return ( $policy->insertID ) ? $this->successResponse( 'Póliza creada exitosamente', $data ) : $this->failResponse( 'No se pudo crear la póliza', 404, $policy );
@@ -36,10 +35,9 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id )
+	public function edit( $id = null )
 	{
-		$policy = $this->policy->where('id', $id)->first();
-		$data   = ['policy' => $policy];
+		$data = ['policy' => $this->policy->where('id', $id)->first()];
 
 		return view('policy/edit', $data);
 	}
@@ -49,11 +47,10 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id )
+	public function update( $id = null )
 	{
-		$request = \Config\Services::request();
-		$data    = $request->getJSON(true);
-		$policy  = $this->policy->update($id, $data);
+		$data   = $this->request->getJSON(true);
+		$policy = $this->policy->update($id, $data);
 
 		return ( $policy ) ? $this->successResponse( 'Póliza editada exitosamente', $data ) : $this->failResponse( 'No se pudo editar la póliza', 404, $policy );
 	}
@@ -63,7 +60,7 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id )
+	public function delete( $id = null )
 	{
 		$policy = $this->policy->where('id', $id)->delete();
 
@@ -71,10 +68,10 @@ class Policies extends BaseController
 	}
 
 	/**
-	 * [get_all_policies description]
+	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all_policies()
+	public function get_all()
 	{
 		$policies = $this->policy->orderBy('id', 'asc')->findAll();
 
@@ -82,11 +79,11 @@ class Policies extends BaseController
 	}
 
 	/**
-	 * [get_policy_by_id description]
+	 * [get_by_id description]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_policy_by_id ( $id )
+	public function get_by_id ( $id = null )
 	{
 		$policy = $this->policy->find($id);
 

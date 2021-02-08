@@ -41,70 +41,72 @@ $routes->get('/login', 'Auth::login');
 $routes->group('admin', function($routes)
 {
 	// Asociados
-	$routes->get('asociados',                   'Associate::index');
-	$routes->get('asociado/nuevo',              'Associate::new');
-	$routes->post('asociado/create',            'Associate::create');
-	$routes->get('asociado/edit/(:segment)',    'Associate::edit/$1');
-	$routes->post('asociado/update/(:segment)', 'Associate::update/$1');
-	$routes->post('asociado/delete/(:segment)', 'Associate::delete/$1');
-	$routes->get('asociado/getAll', 			'Associate::get_all_associates');
-	$routes->get('asociado/getById/(:segment)', 'Associate::get_associate_by_id/$1');
+	$routes->get('asociados',               'Associate::index');
+	$routes->get('asociado/nuevo',          'Associate::new');
+	$routes->post('asociado/create',        'Associate::create');
+	$routes->get('asociado/edit/(:num)',    'Associate::edit/$1');
+	$routes->post('asociado/update/(:num)', 'Associate::update/$1');
+	$routes->post('asociado/delete/(:num)', 'Associate::delete/$1');
+	$routes->get('asociado/getAll', 	    'Associate::get_all');
+	$routes->get('asociado/getById/(:num)', 'Associate::get_by_id/$1');
 
 	// Contratistas
-	$routes->get('contratistas',                   'Contractor::index');
-	$routes->post('contratista/create',            'Contractor::create');
-	$routes->get('contratista/edit/(:segment)',    'Contractor::edit/$1');
-	$routes->post('contratista/update/(:segment)', 'Contractor::update/$1');
-	$routes->post('contratista/delete/(:segment)', 'Contractor::delete/$1');
-	$routes->get('contratista/getAll', 			   'Contractor::get_all_contractors');
-	$routes->get('contratista/getById/(:segment)', 'Contractor::get_contractor_by_id/$1');
+	$routes->get('contratistas',               'Contractor::index');
+	$routes->post('contratista/create',        'Contractor::create');
+	$routes->get('contratista/edit/(:num)',    'Contractor::edit/$1');
+	$routes->post('contratista/update/(:num)', 'Contractor::update/$1');
+	$routes->post('contratista/delete/(:num)', 'Contractor::delete/$1');
+	$routes->get('contratista/getAll', 		   'Contractor::get_all');
+	$routes->get('contratista/getById/(:num)', 'Contractor::get_by_id/$1');
 
 	// Impuestos
-	$routes->get('impuestos',                   'Tax::index');
-	$routes->post('impuesto/create',            'Tax::create');
-	$routes->get('impuesto/edit/(:segment)',    'Tax::edit/$1');
-	$routes->post('impuesto/update/(:segment)', 'Tax::update/$1');
-	$routes->post('impuesto/delete/(:segment)', 'Tax::delete/$1');
-	$routes->get('impuesto/getAll', 			'Tax::get_all_taxes');
-	$routes->get('impuesto/getById/(:segment)', 'Tax::get_tax_by_id/$1');
+	$routes->get('impuestos',               'Tax::index');
+	$routes->post('impuesto/create',        'Tax::create');
+	$routes->get('impuesto/edit/(:num)',    'Tax::edit/$1');
+	$routes->post('impuesto/update/(:num)', 'Tax::update/$1');
+	$routes->post('impuesto/delete/(:num)', 'Tax::delete/$1');
+	$routes->get('impuesto/getAll', 	    'Tax::get_all');
+	$routes->get('impuesto/getById/(:num)', 'Tax::get_by_id/$1');
 
 	// Pólizas
-	$routes->get('polizas',                   'Policies::index');
-	$routes->post('poliza/create',            'Policies::create');
-	$routes->get('poliza/edit/(:segment)',    'Policies::edit/$1');
-	$routes->post('poliza/update/(:segment)', 'Policies::update/$1');
-	$routes->post('poliza/delete/(:segment)', 'Policies::delete/$1');
-	$routes->get('poliza/getAll', 			  'Policies::get_all_policies');
-	$routes->get('poliza/getById/(:segment)', 'Policies::get_policy_by_id/$1');
+	$routes->get('polizas',               'Policies::index');
+	$routes->post('poliza/create',        'Policies::create');
+	$routes->get('poliza/edit/(:num)',    'Policies::edit/$1');
+	$routes->post('poliza/update/(:num)', 'Policies::update/$1');
+	$routes->post('poliza/delete/(:num)', 'Policies::delete/$1');
+	$routes->get('poliza/getAll', 		  'Policies::get_all');
+	$routes->get('poliza/getById/(:num)', 'Policies::get_by_id/$1');
 
 	// Proyectos
-	$routes->get('proyectos',                   'Project::index');
-	$routes->get('proyecto/nuevo',              'Project::new');
-	$routes->post('proyecto/create',            'Project::create');
-	$routes->get('proyecto/show/(:segment)',    'Project::show/$1');
-	$routes->get('proyecto/edit/(:segment)',    'Project::edit/$1');
-	$routes->post('proyecto/update/(:segment)', 'Project::update/$1');
-	$routes->post('proyecto/delete/(:segment)', 'Project::delete/$1');
+	$routes->get('proyectos',               'Project::index');
+	$routes->get('proyecto/nuevo',          'Project::new');
+	$routes->post('proyecto/create',        'Project::create');
+	$routes->get('proyecto/show/(:num)',    'Project::show/$1');
+	$routes->get('proyecto/edit/(:num)',    'Project::edit/$1');
+	$routes->post('proyecto/update/(:num)', 'Project::update/$1');
+	$routes->post('proyecto/delete/(:num)', 'Project::delete/$1');
+	$routes->get('proyecto/getAll', 		'Project::get_all');
+	$routes->get('proyecto/getById/(:num)', 'Project::get_by_id/$1');
 
 	// Roles
-	$routes->get('roles',                  'Rol::index');
-	$routes->post('rol/create',            'Rol::create');
-	$routes->get('rol/edit/(:segment)',    'Rol::edit/$1');
-	$routes->post('rol/update/(:segment)', 'Rol::update/$1');
-	$routes->post('rol/delete/(:segment)', 'Rol::delete/$1');
-	$routes->get('rol/getAll', 			   'Rol::get_all_roles');
-	$routes->get('rol/getById/(:segment)', 'Rol::get_rol_by_id/$1');
+	$routes->get('roles',              'Rol::index');
+	$routes->post('rol/create',        'Rol::create');
+	$routes->get('rol/edit/(:num)',    'Rol::edit/$1');
+	$routes->post('rol/update/(:num)', 'Rol::update/$1');
+	$routes->post('rol/delete/(:num)', 'Rol::delete/$1');
+	$routes->get('rol/getAll', 		   'Rol::get_all');
+	$routes->get('rol/getById/(:num)', 'Rol::get_by_id/$1');
 	
 	// Usuarios
-	$routes->get('usuarios',                   'User::index');
-	$routes->get('usuario/nuevo',              'User::new');
-	$routes->post('usuario/create',            'User::create');
-	$routes->get('usuario/show/(:segment)',    'User::show/$1');
-	$routes->get('usuario/edit/(:segment)',    'User::edit/$1');
-	$routes->post('usuario/update/(:segment)', 'User::update/$1');
-	$routes->post('usuario/delete/(:segment)', 'User::delete/$1');
-	$routes->get('usuario/getAll', 		       'User::get_all_users');
-	$routes->get('usuario/getById/(:segment)', 'User::get_user_by_id/$1');
+	$routes->get('usuarios',               'User::index');
+	$routes->get('usuario/nuevo',          'User::new');
+	$routes->post('usuario/create',        'User::create');
+	$routes->get('usuario/show/(:num)',    'User::show/$1');
+	$routes->get('usuario/edit/(:num)',    'User::edit/$1');
+	$routes->post('usuario/update/(:num)', 'User::update/$1');
+	$routes->post('usuario/delete/(:num)', 'User::delete/$1');
+	$routes->get('usuario/getAll', 		   'User::get_all');
+	$routes->get('usuario/getById/(:num)', 'User::get_by_id/$1');
 });
 
 /**

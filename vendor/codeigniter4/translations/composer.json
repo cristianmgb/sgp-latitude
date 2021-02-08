@@ -1,0 +1,25 @@
+{
+    "name": "codeigniter4/translations",
+    "type": "project",
+    "description": "Translations for CodeIgniter v4 web framework",
+    "homepage": "https://codeigniter.com",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.2",
+        "ext-intl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Translations\\": ""
+        }
+    },
+    "support": {
+        "forum": "http://forum.codeigniter.com/",
+        "source": "https://github.com/codeigniter4/translations",
+        "slack": "https://codeigniterchat.slack.com"
+    },
+    "require-dev": {
+        "codeigniter4/framework": "dev-master",
+        "phpunit/phpunit": "^7.0"
+    }
+}

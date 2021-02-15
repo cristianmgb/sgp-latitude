@@ -1,0 +1,17 @@
+$width-1: 0.0625rem;
+$width-3: $width-1 * 3;
+
+.card-cms {
+    @include border-radius (0 !important);
+    border: none !important;
+    box-shadow: 0 $width-1 $width-3 0 rgb(0 0 0 / 30%), 0 0 0 $width-1 rgb(0 0 0 / 4%);
+    background-color: var(--awsui-color-background-container-content, $white);
+    box-shadow: 0 $width-1 $width-1 0 rgb(0 28 36 / 30%),
+              $width-1 $width-1 $width-1 0 rgb(0 28 36 / 15%),
+             -$width-1 $width-1 $width-1 0 rgb(0 28 36 / 15%);
+    box-shadow: 0 $width-1 $width-1 0 var(--awsui-color-shadow-medium,rgba(0, 28, 36,.3)),
+              $width-1 $width-1 $width-1 0 var(--awsui-color-shadow-side,rgba(0, 28, 36,.15)),
+             -$width-1 $width-1 $width-1 0 var(--awsui-color-shadow-side,rgba(0, 28, 36,.15));
+    border-top: $width-1 solid $gray-200;
+    border-top: $width-1 solid var(--awsui-color-border-container-top, $gray-200);
+}

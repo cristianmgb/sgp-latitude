@@ -66,7 +66,6 @@ class BaseController extends Controller
 		    'status' 	 => 'OK',
 			'statusCode' => 200,
 			'message'    => $message,
-			'rows'		 => count($data),
 			'data'       => $data
 		];
 

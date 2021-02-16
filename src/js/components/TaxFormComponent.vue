@@ -33,18 +33,6 @@
 					            		/>
 									</CCol>
 			            		</CRow>
-			            		<CRow>
-									<CCol>
-					            		<SgpInputInline
-					            			id="value"
-					            			label="Valor %"
-					            			type="text"
-					            			placeholder="% del impuesto"
-					            			rules="required|numeric"
-					            			v-model="tax.value"
-					            		/>
-					            	</CCol>
-					            </CRow>
 								<CRow>
 									<CCol>
 										<label class="col-form-label" for="state">Estado</label>
@@ -88,7 +76,6 @@
 								<tr class="text-center">
 									<th>Nombre</th>
 									<th>Descripción</th>
-									<th>Valor %</th>
 									<th>Creado</th>
 									<th>Modificado</th>
 									<th width="100px">Estado</th>
@@ -99,7 +86,6 @@
 								<tr v-for="tax in taxes">
 						    		<td class="text-center">{{ tax.name }}</td>
 						    		<td>{{ tax.description }}</td>
-						    		<td class="text-center">{{ tax.value }}</td>
 						    		<td class="text-center">
 						    			<CBadge color="secondary">
 							          		{{ tax.created_at }}

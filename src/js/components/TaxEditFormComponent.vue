@@ -32,18 +32,6 @@
 				            		/>
 								</CCol>
 		            		</CRow>
-		            		<CRow>
-								<CCol>
-									<SgpInput
-				            			id="value"
-				            			label="Nombre"
-				            			type="text"
-				            			placeholder="Nombre"
-				            			rules="required|numeric"
-				            			v-model="tax.value"
-				            		/>
-						        </CCol>
-						    </CRow>
 					    	<CRow>
 						        <CCol>
 				            		<CRow class="form-group">

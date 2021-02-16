@@ -1,8 +1,5 @@
 <template>
-	<CWidgetIcon
-        :text="text"
-        color="primary"
-    >
+	<CWidgetIcon color="primary" :text="text">
         {{ header }}
     </CWidgetIcon>
 </template>

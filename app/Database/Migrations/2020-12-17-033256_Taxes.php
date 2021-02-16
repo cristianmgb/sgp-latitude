@@ -27,10 +27,6 @@ class Taxes extends Migration
 				'constraint' => 250,
 				'null'       => FALSE
 			],
-			'value' => [
-				'type'       => 'DECIMAL',
-				'null'       => FALSE
-			],
 			'state' => [
 				'type'       => 'INT',
                 'default'    => "1",

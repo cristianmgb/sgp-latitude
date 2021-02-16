@@ -16,11 +16,8 @@
 
 <?= $this->section('content') ?>
 	<div class="row">
-		<div class="col-10">
-			<sgp-project-form></sgp-project-form>
-		</div>
-		<div class="col-2">
-			<sgp-taxes-table-project></sgp-taxes-table-project>
+		<div class="col">
+			<sgp-project></sgp-project>
 		</div>
 	</div>
 <?= $this->endSection() ?>

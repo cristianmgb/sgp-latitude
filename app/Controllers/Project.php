@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
-public $project;
+use App\Models\ProjectModel;
 
 class Project extends BaseController
 {
+	public $project;
+
 	public function __construct()
 	{
 		$this->project = new ProjectModel();

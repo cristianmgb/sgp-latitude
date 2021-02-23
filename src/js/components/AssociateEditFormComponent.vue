@@ -108,7 +108,7 @@
 							<CRow><CCol><hr></CCol></CRow>
 							<CRow>
 								<CCol>
-									<CLink class="btn btn-block btn-outline-danger" href="../../asociados">
+									<CLink class="btn btn-block btn-outline-danger" href="../../associates">
 										<i class="fas fa-undo-alt"></i> Regresar
 									</CLink>
 						        </CCol>
@@ -161,7 +161,7 @@
 			        cache: 'no-cache'
 			    }
 
-				fetch('../getById/'+ this.id, config)
+				fetch('../get_by_id/'+ this.id, config)
 				    .then( response => response.json() )
 				    .then( result   => {
 

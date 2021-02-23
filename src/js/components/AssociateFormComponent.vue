@@ -90,9 +90,9 @@
 							<CRow><CCol><hr></CCol></CRow>
 							<CRow>
 								<CCol>
-									<CButton class="btn btn-block btn-secondary">
-										<i class="far fa-times-circle"></i> Cancelar
-									</CButton>
+									<CLink class="btn btn-block btn-outline-danger" href="../associates">
+										<i class="fas fa-undo-alt"></i> Regresar
+									</CLink>
 						        </CCol>
 						        <CCol>
 						        	<CButton type="submit" class="btn btn-block btn-primary">
@@ -111,7 +111,7 @@
 <script>
 	import SgpInput from './SgpInput'
 	import AlertError from './AlertError'
-	
+
 	export default {
 		name : 'associate-form',
 		components: { SgpInput, AlertError },
@@ -128,7 +128,7 @@
 					identification : '',
 					email          : '',
 					phone          : '',
-					state 	       : ''	
+					state 	       : ''
 				}
 			}
 		},

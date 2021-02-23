@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "216706dadc3e71f2a3f69d712b2d546b",
+    "content-hash": "3a45b176f6b8015ddb471e84d5165926",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -60,25 +60,34 @@
         },
         {
             "name": "codeigniter4/translations",
-            "version": "v4.0.2",
+            "version": "v4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/translations.git",
-                "reference": "a00809088fa974af77f63d93123d9db7bd4f6945"
+                "reference": "27884498b96e4dad69a37c4de514ab4feb692417"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/translations/zipball/a00809088fa974af77f63d93123d9db7bd4f6945",
-                "reference": "a00809088fa974af77f63d93123d9db7bd4f6945",
+                "url": "https://api.github.com/repos/codeigniter4/translations/zipball/27884498b96e4dad69a37c4de514ab4feb692417",
+                "reference": "27884498b96e4dad69a37c4de514ab4feb692417",
                 "shasum": ""
             },
             "require": {
                 "ext-intl": "*",
-                "php": ">=7.2"
+                "php": "^7.2 || ^8.0"
+            },
+            "replace": {
+                "symfony/polyfill-intl-grapheme": "*",
+                "symfony/polyfill-intl-normalizer": "*",
+                "symfony/polyfill-php70": "*",
+                "symfony/polyfill-php72": "*"
             },
             "require-dev": {
-                "codeigniter4/framework": "dev-master",
-                "phpunit/phpunit": "^7.0"
+                "codeigniter4/codeigniter4": "dev-develop",
+                "ext-tokenizer": "*",
+                "friendsofphp/php-cs-fixer": "^2.18",
+                "nexusphp/cs-config": "^2.1",
+                "phpunit/phpunit": "^9.4"
             },
             "type": "project",
             "autoload": {
@@ -92,7 +101,7 @@
             ],
             "description": "Translations for CodeIgniter v4 web framework",
             "homepage": "https://codeigniter.com",
-            "time": "2020-04-22T03:26:13+00:00"
+            "time": "2021-02-02T04:57:28+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -386,57 +395,6 @@
                 }
             ],
             "time": "2020-11-10T18:47:58+00:00"
-        },
-        {
-            "name": "fzaninotto/faker",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5ffe7db6c80f441f150fc88008d64e64af66634b",
-                "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "squizlabs/php_codesniffer": "^2.9.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "abandoned": true,
-            "time": "2020-12-11T09:59:14+00:00"
         },
         {
             "name": "mikey179/vfsstream",
@@ -1129,16 +1087,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.5.13",
+            "version": "8.5.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8e86be391a58104ef86037ba8a846524528d784e"
+                "reference": "c25f79895d27b6ecd5abfa63de1606b786a461a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e86be391a58104ef86037ba8a846524528d784e",
-                "reference": "8e86be391a58104ef86037ba8a846524528d784e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c25f79895d27b6ecd5abfa63de1606b786a461a3",
+                "reference": "c25f79895d27b6ecd5abfa63de1606b786a461a3",
                 "shasum": ""
             },
             "require": {
@@ -1218,7 +1176,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-01T04:53:52+00:00"
+            "time": "2021-01-17T07:37:30+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -2028,12 +1986,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -2075,9 +2033,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "fzaninotto/faker": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit19efa7f28829098d099f0c52169bf7ce
+class ComposerStaticInit1767dc2cde69c52dad5e649815cd51b2
 {
     public static $files = array (
-        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     );
@@ -44,10 +44,6 @@ class ComposerStaticInit19efa7f28829098d099f0c52169bf7ce
         'K' => 
         array (
             'Kint\\' => 5,
-        ),
-        'F' => 
-        array (
-            'Faker\\' => 6,
         ),
         'D' => 
         array (
@@ -102,10 +98,6 @@ class ComposerStaticInit19efa7f28829098d099f0c52169bf7ce
         'Kint\\' => 
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
-        ),
-        'Faker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -720,10 +712,10 @@ class ComposerStaticInit19efa7f28829098d099f0c52169bf7ce
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit19efa7f28829098d099f0c52169bf7ce::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit19efa7f28829098d099f0c52169bf7ce::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit19efa7f28829098d099f0c52169bf7ce::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit19efa7f28829098d099f0c52169bf7ce::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1767dc2cde69c52dad5e649815cd51b2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1767dc2cde69c52dad5e649815cd51b2::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1767dc2cde69c52dad5e649815cd51b2::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1767dc2cde69c52dad5e649815cd51b2::$classMap;
 
         }, null, ClassLoader::class);
     }

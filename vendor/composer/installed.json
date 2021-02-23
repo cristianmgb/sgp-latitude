@@ -55,28 +55,37 @@
     },
     {
         "name": "codeigniter4/translations",
-        "version": "v4.0.2",
-        "version_normalized": "4.0.2.0",
+        "version": "v4.1.1",
+        "version_normalized": "4.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/codeigniter4/translations.git",
-            "reference": "a00809088fa974af77f63d93123d9db7bd4f6945"
+            "reference": "27884498b96e4dad69a37c4de514ab4feb692417"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/codeigniter4/translations/zipball/a00809088fa974af77f63d93123d9db7bd4f6945",
-            "reference": "a00809088fa974af77f63d93123d9db7bd4f6945",
+            "url": "https://api.github.com/repos/codeigniter4/translations/zipball/27884498b96e4dad69a37c4de514ab4feb692417",
+            "reference": "27884498b96e4dad69a37c4de514ab4feb692417",
             "shasum": ""
         },
         "require": {
             "ext-intl": "*",
-            "php": ">=7.2"
+            "php": "^7.2 || ^8.0"
+        },
+        "replace": {
+            "symfony/polyfill-intl-grapheme": "*",
+            "symfony/polyfill-intl-normalizer": "*",
+            "symfony/polyfill-php70": "*",
+            "symfony/polyfill-php72": "*"
         },
         "require-dev": {
-            "codeigniter4/framework": "dev-master",
-            "phpunit/phpunit": "^7.0"
+            "codeigniter4/codeigniter4": "dev-develop",
+            "ext-tokenizer": "*",
+            "friendsofphp/php-cs-fixer": "^2.18",
+            "nexusphp/cs-config": "^2.1",
+            "phpunit/phpunit": "^9.4"
         },
-        "time": "2020-04-22T03:26:13+00:00",
+        "time": "2021-02-02T04:57:28+00:00",
         "type": "project",
         "installation-source": "dist",
         "autoload": {
@@ -157,59 +166,6 @@
                 "type": "tidelift"
             }
         ]
-    },
-    {
-        "name": "fzaninotto/faker",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fzaninotto/Faker.git",
-            "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5ffe7db6c80f441f150fc88008d64e64af66634b",
-            "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.3.3 || ^7.0 || ^8.0"
-        },
-        "require-dev": {
-            "ext-intl": "*",
-            "phpunit/phpunit": "^4.8.35 || ^5.7",
-            "squizlabs/php_codesniffer": "^2.9.2"
-        },
-        "time": "2020-12-11T09:59:14+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.9-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Faker\\": "src/Faker/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "François Zaninotto"
-            }
-        ],
-        "description": "Faker is a PHP library that generates fake data for you.",
-        "keywords": [
-            "data",
-            "faker",
-            "fixtures"
-        ],
-        "abandoned": true
     },
     {
         "name": "kint-php/kint",
@@ -1113,17 +1069,17 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "8.5.13",
-        "version_normalized": "8.5.13.0",
+        "version": "8.5.14",
+        "version_normalized": "8.5.14.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "8e86be391a58104ef86037ba8a846524528d784e"
+            "reference": "c25f79895d27b6ecd5abfa63de1606b786a461a3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e86be391a58104ef86037ba8a846524528d784e",
-            "reference": "8e86be391a58104ef86037ba8a846524528d784e",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c25f79895d27b6ecd5abfa63de1606b786a461a3",
+            "reference": "c25f79895d27b6ecd5abfa63de1606b786a461a3",
             "shasum": ""
         },
         "require": {
@@ -1161,7 +1117,7 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^2.0.0"
         },
-        "time": "2020-12-01T04:53:52+00:00",
+        "time": "2021-01-17T07:37:30+00:00",
         "bin": [
             "phpunit"
         ],

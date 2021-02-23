@@ -2,10 +2,10 @@
 
 use CodeIgniter\Model;
 
-class ContractorModel extends Model
+class Contractor extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'sgp_contractors';
+    protected $table                = 'contractors';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -39,5 +39,5 @@ class ContractorModel extends Model
     protected $afterDelete          = [];
 }
 
-/* End of file ContractorModel.php */
-/* Location: ./app/Models/ContractorModel.php */
+/* End of file Contractor.php */
+/* Location: ./app/Models/Contractor.php */

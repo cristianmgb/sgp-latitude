@@ -2,10 +2,10 @@
 
 use CodeIgniter\Model;
 
-class TaxModel extends Model
+class Tax extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'sgp_taxes';
+    protected $table                = 'taxes';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -39,5 +39,5 @@ class TaxModel extends Model
     protected $afterDelete          = [];
 }
 
-/* End of file TaxModel.php */
-/* Location: ./app/Models/TaxModel.php */
+/* End of file Tax.php */
+/* Location: ./app/Models/Tax.php */

@@ -5,8 +5,7 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 	require SYSTEMPATH . 'Config/Routes.php';
 }
 
@@ -16,7 +15,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Admin');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -30,84 +29,49 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/admin', 'Admin::index');
 
 // Auth routes
-$routes->get('/login', 'Auth::login');
+$routes->get('/', 'Auth::index');
+$routes->get('/home', 'Auth::home');
+$routes->post('login', 'Auth::login');
 
-/**
- *  Admin Routes
- * */
-$routes->group('admin', function($routes)
-{
-	// Asociados
-	$routes->get('asociados',               'Associate::index');
-	$routes->get('asociado/nuevo',          'Associate::new');
-	$routes->post('asociado/create',        'Associate::create');
-	$routes->get('asociado/edit/(:num)',    'Associate::edit/$1');
-	$routes->post('asociado/update/(:num)', 'Associate::update/$1');
-	$routes->post('asociado/delete/(:num)', 'Associate::delete/$1');
-	$routes->get('asociado/getAll', 	    'Associate::get_all');
-	$routes->get('asociado/getById/(:num)', 'Associate::get_by_id/$1');
+// Asociados
+$routes->get('associates/get_all', 'Associates::get_all');
+$routes->get('associates/get_by_id/(:num)', 'Associates::get_by_id/$1');
+$routes->resource('associates');
 
-	// Contratistas
-	$routes->get('contratistas',               'Contractor::index');
-	$routes->post('contratista/create',        'Contractor::create');
-	$routes->get('contratista/edit/(:num)',    'Contractor::edit/$1');
-	$routes->post('contratista/update/(:num)', 'Contractor::update/$1');
-	$routes->post('contratista/delete/(:num)', 'Contractor::delete/$1');
-	$routes->get('contratista/getAll', 		   'Contractor::get_all');
-	$routes->get('contratista/getById/(:num)', 'Contractor::get_by_id/$1');
+// Contratistas
+$routes->get('contractors/get_all', 'Contractors::get_all');
+$routes->get('contractors/get_by_id/(:num)', 'Contractors::get_by_id/$1');
+$routes->resource('contractors');
 
-	// Impuestos
-	$routes->get('impuestos',               'Tax::index');
-	$routes->post('impuesto/create',        'Tax::create');
-	$routes->get('impuesto/edit/(:num)',    'Tax::edit/$1');
-	$routes->post('impuesto/update/(:num)', 'Tax::update/$1');
-	$routes->post('impuesto/delete/(:num)', 'Tax::delete/$1');
-	$routes->get('impuesto/getAll', 	    'Tax::get_all');
-	$routes->get('impuesto/getById/(:num)', 'Tax::get_by_id/$1');
+// Impuestos
+$routes->get('taxes/get_all', 'Taxes::get_all');
+$routes->get('taxes/get_by_id/(:num)', 'Taxes::get_by_id/$1');
+$routes->resource('taxes');
 
-	// Pólizas
-	$routes->get('polizas',               'Policies::index');
-	$routes->post('poliza/create',        'Policies::create');
-	$routes->get('poliza/edit/(:num)',    'Policies::edit/$1');
-	$routes->post('poliza/update/(:num)', 'Policies::update/$1');
-	$routes->post('poliza/delete/(:num)', 'Policies::delete/$1');
-	$routes->get('poliza/getAll', 		  'Policies::get_all');
-	$routes->get('poliza/getById/(:num)', 'Policies::get_by_id/$1');
+// Pólizas
+$routes->get('policies/get_all', 'Policies::get_all');
+$routes->get('policies/get_by_id/(:num)', 'Policies::get_by_id/$1');
+$routes->resource('policies');
 
-	// Proyectos
-	$routes->get('proyectos',               'Project::index');
-	$routes->get('proyecto/nuevo',          'Project::new');
-	$routes->post('proyecto/create',        'Project::create');
-	$routes->get('proyecto/show/(:num)',    'Project::show/$1');
-	$routes->get('proyecto/edit/(:num)',    'Project::edit/$1');
-	$routes->post('proyecto/update/(:num)', 'Project::update/$1');
-	$routes->post('proyecto/delete/(:num)', 'Project::delete/$1');
-	$routes->get('proyecto/getAll', 		'Project::get_all');
-	$routes->get('proyecto/getById/(:num)', 'Project::get_by_id/$1');
+// Proyectos
+$routes->resource('projects');
 
-	// Roles
-	$routes->get('roles',              'Rol::index');
-	$routes->post('rol/create',        'Rol::create');
-	$routes->get('rol/edit/(:num)',    'Rol::edit/$1');
-	$routes->post('rol/update/(:num)', 'Rol::update/$1');
-	$routes->post('rol/delete/(:num)', 'Rol::delete/$1');
-	$routes->get('rol/getAll', 		   'Rol::get_all');
-	$routes->get('rol/getById/(:num)', 'Rol::get_by_id/$1');
-	
-	// Usuarios
-	$routes->get('usuarios',               'User::index');
-	$routes->get('usuario/nuevo',          'User::new');
-	$routes->post('usuario/create',        'User::create');
-	$routes->get('usuario/show/(:num)',    'User::show/$1');
-	$routes->get('usuario/edit/(:num)',    'User::edit/$1');
-	$routes->post('usuario/update/(:num)', 'User::update/$1');
-	$routes->post('usuario/delete/(:num)', 'User::delete/$1');
-	$routes->get('usuario/getAll', 		   'User::get_all');
-	$routes->get('usuario/getById/(:num)', 'User::get_by_id/$1');
-});
+// Roles
+$routes->get('roles/get_all', 'Roles::get_all');
+$routes->get('roles/get_by_id/(:num)', 'Roles::get_by_id/$1');
+$routes->resource('roles');
+
+// Permisos
+$routes->get('permissions/get_all', 'Permissions::get_all');
+$routes->get('permissions/get_by_id/(:num)', 'Permisos::get_by_id/$1');
+$routes->resource('permissions');
+
+// Usuarios
+$routes->get('users/get_all', 'Users::get_all');
+$routes->get('users/get_by_id/(:num)', 'Users::get_by_id/$1');
+$routes->resource('users');
 
 /**
  * --------------------------------------------------------------------
@@ -122,7 +86,6 @@ $routes->group('admin', function($routes)
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

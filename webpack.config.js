@@ -1,7 +1,7 @@
 /**
  * Starter-ci-boilerplate
  *
- * Its a starter for application  development of codeigniter framework 
+ * Its a starter for application  development of codeigniter framework
  *
  * This content is released under the MIT License (MIT)
  *
@@ -14,7 +14,7 @@
  * @link       https://cihispano.org/
  * @since      Version 1.0.0
  * @filesource
- * 
+ *
  */
 const path    = require('path')
 const webpack = require('webpack')
@@ -29,8 +29,7 @@ module.exports = {
     // "production" | "development" | "none"
     mode : isDevelopment ? 'production' : 'development',
     entry: {
-        dash : path.resolve(__dirname, 'src/js/index'),
-        auth : path.resolve(__dirname, 'src/js/auth/index')
+        app : path.resolve(__dirname, 'src/js/index')
     },
     output: {
         path     : path.resolve(__dirname, 'public/dist/'),

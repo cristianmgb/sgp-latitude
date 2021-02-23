@@ -36,7 +36,7 @@ class Database extends \CodeIgniter\Database\Config
 		'password' => 'TzczyhfelJ{H',
 		'database' => 'olberutr_sgp_latitude',
 		'DBDriver' => 'MySQLi',
-		'DBPrefix' => '',
+		'DBPrefix' => 'sgp_',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
 		'cacheOn'  => false,

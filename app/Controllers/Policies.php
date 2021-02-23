@@ -2,32 +2,46 @@
 
 namespace App\Controllers;
 
-use App\Models\PolicyModel;
+use App\Models\Policy;
 
-class Policies extends BaseController
-{
-	public $policy;
+class Policies extends BaseController {
+	private $policy;
 
-	public function __construct()
-	{
-		$this->policy = new PolicyModel();
+	public function __construct() {
+		$this->policy = new Policy();
 	}
 
-	public function index()
-	{
+	public function index() {
 		return view('policy/index');
+	}
+
+	/**
+	 * [new description]
+	 * @return [type] [description]
+	 */
+	public function new () {
+		return view('policy/new');
 	}
 
 	/**
 	 * [create description]
 	 * @return [type] [description]
 	 */
-	public function create()
-	{
+	public function create() {
 		$data = $this->request->getJSON(true);
-        $this->policy->insert( $data );
+		$this->policy->insert($data);
 
-        return ( $policy->insertID ) ? $this->successResponse( 'Póliza creada exitosamente', $data ) : $this->failResponse( 'No se pudo crear la póliza', 404, $policy );
+		return ($policy->insertID) ? $this->successResponse('Póliza creada exitosamente', $data) : $this->failResponse('No se pudo crear la póliza', 404, $policy);
+	}
+
+	/**
+	 * [show description]
+	 * @return [type] [description]
+	 */
+	public function show($id = null) {
+		$policy = $this->policy->find($id);
+
+		return ($policy) ? $this->successResponse('Póliza encontrado', $policy) : $this->failResponse('Póliza no econtrado', 404, $policy);
 	}
 
 	/**
@@ -35,8 +49,7 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function edit( $id = null )
-	{
+	public function edit($id = null) {
 		$data = ['policy' => $this->policy->where('id', $id)->first()];
 
 		return view('policy/edit', $data);
@@ -47,12 +60,11 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function update( $id = null )
-	{
-		$data   = $this->request->getJSON(true);
+	public function update($id = null) {
+		$data = $this->request->getJSON(true);
 		$policy = $this->policy->update($id, $data);
 
-		return ( $policy ) ? $this->successResponse( 'Póliza editada exitosamente', $data ) : $this->failResponse( 'No se pudo editar la póliza', 404, $policy );
+		return ($policy) ? $this->successResponse('Póliza editada exitosamente', $data) : $this->failResponse('No se pudo editar la póliza', 404, $policy);
 	}
 
 	/**
@@ -60,22 +72,20 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function delete( $id = null )
-	{
+	public function delete($id = null) {
 		$policy = $this->policy->where('id', $id)->delete();
 
-		return ( $policy ) ? $this->successResponse( 'Póliza eliminada exitosamente', '' ) : $this->failResponse( 'No se pudo eliminar la póliza', 404, '' );
+		return ($policy) ? $this->successResponse('Póliza eliminada exitosamente', '') : $this->failResponse('No se pudo eliminar la póliza', 404, '');
 	}
 
 	/**
 	 * [get_all description]
 	 * @return [type] [description]
 	 */
-	public function get_all()
-	{
+	public function get_all() {
 		$policies = $this->policy->orderBy('id', 'asc')->findAll();
 
-		return ( $policies ) ? $this->successResponse( 'Datos encontrados', $policies ) : $this->failResponse( 'Sin datos disponibles', 404, $policies );
+		return ($policies) ? $this->successResponse('Datos encontrados', $policies) : $this->failResponse('Sin datos disponibles', 404, $policies);
 	}
 
 	/**
@@ -83,11 +93,10 @@ class Policies extends BaseController
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function get_by_id ( $id = null )
-	{
+	public function get_by_id($id = null) {
 		$policy = $this->policy->find($id);
 
-		return ( $policy ) ? $this->successResponse( 'Póliza encontrada', $policy ) : $this->failResponse( 'Póliza no encontrada', 404, $policy );
+		return ($policy) ? $this->successResponse('Póliza encontrada', $policy) : $this->failResponse('Póliza no encontrada', 404, $policy);
 	}
 }
 

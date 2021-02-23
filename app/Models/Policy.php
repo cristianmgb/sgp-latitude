@@ -2,10 +2,10 @@
 
 use CodeIgniter\Model;
 
-class PolicyModel extends Model
+class Policy extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'sgp_policies';
+    protected $table                = 'policies';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -39,5 +39,5 @@ class PolicyModel extends Model
     protected $afterDelete          = [];
 }
 
-/* End of file PolicyModel.php */
-/* Location: ./app/Models/PolicyModel.php */
+/* End of file Policy.php */
+/* Location: ./app/Models/Policy.php */

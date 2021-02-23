@@ -7,7 +7,7 @@ class Associates extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_associates';
+	private const TABLE = 'associates';
 
 	public function up()
 	{

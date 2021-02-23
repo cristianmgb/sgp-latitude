@@ -7,7 +7,7 @@ class Platform extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_platform';
+	private const TABLE = 'platform';
 
 	public function up()
 	{

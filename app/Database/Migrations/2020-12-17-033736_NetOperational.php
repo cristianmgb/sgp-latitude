@@ -7,7 +7,7 @@ class NetOperational extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_net_operational';
+	private const TABLE = 'net_operational';
 
 	public function up()
 	{

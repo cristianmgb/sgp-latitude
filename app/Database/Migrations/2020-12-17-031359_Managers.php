@@ -7,7 +7,7 @@ class Managers extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_managers';
+	private const TABLE = 'managers';
 
 	public function up()
 	{

@@ -7,7 +7,7 @@ class Policies extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_policies';
+	private const TABLE = 'policies';
 
 	public function up()
 	{

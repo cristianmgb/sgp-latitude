@@ -7,7 +7,7 @@ class ContractorsProjects extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_contractors_projects';
+	private const TABLE = 'contractors_projects';
 
 	public function up()
 	{

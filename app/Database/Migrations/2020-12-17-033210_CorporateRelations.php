@@ -7,7 +7,7 @@ class CorporateRelations extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_corporate_relations';
+	private const TABLE = 'corporate_relations';
 
 	public function up()
 	{

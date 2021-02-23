@@ -7,7 +7,7 @@ class Taxes extends Migration
 	/**
 	 * @var string
 	 */
-	private const TABLE = 'sgp_taxes';
+	private const TABLE = 'taxes';
 
 	public function up()
 	{

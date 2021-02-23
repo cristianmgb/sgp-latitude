@@ -17,17 +17,15 @@ namespace App\Controllers;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 
-class BaseController extends Controller
-{
+class BaseController extends Controller {
 	use ResponseTrait;
 
 	/**
 	 * @var string[]
 	 */
 	public $supportedResponseFormats = [
-		'application/json'
+		'application/json',
 	];
-
 
 	/**
 	 * An array of helpers to be loaded automatically upon
@@ -41,8 +39,7 @@ class BaseController extends Controller
 	/**
 	 * Constructor.
 	 */
-	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-	{
+	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger) {
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
@@ -50,8 +47,10 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
-		$this->request = \Config\Services::request();
+
+		$session = \Config\Services::session();
+		$request = \Config\Services::request();
+		$validation = \Config\Services::validation();
 	}
 
 	/**
@@ -60,13 +59,13 @@ class BaseController extends Controller
 	 * @param  [type] $data    [description]
 	 * @return [type]          [description]
 	 */
-	public function successResponse ( $message, $data ){
+	public function successResponse($message, $data) {
 
 		$options = [
-		    'status' 	 => 'OK',
+			'status' => 'OK',
 			'statusCode' => 200,
-			'message'    => $message,
-			'data'       => $data
+			'message' => $message,
+			'data' => $data,
 		];
 
 		return $this->response->setJSON($options);
@@ -79,13 +78,13 @@ class BaseController extends Controller
 	 * @param  [type] $data    [description]
 	 * @return [type]          [description]
 	 */
-	public function failResponse ( $cod, $message, $data ){
+	public function failResponse($cod, $message, $data) {
 
 		$options = [
-		    'status' 	 => 'ERROR',
+			'status' => 'ERROR',
 			'statusCode' => $cod,
-			'message'    => $message,
-			'data'       => $data
+			'message' => $message,
+			'data' => $data,
 		];
 
 		return $this->response->setJSON($options);

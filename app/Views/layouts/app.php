@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?= $this->renderSection('title') ?></title>
+        <title><?=$this->renderSection('title')?></title>
         <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('/dist/img/apple-icon-57x57.png'); ?>">
         <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('/dist/img/apple-icon-60x60.png'); ?>">
         <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('/dist/img/apple-icon-72x72.png'); ?>">
@@ -21,23 +21,23 @@
         <meta name="msapplication-TileImage" content="<?php echo base_url('/dist/img/favicon/ms-icon-144x144.png'); ?>">
         <meta name="theme-color" content="#ffffff">
         <!--  App CSS (Do not remove) -->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('/dist/css/dash.css'); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('/dist/css/app.css'); ?>">
     </head>
     <body class="c-app c-legacy-theme">
-        <?= $this->include('partials/topbar') ?>
-        <div class="c-wrapper" id="dash">
-            <?= $this->include('partials/aside') ?>
+        <?=$this->include('partials/topbar')?>
+        <div class="c-wrapper" id="app">
+            <?=$this->include('partials/aside')?>
             <div class="c-body">
-                <main class="c-main fade-in">
-                    <div class="container-fluid">
-                        <?= $this->renderSection('content') ?>
+                <main class="c-main fade-in pt-3">
+                    <div class="container-fluid px-3">
+                        <?=$this->renderSection('content')?>
                     </div>
                 </main>
-                <?= $this->include('partials/footer') ?>
+                <?=$this->include('partials/footer')?>
             </div>
         </div>
         <!-- App JS (Do not remove) -->
         <script src="<?php echo base_url('/dist/js/commons.js'); ?>"></script>
-        <script src="<?php echo base_url('/dist/js/dash.js'); ?>"></script>
+        <script src="<?php echo base_url('/dist/js/app.js'); ?>"></script>
     </body>
 </html>

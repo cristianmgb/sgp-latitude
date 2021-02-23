@@ -39,7 +39,7 @@ const config = {
 configure(config);
 
 // Import Main styles for this application
-import '../scss/dashboard'
+import '../scss/app'
 import '../img/brand-full.png'
 import '../img/brand-minimized.png'
 
@@ -69,29 +69,38 @@ import '../img/favicon/ms-icon-144x144.png'
 import '../img/favicon/favicon.ico'
 
 // Componentes
-Vue.component('sgp-rol-form', require('./components/RolFormComponent').default)
-Vue.component('sgp-policy-form', require('./components/PolicyFormComponent').default)
-Vue.component('sgp-tax-form', require('./components/TaxFormComponent').default)
-Vue.component('sgp-contractor-form', require('./components/ContractorFormComponent').default)
+
+// Associates
 Vue.component('sgp-associate-form', require('./components/AssociateFormComponent').default)
 Vue.component('sgp-associate-table', require('./components/AssociateTableComponent').default)
+Vue.component('sgp-associate-edit-form', require('./components/AssociateEditFormComponent').default)
+// Contractors
+Vue.component('sgp-contractor-form', require('./components/ContractorFormComponent').default)
+Vue.component('sgp-contractor-table', require('./components/ContractorTableComponent').default)
+Vue.component('sgp-contractor-edit-form', require('./components/ContractorEditFormComponent').default)
+// Taxes
+Vue.component('sgp-tax-form', require('./components/TaxFormComponent').default)
+Vue.component('sgp-tax-table', require('./components/TaxTableComponent').default)
+Vue.component('sgp-tax-edit-form', require('./components/TaxEditFormComponent').default)
+// Policies
+Vue.component('sgp-policy-form', require('./components/PolicyFormComponent').default)
+Vue.component('sgp-policy-table', require('./components/PolicyTableComponent').default)
+Vue.component('sgp-policy-edit-form', require('./components/PolicyEditFormComponent').default)
+
+Vue.component('sgp-rol-form', require('./components/RolFormComponent').default)
 Vue.component('sgp-user-form', require('./components/UserFormComponent').default)
 Vue.component('sgp-user-table', require('./components/UserTableComponent').default)
 Vue.component('sgp-project', require('./components/ProjectFormComponent').default)
-Vue.component('sgp-associate-edit-form', require('./components/AssociateEditFormComponent').default)
-Vue.component('sgp-contractor-edit-form', require('./components/ContractorEditFormComponent').default)
-Vue.component('sgp-tax-edit-form', require('./components/TaxEditFormComponent').default)
-Vue.component('sgp-policy-edit-form', require('./components/PolicyEditFormComponent').default)
 Vue.component('sgp-rol-edit-form', require('./components/RolEditFormComponent').default)
 Vue.component('sgp-user-edit-form', require('./components/UserEditFormComponent').default)
 Vue.component('sgp-widget-section', require('./components/WidgetSectionComponent').default)
 
 /**
- * [dash description]: Instanciamos Vue en 'dash'
+ * [app description]: Instanciamos Vue en 'app'
  * @type {Vue}
  */
 new Vue({
-    el: '#dash',
+    el: '#app',
     data: {
     	msg: 'Dashboard Starter-ci-boilerplate 1.0'
 	}

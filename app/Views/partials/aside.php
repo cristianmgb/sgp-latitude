@@ -2,7 +2,7 @@
     <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
         <i class="fas fa-bars"></i>
     </button>
-    <?= anchor('#', '<i class="fas fa-bars"></i>', 'class="c-header-brand d-lg-none"') ?>
+    <?=anchor('#', '<i class="fas fa-bars"></i>', 'class="c-header-brand d-lg-none"')?>
     <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
         <i class="fas fa-bars"></i>
     </button>
@@ -17,10 +17,13 @@
                 <div class="dropdown-header bg-dark py-2 text-center text-white">
                     <strong>Configuración</strong>
                 </div>
-                <?= anchor('#', '<i class="fas fa-user-cog mr-2"></i> Pérfil', 'class="dropdown-item"') ?>
-                <?= anchor('#', '<i class="fas fa-sign-out-alt mr-2"></i> Salir', 'class="dropdown-item"') ?>
+                <div class="dropdown-header py-2 text-center">
+                    <strong><?=session()->getFlashdata('firt_name')?></strong>
+                </div>
+                <?=anchor('#', '<i class="fas fa-user-cog mr-2"></i> Pérfil', 'class="dropdown-item"')?>
+                <?=anchor('auth/logout', '<i class="fas fa-sign-out-alt mr-2"></i> Salir', 'class="dropdown-item"')?>
             </div>
         </li>
     </ul>
-    <?= $this->renderSection('breadcrumb') ?>
+    <?=$this->renderSection('breadcrumb')?>
 </header>

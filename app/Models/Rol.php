@@ -2,17 +2,17 @@
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class Rol extends Model
 {
-        protected $DBGroup              = 'default';
-    protected $table                = 'sgp_users';
+    protected $DBGroup              = 'default';
+    protected $table                = 'roles';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDelete        = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['id_rol', 'first_name', 'last_name', 'email', 'password', 'phone', 'state'];
+    protected $allowedFields        = ['name', 'description', 'state'];
 
     // Dates
     protected $useTimestamps        = true;
@@ -39,5 +39,5 @@ class UserModel extends Model
     protected $afterDelete          = [];
 }
 
-/* End of file UserModel.php */
-/* Location: ./app/Models/UserModel.php */
+/* End of file Rol.php */
+/* Location: ./app/Models/Rol.php */

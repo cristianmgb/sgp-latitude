@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProjectModel extends Model
+class Project extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'sgp_projects';
+	protected $table                = 'projects';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -41,5 +41,5 @@ class ProjectModel extends Model
 	protected $afterDelete          = [];
 }
 
-/* End of file ProjectModel.php */
-/* Location: ./app/Models/ProjectModel.php */
+/* End of file Project.php */
+/* Location: ./app/Models/Project.php */

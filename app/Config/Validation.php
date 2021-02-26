@@ -1,7 +1,6 @@
 <?php namespace Config;
 
-class Validation
-{
+class Validation {
 	//--------------------------------------------------------------------
 	// Setup
 	//--------------------------------------------------------------------
@@ -26,11 +25,22 @@ class Validation
 	 * @var array
 	 */
 	public $templates = [
-		'list'   => 'CodeIgniter\Validation\Views\list',
+		'list' => 'CodeIgniter\Validation\Views\list',
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $signin = [
+		'email' => [
+			'label' => 'Correo electrónico',
+			'rules' => 'required|valid_email',
+		],
+		'password' => [
+			'label' => 'Contraseña',
+			'rules' => 'required|min_length[10]|max_length[10]',
+		],
+	];
 }

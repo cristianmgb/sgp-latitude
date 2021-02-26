@@ -1,19 +1,19 @@
-<?= $this->extend('./layouts/dashboard') ?>
+<?=$this->extend('./layouts/app')?>
 
-<?= $this->section('title') ?>
+<?=$this->section('title')?>
 	Proyectos
-<?= $this->endSection() ?>
+<?=$this->endSection()?>
 
-<?= $this->section('breadcrumb') ?>
+<?=$this->section('breadcrumb')?>
 	<div class="c-subheader">
 		<ol class="breadcrumb border-0 m-0">
-			<li class="breadcrumb-item">Inicio</li>
-			<li class="breadcrumb-item"><?= anchor('admin/proyectos', 'Proyectos') ?></li>
+			<li class="breadcrumb-item"><?=anchor('/home', 'Inicio')?></li>
+			<li class="breadcrumb-item"><?=anchor('projects', 'Proyectos')?></li>
 		</ol>
 	</div>
-<?= $this->endSection() ?>
+<?=$this->endSection()?>
 
-<?= $this->section('content') ?>
+<?=$this->section('content')?>
 	<div class="row">
 		<div class="col">
 			<div class="card card-accent-primary">
@@ -33,10 +33,10 @@
 								<th width="100px">Acción</th>
 							</tr>
 						</thead>
-						<tbody id="projects"></tbody>
+
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-<?= $this->endSection() ?>
+<?=$this->endSection()?>

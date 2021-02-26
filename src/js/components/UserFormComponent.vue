@@ -107,8 +107,8 @@
 														:class="{ 'is-invalid': errors[0] }"
 													>
 														<option value="">Seleccionar</option>
-														<option v-for="rol in roles" :value="rol.id">
-											             	{{ rol.name }}
+														<option v-for="rol in roles" :value="rol.value">
+											             	{{ rol.text }}
 											            </option>
 													</select>
 													<AlertError :errors="errors[0]"></AlertError>
@@ -175,6 +175,12 @@
 				{ value: '1', text: 'Activo' },
 				{ value: '0', text: 'Inactivo' }
 			],
+			roles : [
+				{ value: '' , text: 'Seleccionar' },
+				{ value: '1', text: 'Superadministrador' },
+				{ value: '2', text: 'Administrador' },
+				{ value: '3', text: 'Asociado' }
+			],
 			user: {
 		        first_name : '',
 		        last_name  : '',
@@ -184,7 +190,7 @@
 				id_rol     : '',
 				state 	   : ''
 		    },
-			roles: [],
+			// roles: [],
 			password : '',
 		    confirm  : ''
 		}),
@@ -196,7 +202,7 @@
 		    	fetch('../rol/getAll')
 				  	.then( response => response.json() )
 				  	.then( data => {
-				  		this.roles = data.data
+				  		// this.roles = data.data
 				  	}).catch( function(error) {
 				  		this.$toast.error('<i class="fas fa-exclamation-triangle"></i> ' + error)
 				  	});

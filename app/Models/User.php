@@ -2,17 +2,17 @@
 
 use CodeIgniter\Model;
 
-class RolModel extends Model
+class User extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'sgp_roles';
+    protected $table                = 'users';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDelete        = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['name', 'description', 'state'];
+    protected $allowedFields        = ['id_rol', 'first_name', 'last_name', 'email', 'password', 'phone', 'state'];
 
     // Dates
     protected $useTimestamps        = true;
@@ -39,5 +39,5 @@ class RolModel extends Model
     protected $afterDelete          = [];
 }
 
-/* End of file RolModel.php */
-/* Location: ./app/Models/RolModel.php */
+/* End of file User.php */
+/* Location: ./app/Models/User.php */

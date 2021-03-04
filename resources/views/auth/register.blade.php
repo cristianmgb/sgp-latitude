@@ -3,7 +3,6 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-8">
-            @include('partials.name_cms')
             <div class="card-group shadow-sm">
                 <div class="card p-4">
                     <div class="card-body">

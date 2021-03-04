@@ -15,8 +15,8 @@
         <div class="c-wrapper" id="app">
             @include('partials.navbar')
             <div class="c-body">
-                <main class="c-main fade-in">
-                    <div class="container-fluid">
+                <main class="c-main pt-3 fade-in">
+                    <div class="container-fluid px-3">
                         @yield('content')
                     </div>
                 </main>

@@ -1,21 +1,30 @@
 @extends('layouts.app')
 
+@section('breadcrumbs', Breadcrumbs::render())
+
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                    @role('superadministrador')
+                        {{ __('Hello, Super Admin you are logged in!') }}
+                    @endrole
 
-                        {{ __('You are logged in!') }}
-                    </div>
+                    @role('administrador')
+                        {{ __('You aren´t Super Admin but, but you are an Admin logged in! :)') }}
+                    @endrole
+
+                    @role('asociado')
+                        {{ __('You aren´t Super Admin but, but you are an Asociado logged in! :)') }}
+                    @endrole
                 </div>
             </div>
         </div>

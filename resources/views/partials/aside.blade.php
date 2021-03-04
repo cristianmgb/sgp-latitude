@@ -1,8 +1,11 @@
-<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-    <div class="c-sidebar-brand d-lg-down-none">
-    	<img src="https://via.placeholder.com/300x80?text=Logo empresa" alt="Logo empresa" class="c-sidebar-brand-full w-50 mx-auto">
-    	<span class="c-sidebar-brand-minimized"><i class="fas fa-database"></i></span>
+<div class="c-sidebar c-sidebar-fixed c-sidebar-lg-show c-sidebar-minimized" id="sidebar">
+    <div class="c-sidebar-brand bg-white d-lg-down-none">
+		<img src="{{ asset('img/brand-full.png') }}" alt="Logo Lattitude" class="c-sidebar-brand-full w-50 mx-auto">
+        <img src="{{ asset('img/brand-minimized.png') }}" alt="Logo Lattitude" class="c-sidebar-brand-minimized w-50 mx-auto">
     </div>
     @include('partials.sidebar')
-    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    <button class="c-sidebar-minimizer c-class-toggler"
+    	type="button" data-target="_parent"
+     	data-class="c-sidebar-minimized"
+    ></button>
 </div>

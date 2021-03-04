@@ -29,21 +29,24 @@ $grays: map-merge(
     $grays
 );
 
-$primary-base:    #464646 !default;
-$primary-100:     #eae9fb !default;
-$primary-200:     #d6d2fb !default;
-$primary-300:     #c1bcf4 !default;
-$primary-400:     #ada5f1 !default;
-$primary-500:     #988fed !default;
-$primary-600:     #8478ea !default;
-$primary-700:     #6f62e6 !default;
-$primary-800:     #5b4ce2 !default;
-$primary-900:     #4635df !default;
-$primary-dark:    #1f1498 !default;
-$primary:         #464646 !default;
-$primary-50:      #988fed !default;
-$primary-25:      #ccc7f6 !default;
+$primary-base:  #321fdb !default;
+$primary-100:   #eae9fb !default;
+$primary-200:   #d6d2fb !default;
+$primary-300:   #c1bcf4 !default;
+$primary-400:   #ada5f1 !default;
+$primary-500:   #988fed !default;
+$primary-600:   #8478ea !default;
+$primary-700:   #6f62e6 !default;
+$primary-800:   #5b4ce2 !default;
+$primary-900:   #4635df !default;
+
+$primary-dark:  #1f1498 !default;
+$primary:       #321fdb !default;
+$primary-50:    #988fed !default;
+$primary-25:    #ccc7f6 !default;
+
 $secondary-base:  #3c4b64 !default;
+
 $secondary-100:   #ebedef !default;
 $secondary-200:   #d8dbe0 !default;
 $secondary-300:   #c4c9d0 !default;
@@ -84,7 +87,7 @@ $theme-colors: () !default;
 $theme-colors: map-merge(
     (
         "primary":    $primary,
-        "secondary":  $secondary-25,
+        "secondary":  $secondary,
         "success":    $success,
         "info":       $info,
         "warning":    $warning,
@@ -129,5 +132,9 @@ $escaped-characters: (
 
 .c-sidebar,
 .c-sidebar-minimizer {
-    background: $black !important;
+    background: $secondary-dark !important;
+
+    .c-sidebar-nav-link {
+        .c-active { background: $secondary-25 }
+    }
 }

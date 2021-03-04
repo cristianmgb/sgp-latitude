@@ -9,6 +9,7 @@
         <i class="fas fa-bars"></i>
     </button>
     <ul class="c-header-nav ml-auto mr-2">
+        {{ Auth::user()->first_name }}
         <li class="c-header-nav-item dropdown">
             <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="c-avatar">
@@ -20,13 +21,16 @@
                     <strong>Configuración</strong>
                 </div>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-user-cog mr-2"></i> Pérfil
+                    <i class="fas fa-user-cog mr-2"></i> Pérfil {{ Auth::user()->name }}
                 </a>
-                <a href="#" class="dropdown-item">
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt mr-2"></i> Salir
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
             </div>
         </li>
     </ul>
-    @include('partials.breadcrumb')
+    <div class="c-subheader px-3">
+        @yield('breadcrumbs')
+    </div>
 </header>

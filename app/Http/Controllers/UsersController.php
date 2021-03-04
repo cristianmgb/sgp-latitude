@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
+use App\Models\Meta;
+use App\Models\Role;
+use App\Models\Permission;
 
 class UsersController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +20,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.index')->with('users', User::Paginate(10));
     }
 
     /**
@@ -33,18 +30,31 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create')
+                ->with('roles', Role::all())
+                ->with('states', $this->get_states());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User;
+        $user->first_name = $request->first_name;
+        $user->last_name  = $request->last_name;
+        $user->email      = $request->email;
+        $user->password   = Hash::make($request->password);
+        $user->status     = $request->status;
+        $user->save();
+
+        $lastUser = User::all();
+        $lastUser->last()->assignRole($request->rol);
+
+        return redirect('users/create')->with('message', 'Usuario creado satisfactoriamente !');
     }
 
     /**
@@ -55,7 +65,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('users.show')->with('user', User::findOrFail($id));
     }
 
     /**
@@ -66,7 +76,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('users.edit')
+                ->with('user', User::findOrFail($id))
+                ->with('roles', Role::all())
+                ->with('states', $this->get_states());
     }
 
     /**
@@ -78,7 +91,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->user::findOrFail($request->id);
+        $this->user->first_name = $request->first_name;
+        $this->user->last_name  = $request->last_name;
+        $this->user->email      = $request->email;
+
+        $this->user->save();
+
+        return $this->user;
     }
 
     /**
@@ -89,6 +109,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+       return $this->user::destroy($request->id);
     }
 }

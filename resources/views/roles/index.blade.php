@@ -1,0 +1,87 @@
+@extends('layouts.app')
+
+@section('breadcrumbs', Breadcrumbs::render('roles.index'))
+
+@section('content')
+	<div class="row">
+		<div class="col">
+			<h2>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check" viewBox="0 0 16 16">
+				  	<path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+				  	<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+				</svg> Roles
+			</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			@if (session('message'))
+			    <div class="alert alert-success" role="alert">
+			    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					  	<i class="fas fa-times-circle"></i>
+					</button>
+			        {{ session('message') }}
+			    </div>
+			@endif
+		</div>
+	</div>
+    <div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-10">
+							<i class="fa fa-align-justify"></i> Listado
+						</div>
+						<div class="col-2">
+							<a class="btn btn-secondary btn-block" role="button" href="{{ route('roles.create') }}">
+								<i class="fas fa-plus-circle"></i> Nuevo
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<table class="table table-striped table-bordered table-condensed table-hover table-sm mb-0 shadow-sm">
+						<thead>
+							<tr class="text-center bg-secondary">
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Creado</th>
+								<th>Actualizado</th>
+								<th>Suspendido</th>
+								<th width="120px">Acción</th>
+							</tr>
+						</thead>
+						<tbody class="mb-0">
+							@foreach ($roles as $rol)
+								<tr class="text-center">
+									<td>{{ $rol->name }}</td>
+									<td>{{ $rol->guard_name }}</td>
+									<td><span class="badge badge-success">{{ $rol->created_at }}</span></td>
+									<td><span class="badge badge-info">{{ $rol->updated_at }}</span></td>
+									<td><span class="badge badge-danger">{{ $rol->deleted_at }}</span></td>
+									<td>
+										<div class="btn-group btn-group-sm" role="group" aria-label="actions-roles">
+											<div class="btn-group btn-group-sm" role="group" aria-label="actions-roles">
+												<a
+													rol="button"
+													class="btn btn-outline-success"
+													href="{{ route('roles.edit' , $rol->id ) }}"
+												>
+													<i class="fas fa-edit"></i>
+												</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">{{ $roles->links() }}</div>
+	</div>
+@endsection

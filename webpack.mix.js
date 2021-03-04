@@ -15,9 +15,10 @@ require('laravel-mix-imagemin');
  */
 
 mix.setPublicPath('public/')
-	.browserSync('http://cms-comerciales.test/')
+	.browserSync('http://sgplatittude.test/')
 	.js('resources/js/app.js', 'public/js')
     .vue()
     .svgVue()
     .copy('resources/img/', 'public/img')
+    .copy('resources/svg/', 'public/svg')
     .sass('resources/sass/app.scss', 'public/css');

@@ -14,13 +14,6 @@
         <main class="container">
             @yield('content')
         </main>
-       {{--  <footer class="container">
-            <div class="col">
-                <p class="text-center">
-                    <i class="far fa-copyright"></i> 2021, Motorysa S.A. Todos los derechos reservados
-                </p>
-            </div>
-        </footer> --}}
         <!-- App JS (Do not remove) -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </body>

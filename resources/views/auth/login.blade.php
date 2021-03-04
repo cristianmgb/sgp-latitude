@@ -3,7 +3,6 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-8">
-            @include('partials.name_cms')
             <div class="card-group shadow-sm">
                 <div class="card p-4">
                     <div class="card-body">
@@ -44,7 +43,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary px-5">
+                                <button type="submit" class="btn btn-dark px-5">
                                     {{ __('Iniciar Sesión') }}
                                 </button>
                             </div>

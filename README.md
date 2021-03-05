@@ -20,6 +20,18 @@ $ composer install
 $ npm install
 $ npm run dev
 ```
+## Configuración de la Base de datos
+
+Seguido a los pasos anteriores configurar los parametros de la base de datos:
+
+```
+DB_HOST=
+DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+```
 
 ## Configuración
 

@@ -26,14 +26,13 @@ Seguido a los pasos anteriores configurar los parametros de la base de datos:
 
 ```
 DB_HOST=
-DB_PORT=3306
+DB_PORT=
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
-
 ```
 
-## Configuración
+## Configuración del .Env
 
 - Renombrar el `env` por `.env`
 - Definir el `APP_URL` al nombre de tu proyecto.
@@ -57,5 +56,4 @@ Administrador
 Asociado
 - User: asociado@latittude.com
 - Pass: secret
-
 ```

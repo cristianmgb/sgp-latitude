@@ -30,18 +30,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'show_permission']);
         Permission::create(['name' => 'edit_permission']);
         Permission::create(['name' => 'delete_permission']);
-        Permission::create(['name' => 'add_setting']);
-        Permission::create(['name' => 'show_setting']);
-        Permission::create(['name' => 'edit_setting']);
-        Permission::create(['name' => 'delete_setting']);
-        Permission::create(['name' => 'add_module']);
-        Permission::create(['name' => 'show_module']);
-        Permission::create(['name' => 'edit_module']);
-        Permission::create(['name' => 'delete_module']);
-        Permission::create(['name' => 'add_menu']);
-        Permission::create(['name' => 'show_menu']);
-        Permission::create(['name' => 'edit_menu']);
-        Permission::create(['name' => 'delete_menu']);
 
         // Permisos de módulos
         Permission::create(['name' => 'add_associate']);

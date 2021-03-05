@@ -27,14 +27,9 @@ class DatabaseSeeder extends Seeder
 
         $permissions = Permission::all();
         $superadmin  = Role::findOrFail(1);
-        $admin       = Role::findOrFail(2);
 
         foreach ($permissions as $permission) {
             $superadmin->givePermissionTo($permission);
-        }
-
-        foreach ($permissions as $permission) {
-            $admin->givePermissionTo($permission);
         }
 
         User::findOrFail(1)->assignRole('superadministrador');

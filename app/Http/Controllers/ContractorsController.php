@@ -88,11 +88,14 @@ class ContractorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Contractor $contractor
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contractor $contractor)
+    public function destroy($id)
     {
-        //
+        $contractor = Contractor::findOrFail($id);
+        $contractor->delete();
+
+        return redirect()->route('contractors.index')->with('message', 'Contratista eliminado satisfactoriamente !');
     }
 }

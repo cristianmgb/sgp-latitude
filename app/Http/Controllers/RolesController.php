@@ -50,6 +50,21 @@ class RolesController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $rol = Role::findOrFail($id);
+
+        return view('roles.show')
+             ->with('rol', $rol)
+             ->with('permissions', $rol->getAllPermissions());
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -93,8 +108,7 @@ class RolesController extends Controller
 
         $rol->update();
 
-        return redirect()->route('roles.edit', $rol->id )
-                        ->with('message', 'Rol editado satisfactoriamente !');
+        return redirect()->route('roles.edit', $rol->id )->with('message', 'Rol editado satisfactoriamente !');
     }
 
     /**
@@ -105,10 +119,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        $rol = Role::find($id);
-        $rol::destroy($id);
+        $rol = Role::findOrFail($id);
+        $rol->destroy($id);
 
-        return redirect()->route('roles.index')
-                      ->with('message', 'Rol eliminado satisfactoriamente !');
+        return redirect()->route('roles.index')->with('message', 'Rol eliminado satisfactoriamente !');
     }
 }

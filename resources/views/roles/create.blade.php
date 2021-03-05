@@ -5,11 +5,6 @@
 @section('content')
 	<div class="row">
 		<div class="col">
-			<h1>Crear Rol</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
 			@if (session('message'))
 			    <div class="alert alert-success" role="alert">
 			    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,9 +22,15 @@
 	        <div class="col-4">
 	            <div class="card shadow-sm">
 	                <div class="card-header">
-	                    <i class="fas fa-plus-circle"></i> Nuevo
+	                    <i class="fas fa-plus-circle"></i> Nuevo Rol
 	                </div>
 	                <div class="card-body">
+	                	<div class="form-group mb-3">
+	                		<p>
+	                			Se recomienda nombrar un nuevo rol en minúsculas y se usan dos palabras
+	                			unir con un '_' ambas palabras.
+	                		</p>
+	                	</div>
 	                    <div class="form-group">
 	                        <label for="name">Nombre</label>
 	                        <input
@@ -58,14 +59,14 @@
     						</div>
     						<div class="col">
     							<button class="btn btn-primary btn-block" type="submit">
-									<i class="far fa-save"></i> Guardar
+									<i class="far fa-save"></i> Crear
 								</button>
     						</div>
     					</div>
 	                </div>
 	            </div>
 	        </div>
-	        <div class="col-3">
+	        <div class="col-2">
 	            <div class="card shadow-sm">
 	                <div class="card-header">
 	                    <i class="fas fa-list"></i> Permisos disponibles

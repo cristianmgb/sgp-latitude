@@ -88,11 +88,14 @@ class TaxesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tax $tax
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tax $tax)
+    public function destroy($id)
     {
-        //
+        $tax = Tax::findOrFail($id);
+        $tax->delete();
+
+        return redirect()->route('taxes.index')->with('message', 'Impuesto eliminado satisfactoriamente !');
     }
 }

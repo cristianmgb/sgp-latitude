@@ -68,19 +68,21 @@
 	        <div class="col-3">
 	            <div class="card shadow-sm">
 	                <div class="card-header">
-	                    <i class="fas fa-list"></i> Permisos disponibles
+	                    <i class="fas fa-list"></i> Permisos del Rol
 	                </div>
 	                <div class="card-body">
-	                	@foreach ($permissions as $permission)
-	                		<div class="form-group form-check">
-	                			{{ html()->label(html()->checkbox('permissions[]', in_array($permission->name, $rol->permissions->pluck('name')->all()), $permission->name)->id('permission-'.$permission->id) . ' ' . $permission->name)->for('permission-'.$permission->id) }}
-								@error('permissions')
-		                            <span class="invalid-feedback" role="alert">
-		                                <strong>{{ $message }}</strong>
-		                            </span>
-		                        @enderror
-							</div>
-	            		@endforeach
+	            		@if ($permissions->count())
+                            @foreach($permissions as $permission)
+                                <div class="form-group form-check">
+                                    {{ html()->label(html()->checkbox('permissions[]', in_array($permission->name, $rol->permissions->pluck('name')->all()), $permission->name)->id('permission-'.$permission->id) . ' ' . $permission->name)->for('permission-'.$permission->id) }}
+                                    @error('permissions')
+			                            <span class="invalid-feedback" role="alert">
+			                                <strong>{{ $message }}</strong>
+			                            </span>
+			                        @enderror
+                                </div>
+                            @endforeach
+                        @endif
 	        		</div>
 	            </div>
 	        </div>

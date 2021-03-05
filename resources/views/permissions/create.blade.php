@@ -3,11 +3,7 @@
 @section('breadcrumbs', Breadcrumbs::render('permissions.create'))
 
 @section('content')
-	<div class="row">
-		<div class="col">
-			<h1>Crear Permiso</h1>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col">
 			@if (session('message'))
@@ -24,7 +20,7 @@
         <div class="col-4">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <i class="fas fa-plus-circle"></i> Nuevo
+                    <i class="fas fa-plus-circle"></i> Nuevo Permiso
                 </div>
                 <div class="card-body">
                 	<form method="POST" action="{{ route('permissions.store') }}">
@@ -60,7 +56,7 @@
 	        						</div>
 	        						<div class="col">
 	        							<button class="btn btn-primary btn-block" type="submit">
-											<i class="far fa-save"></i> Guardar
+											<i class="far fa-save"></i> Crear
 										</button>
 	        						</div>
 	        					</div>
@@ -68,6 +64,31 @@
 			            </div>
 			        </form>
                 </div>
+            </div>
+        </div>
+        <div class="col-3">
+        	<div class="card shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-exclamation-circle"></i> Recomendación
+                </div>
+                <div class="card-body">
+                	<div class="form-group mb-3">
+                		<p>
+                			Los prefijos hacen referencia a la acción a la cual se tiene permiso y en el sistema
+                			se definen de la siguiente manera:
+                		</p>
+                		<ul class="list-group mb-2 w-75 mx-auto">
+						  	<li class="list-group-item">add_nombre_del_modulo</li>
+						  	<li class="list-group-item">show_nombre_del_modulo</li>
+						  	<li class="list-group-item">edit_nombre_del_modulo</li>
+						  	<li class="list-group-item">delete_nombre_del_modulo</li>
+						</ul>
+						<p>
+                			Se recomienda se mantenga dicha estructura para un nuevo permiso, el prefijo seguido
+                			siempre de un '_' y por último el nombre del módulo.
+                		</p>
+                	</div>
+               	</div>
             </div>
         </div>
     </div>

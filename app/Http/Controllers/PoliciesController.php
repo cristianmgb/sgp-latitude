@@ -88,11 +88,14 @@ class PoliciesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Policy $policy
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Policy $policy)
+    public function destroy($id)
     {
-        //
+        $policy = Policy::findOrFail($id);
+        $policy->delete();
+
+        return redirect()->route('policies.index')->with('message', 'Póliza eliminada satisfactoriamente !');
     }
 }

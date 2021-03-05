@@ -91,11 +91,14 @@ class AssociatesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Associate $associate
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Associate $associate)
+    public function destroy($id)
     {
-        return $associate::destroy($request->id);
+        $associate = Associate::findOrFail($id);
+        $associate->delete();
+
+        return redirect()->route('associates.index')->with('message', 'Asociado eliminado satisfactoriamente !');
     }
 }

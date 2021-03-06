@@ -46,7 +46,7 @@ $RECYCLE.BIN/
 #-------------------------
 # These should never be under version control,
 # as it poses a security risk.
-.env
+#.env
 .env.backup
 .vagrant
 Vagrantfile
@@ -78,7 +78,7 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-vendor/
+#vendor/
 
 #-------------------------
 # IDE / Development Files
@@ -123,7 +123,7 @@ nb-configuration.xml
 #-------------------------
 # Npm
 #-------------------------
-node_modules/
+#node_modules/
 
 #-------------------------
 # Github-Workflow
@@ -138,7 +138,7 @@ docker/*.env
 #-------------------------
 # Public files
 #-------------------------
-public/css/
-public/js/
-public/fonts/
-public/img/
+# public/css/
+# public/js/
+# public/fonts/
+# public/img/

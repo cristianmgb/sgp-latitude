@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear Asociado')
+
 @section('breadcrumbs', Breadcrumbs::render('associates.create'))
 
 @section('content')

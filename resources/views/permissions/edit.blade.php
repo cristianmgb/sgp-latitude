@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editar Permiso')
+
 @section('breadcrumbs', Breadcrumbs::render('permissions.edit'))
 
 @section('content')

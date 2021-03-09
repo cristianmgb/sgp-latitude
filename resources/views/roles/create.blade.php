@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear Rol')
+
 @section('breadcrumbs', Breadcrumbs::render('roles.create'))
 
 @section('content')

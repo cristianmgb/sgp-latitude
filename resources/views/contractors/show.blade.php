@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Información del Contratista')
+
 @section('breadcrumbs', Breadcrumbs::render('contractors.show'))
 
 @section('content')

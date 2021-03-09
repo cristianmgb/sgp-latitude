@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear Póliza')
+
 @section('breadcrumbs', Breadcrumbs::render('policies.create'))
 
 @section('content')

@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', 'Inicio de Sesión')
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-8">

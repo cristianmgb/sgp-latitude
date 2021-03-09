@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Información del Asociado')
+
 @section('breadcrumbs', Breadcrumbs::render('associates.show'))
 
 @section('content')

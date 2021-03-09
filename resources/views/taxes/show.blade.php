@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Información del Impuesto')
+
 @section('breadcrumbs', Breadcrumbs::render('taxes.show'))
 
 @section('content')

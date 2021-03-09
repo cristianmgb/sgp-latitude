@@ -5,13 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>@yield('title')</title>
         @include('partials.meta')
         <!--  App CSS (Do not remove) -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="c-app flex-row align-items-center">
-        <main class="container">
+        <main class="container" id="app">
             @yield('content')
         </main>
         <!-- App JS (Do not remove) -->

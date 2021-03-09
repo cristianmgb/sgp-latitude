@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editar Contratista')
+
 @section('breadcrumbs', Breadcrumbs::render('contractors.edit'))
 
 @section('content')

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear Contratista')
+
 @section('breadcrumbs', Breadcrumbs::render('contractors.create'))
 
 @section('content')

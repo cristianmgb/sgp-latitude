@@ -16,7 +16,7 @@ class PermissionsController extends Controller
     public function index()
     {
         return view('permissions.index')
-            ->with('permissions', Permission::Paginate(10));
+            ->with('permissions', Permission::withTrashed()->Paginate(10));
     }
 
     /**
@@ -93,6 +93,6 @@ class PermissionsController extends Controller
         $permission::destroy($id);
 
         return redirect()->route('permissions.index')
-                      ->with('message', 'Permiso eliminado satisfactoriamente !');
+                      ->with('message', 'Permiso suspendido satisfactoriamente !');
     }
 }

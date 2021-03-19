@@ -15,7 +15,7 @@ class PoliciesController extends Controller
      */
     public function index()
     {
-        return view('policies.index')->with('policies', Policy::Paginate(10));
+        return view('policies.index')->with('policies', Policy::withTrashed()->Paginate(10));
     }
 
     /**
@@ -36,11 +36,11 @@ class PoliciesController extends Controller
      */
     public function store(PolicyRequest $request)
     {
-        $olicy = new Policy;
-        $olicy->name        = $request->name;
-        $olicy->description = $request->description;
-        $olicy->status      = $request->status;
-        $olicy->save();
+        $policy = new Policy;
+        $policy->name        = $request->name;
+        $policy->description = $request->description;
+        $policy->status      = $request->status;
+        $policy->save();
 
         return redirect('policies/create')->with('message', 'Póliza creada satisfactoriamente !');
     }
@@ -96,6 +96,6 @@ class PoliciesController extends Controller
         $policy = Policy::findOrFail($id);
         $policy->delete();
 
-        return redirect()->route('policies.index')->with('message', 'Póliza eliminada satisfactoriamente !');
+        return redirect()->route('policies.index')->with('message', 'Póliza suspendida satisfactoriamente !');
     }
 }

@@ -9,14 +9,14 @@ use App\Models\Permission;
 
 class RolesController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('roles.index')->with('roles', Role::Paginate(10));
+        return view('roles.index')->with('roles', Role::withTrashed()->Paginate(10));
     }
 
     /**
@@ -122,6 +122,6 @@ class RolesController extends Controller
         $rol = Role::findOrFail($id);
         $rol->destroy($id);
 
-        return redirect()->route('roles.index')->with('message', 'Rol eliminado satisfactoriamente !');
+        return redirect()->route('roles.index')->with('message', 'Rol suspendido satisfactoriamente !');
     }
 }

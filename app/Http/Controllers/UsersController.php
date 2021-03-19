@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Meta;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Associate;
 
 class UsersController extends Controller
 {
@@ -20,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index')->with('users', User::Paginate(10));
+        return view('users.index')->with('users', User::withTrashed()->Paginate(10));
     }
 
     /**
@@ -32,6 +33,7 @@ class UsersController extends Controller
     {
         return view('users.create')
                 ->with('roles', Role::all())
+                ->with('associates', Associate::all())
                 ->with('states', $this->get_states());
     }
 
@@ -44,11 +46,12 @@ class UsersController extends Controller
     public function store(UserRequest $request)
     {
         $user = new User;
-        $user->first_name = $request->first_name;
-        $user->last_name  = $request->last_name;
-        $user->email      = $request->email;
-        $user->password   = Hash::make($request->password);
-        $user->status     = $request->status;
+        $user->first_name   = $request->first_name;
+        $user->last_name    = $request->last_name;
+        $user->email        = $request->email;
+        $user->password     = Hash::make($request->password);
+        $user->status       = $request->status;
+        $user->associate_id = $request->associate_id;
         $user->save();
 
         $lastUser = User::all();
@@ -76,9 +79,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $user     = User::findOrFail($id);
+        $user_rol = $user->getRoleNames();
+
         return view('users.edit')
-                ->with('user', User::findOrFail($id))
+                ->with('user', $user)
+                ->with('user_rol', $user_rol)
                 ->with('roles', Role::all())
+                ->with('associates', Associate::all())
                 ->with('states', $this->get_states());
     }
 
@@ -91,14 +99,24 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->user::findOrFail($request->id);
-        $this->user->first_name = $request->first_name;
-        $this->user->last_name  = $request->last_name;
-        $this->user->email      = $request->email;
+        $user = User::findOrFail($id);
+        $rol  = $user->getRoleNames();
+        $role = Role::findByName($rol[0]);
 
-        $this->user->save();
+        $user->first_name   = $request->first_name;
+        $user->last_name    = $request->last_name;
+        $user->email        = $request->email;
+        $user->status       = $request->status;
+        $user->associate_id = $request->associate_id;
 
-        return $this->user;
+        // Removemos el rol actual
+        $user->removeRole($role);
+        // Actualizamos el rol
+        $user->assignRole($request->rol);
+        $user->update();
+
+        return redirect()->route('users.edit' , $user)
+                ->with('message', 'Usuario editado satisfactoriamente !');
     }
 
     /**
@@ -109,6 +127,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-       return $this->user::destroy($request->id);
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('message', 'Usuario suspendido satisfactoriamente !');
     }
 }

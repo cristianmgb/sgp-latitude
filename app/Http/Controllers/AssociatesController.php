@@ -15,7 +15,7 @@ class AssociatesController extends Controller
      */
     public function index()
     {
-        return view('associates.index')->with('associates', Associate::Paginate(10));
+        return view('associates.index')->with('associates', Associate::withTrashed()->Paginate(10));
     }
 
     /**
@@ -99,6 +99,6 @@ class AssociatesController extends Controller
         $associate = Associate::findOrFail($id);
         $associate->delete();
 
-        return redirect()->route('associates.index')->with('message', 'Asociado eliminado satisfactoriamente !');
+        return redirect()->route('associates.index')->with('message', 'Asociado suspendido satisfactoriamente !');
     }
 }

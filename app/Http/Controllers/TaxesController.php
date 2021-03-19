@@ -15,7 +15,7 @@ class TaxesController extends Controller
      */
     public function index()
     {
-        return view('taxes.index')->with('taxes', Tax::Paginate(10));
+        return view('taxes.index')->with('taxes', Tax::withTrashed()->Paginate(10));
     }
 
     /**
@@ -96,6 +96,6 @@ class TaxesController extends Controller
         $tax = Tax::findOrFail($id);
         $tax->delete();
 
-        return redirect()->route('taxes.index')->with('message', 'Impuesto eliminado satisfactoriamente !');
+        return redirect()->route('taxes.index')->with('message', 'Impuesto suspendido satisfactoriamente !');
     }
 }

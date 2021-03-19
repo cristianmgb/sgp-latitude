@@ -15,7 +15,7 @@ class ContractorsController extends Controller
      */
     public function index()
     {
-        return view('contractors.index')->with('contractors', Contractor::Paginate(10));
+        return view('contractors.index')->with('contractors', Contractor::withTrashed()->Paginate(10));
     }
 
     /**
@@ -96,6 +96,6 @@ class ContractorsController extends Controller
         $contractor = Contractor::findOrFail($id);
         $contractor->delete();
 
-        return redirect()->route('contractors.index')->with('message', 'Contratista eliminado satisfactoriamente !');
+        return redirect()->route('contractors.index')->with('message', 'Contratista suspendido satisfactoriamente !');
     }
 }

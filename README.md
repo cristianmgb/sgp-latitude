@@ -4,20 +4,31 @@
 	</a>
 </p>
 
-## Instalación y actualizaciones
+## Clonación vía SSH o HTTPS
 
 ```bash
 [clonar SSH]$ git clone git@github.com:cristianmgb/sgp-latitude.git
 ```
-Ó
 ```bash
 [clonar HTTPS]$ git clone https://github.com/cristianmgb/sgp-latitude.git
 ```
+
+## Instalación de dependencias
+
+Para dependencias propias del framework y de PHP, ejecutar:
 ```bash
 $ composer install
 ```
+
+Para dependencias de Javascript, ejecutar:
 ```bash
 $ npm install
+```
+
+## Compilación Js
+
+Para compilar los recursos javascript, ejecute:
+```
 $ npm run dev
 ```
 ## Configuración de la Base de datos
@@ -36,13 +47,15 @@ DB_PASSWORD=
 
 - Renombrar el `env` por `.env`
 - Definir el `APP_URL` al nombre de tu proyecto.
-- ejecutar `php artisan key:generate`
+- Ejecutar `php artisan key:generate`
 - Ejecutar `php artisan migrate --seed`
 - Ejecutar `php artisan optimize:clear`
 
 ## Datos de Usuarios
 
-El único usuariocon permisos asignados es el `Superadministrador` una vez logueado este debe asiganr los permisos que requieran los otros dos roles del sistema aquí los datos de cada usario:
+Una vez configurada la base de datos y ejecutados los comandos para las migraciones
+y seeders previos del sistema, estas serían las credenciales para los usuarios del
+sistema con susrespectivos roles y permisos ya asignados:
 
 ```
 Superadministador

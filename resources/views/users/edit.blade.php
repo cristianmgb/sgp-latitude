@@ -7,11 +7,6 @@
 @section('content')
 	<div class="row">
 		<div class="col">
-			<h1>Editar Usuario</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
 			@if (session('message'))
 			    <div class="alert alert-success" role="alert">
 			    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,13 +21,13 @@
         <div class="col-6">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <i class="fas fa-plus-circle"></i> Nuevo
+                    <i class="fas fa-edit"></i> Editar Usuario
                 </div>
                 <div class="card-body">
                 	<form method="POST" action="{{ route('users.update', $user->id) }}">
 						@method('PUT')
 				    	@csrf
-	                	<div class="row">
+				    	<div class="row">
 	        				<div class="col">
 			                    <div class="form-group">
 			                        <label for="first_name">Nombres</label>
@@ -69,19 +64,20 @@
 	                                @enderror
 			                    </div>
 			                    <div class="form-group">
-			                        <label for="status">Estado</label>
+			                        <label for="rol">Rol</label>
 			                        <select
-			                        	id="status"
-				                        name="status"
-				                        class="form-control @error('status') is-invalid @enderror"
+				                        id="rol"
+				                        name="rol"
+				                        class="form-control @error('rol') is-invalid @enderror"
 			                        >
-								      	@foreach ($states as $key => $value)
-								      		<option value="{{ $key }}" {{ ($user->status == $key) ? 'selected' : '' }}>
-								      			{{ $value }}
+			                        	<option value="">Seleccionar</option>
+			                        	@foreach ($roles as $rol)
+								      		<option value="{{ $rol->id }}" {{ ($user_rol[0] == $rol->name) ? 'selected' : '' }}>
+								      			{{ $rol->name }}
 								      		</option>
 			                        	@endforeach
 								    </select>
-								    @error('status')
+								    @error('rol')
 	                                    <span class="invalid-feedback" role="alert">
 	                                        <strong>{{ $message }}</strong>
 	                                    </span>
@@ -107,37 +103,39 @@
 	                                @enderror
 			                    </div>
 			                    <div class="form-group">
-			                        <label for="password">Contraseña</label>
-			                        <input
-				                        id="password"
-				                        name="password"
-				                        type="password"
-				                        placeholder="****"
-				                        autocomplete="off"
-				                        value=""
-				                        class="form-control @error('password') is-invalid @enderror"
+			                        <label for="status">Estado</label>
+			                        <select
+			                        	id="status"
+				                        name="status"
+				                        class="form-control @error('status') is-invalid @enderror"
 			                        >
-			                        @error('password')
+								      	@foreach ($states as $key => $value)
+								      		<option value="{{ $key }}" {{ ($user->status == $key) ? 'selected' : '' }}>
+								      			{{ $value }}
+								      		</option>
+			                        	@endforeach
+								    </select>
+								    @error('status')
 	                                    <span class="invalid-feedback" role="alert">
 	                                        <strong>{{ $message }}</strong>
 	                                    </span>
 	                                @enderror
 			                    </div>
 			                    <div class="form-group">
-			                        <label for="rol">Rol</label>
+			                        <label for="associate_id">Asociado</label>
 			                        <select
-				                        id="rol"
-				                        name="rol"
-				                        class="form-control @error('rol') is-invalid @enderror"
+				                        id="associate_id"
+				                        name="associate_id"
+				                        class="form-control @error('associate_id') is-invalid @enderror"
 			                        >
 			                        	<option value="">Seleccionar</option>
-			                        	@foreach ($roles as $rol)
-								      		<option value="{{ $rol->name }}" {{ ($user->id == $rol->id) ? 'selected' : '' }}>
-								      			{{ $rol->name }}
+			                        	@foreach ($associates as $associate)
+								      		<option value="{{ $associate->id }}" {{ ($user->associate_id == $associate->id) ? 'selected' : '' }}>
+								      			{{ $associate->first_name }}
 								      		</option>
 			                        	@endforeach
 								    </select>
-								    @error('rol')
+								    @error('associate_id')
 	                                    <span class="invalid-feedback" role="alert">
 	                                        <strong>{{ $message }}</strong>
 	                                    </span>
@@ -153,7 +151,7 @@
 							</div>
 							<div class="col">
 								<button class="btn btn-primary btn-block" type="submit">
-									<i class="far fa-save"></i> Guardar
+									<i class="fas fa-check"></i> Actualizar
 								</button>
 							</div>
 						</div>

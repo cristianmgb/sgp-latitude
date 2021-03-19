@@ -7,11 +7,6 @@
 @section('content')
 	<div class="row">
 		<div class="col">
-			<h1>Crear Póliza</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
 			@if (session('message'))
 			    <div class="alert alert-success" role="alert">
 			    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,7 +21,7 @@
         <div class="col-4">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <i class="fas fa-plus-circle"></i> Nuevo
+                    <i class="fas fa-plus-circle"></i> Nueva Póliza
                 </div>
                 <div class="card-body">
                 	<form method="POST" action="{{ route('policies.store') }}">

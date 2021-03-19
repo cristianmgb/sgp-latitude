@@ -7,11 +7,6 @@
 @section('content')
 	<div class="row">
 		<div class="col">
-			<h1>Crear Usuario</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
 			@if (session('message'))
 			    <div class="alert alert-success" role="alert">
 			    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,7 +21,7 @@
         <div class="col-6">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <i class="fas fa-plus-circle"></i> Nuevo
+                    <i class="fas fa-plus-circle"></i> Nuevo Usuario
                 </div>
                 <div class="card-body">
                 	<form method="POST" action="{{ route('users.store') }}">
@@ -69,44 +64,6 @@
 	                                @enderror
 			                    </div>
 			                    <div class="form-group">
-			                        <label for="status">Estado</label>
-			                        <select
-			                        	id="status"
-				                        name="status"
-				                        class="form-control @error('status') is-invalid @enderror"
-			                        >
-								      	@foreach ($states as $key => $value)
-								      		<option value="{{ $key }}" {{ (old('status') == $key) ? 'selected' : '' }}>
-								      			{{ $value }}
-								      		</option>
-			                        	@endforeach
-								    </select>
-								    @error('status')
-	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
-	                                    </span>
-	                                @enderror
-			                    </div>
-			                </div>
-			                <div class="col">
-			                    <div class="form-group">
-			                        <label for="last_name">Apellidos</label>
-			                        <input
-				                        id="last_name"
-				                        name="last_name"
-				                        type="text"
-				                        autocomplete="off"
-				                        placeholder="Apellidos"
-				                        value="{{ old('last_name') }}"
-				                        class="form-control @error('last_name') is-invalid @enderror"
-			                        >
-			                        @error('last_name')
-	                                    <span class="invalid-feedback" role="alert">
-	                                        <strong>{{ $message }}</strong>
-	                                    </span>
-	                                @enderror
-			                    </div>
-			                    <div class="form-group">
 			                        <label for="password">Contraseña</label>
 			                        <input
 				                        id="password"
@@ -138,6 +95,81 @@
 			                        	@endforeach
 								    </select>
 								    @error('rol')
+	                                    <span class="invalid-feedback" role="alert">
+	                                        <strong>{{ $message }}</strong>
+	                                    </span>
+	                                @enderror
+			                    </div>
+			                </div>
+			                <div class="col">
+			                    <div class="form-group">
+			                        <label for="last_name">Apellidos</label>
+			                        <input
+				                        id="last_name"
+				                        name="last_name"
+				                        type="text"
+				                        autocomplete="off"
+				                        placeholder="Apellidos"
+				                        value="{{ old('last_name') }}"
+				                        class="form-control @error('last_name') is-invalid @enderror"
+			                        >
+			                        @error('last_name')
+	                                    <span class="invalid-feedback" role="alert">
+	                                        <strong>{{ $message }}</strong>
+	                                    </span>
+	                                @enderror
+			                    </div>
+			                    <div class="form-group">
+			                        <label for="status">Estado</label>
+			                        <select
+			                        	id="status"
+				                        name="status"
+				                        class="form-control @error('status') is-invalid @enderror"
+			                        >
+								      	@foreach ($states as $key => $value)
+								      		<option value="{{ $key }}" {{ (old('status') == $key) ? 'selected' : '' }}>
+								      			{{ $value }}
+								      		</option>
+			                        	@endforeach
+								    </select>
+								    @error('status')
+	                                    <span class="invalid-feedback" role="alert">
+	                                        <strong>{{ $message }}</strong>
+	                                    </span>
+	                                @enderror
+			                    </div>
+			                    <div class="form-group">
+			                        <label for="password_confirmation">Confirmar Contraseña</label>
+			                        <input
+				                        id="password_confirmation"
+				                        name="password_confirmation"
+				                        type="password"
+				                        placeholder="****"
+				                        autocomplete="off"
+				                        value="{{ old('password_confirmation') }}"
+				                        class="form-control @error('password_confirmation') is-invalid @enderror"
+			                        >
+			                        @error('password_confirmation')
+	                                    <span class="invalid-feedback" role="alert">
+	                                        <strong>{{ $message }}</strong>
+	                                    </span>
+	                                @enderror
+			                    </div>
+			                    <div class="form-group">
+			                        <label for="associate_id">Asociado</label>
+			                        <select
+				                        id="associate_id"
+				                        name="associate_id"
+				                        class="form-control @error('associate_id') is-invalid @enderror"
+			                        >
+			                        	<option value="">Seleccionar</option>
+			                        	@foreach ($associates as $associate)
+								      		<option value="{{ $associate->id }}" {{ (old('associate_id') == $associate->id) ? 'selected' : '' }}>
+								      			{{ $associate->first_name }}
+								      		</option>
+			                        	@endforeach
+								    </select>
+								    @error('associate_id')
 	                                    <span class="invalid-feedback" role="alert">
 	                                        <strong>{{ $message }}</strong>
 	                                    </span>

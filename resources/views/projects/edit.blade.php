@@ -153,7 +153,7 @@
 							</div>
 							<div class="col">
 								<button class="btn btn-primary btn-block" type="submit">
-									<i class="far fa-save"></i> Guardar
+									<i class="fas fa-check"></i> Actualizar
 								</button>
 							</div>
 						</div>

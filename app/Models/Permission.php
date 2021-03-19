@@ -3,10 +3,33 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends \Spatie\Permission\Models\Permission
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'permissions';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
     /**
      * Default Permissions of the Application.
      */
@@ -43,4 +66,10 @@ class Permission extends \Spatie\Permission\Models\Permission
     {
         $this->attributes['name'] = strtolower($value);
     }
+
+    /**
+     * [$dates description]
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

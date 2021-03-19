@@ -124,7 +124,29 @@ Breadcrumbs::for('projects.show', function ($trail) {
     $trail->push('Proyectos', route('projects.index'));
     $trail->push('Ver Proyecto', route('projects.show', $id ?? ''));
 });
-
+// Inicio > Usuarios
+Breadcrumbs::for('users.index', function ($trail) {
+    $trail->parent('home.index');
+    $trail->push('Usuarios', route('users.index'));
+});
+// Inicio > Usuarios > Nuevo Usuario
+Breadcrumbs::for('users.create', function ($trail) {
+    $trail->parent('home.index');
+    $trail->push('Usuarios', route('users.index'));
+    $trail->push('Nuevo Usuario', route('users.create'));
+});
+// Inicio > Usuarios > Editar Usuario
+Breadcrumbs::for('users.edit', function ($trail) {
+    $trail->parent('home.index');
+    $trail->push('Usuarios', route('users.index'));
+    $trail->push('Editar Usuario', route('users.edit', $id ?? ''));
+});
+// Inicio > Usuarios > Ver Usuario
+Breadcrumbs::for('users.show', function ($trail) {
+    $trail->parent('home.index');
+    $trail->push('Usuarios', route('users.index'));
+    $trail->push('Ver Usuario', route('users.show', $id ?? ''));
+});
 // Inicio > Roles
 Breadcrumbs::for('roles.index', function ($trail) {
     $trail->parent('home.index');
@@ -148,7 +170,6 @@ Breadcrumbs::for('roles.show', function ($trail) {
     $trail->push('Roles', route('roles.index'));
     $trail->push('Ver Rol', route('roles.show', $id ?? ''));
 });
-
 // Inicio > Permisos
 Breadcrumbs::for('permissions.index', function ($trail) {
     $trail->parent('home.index');
@@ -171,28 +192,4 @@ Breadcrumbs::for('permissions.show', function ($trail) {
     $trail->parent('home.index');
     $trail->push('Permisos', route('permissions.index'));
     $trail->push('Ver Permiso', route('permissions.show', $id ?? ''));
-});
-
-// Inicio > Usuarios
-Breadcrumbs::for('users.index', function ($trail) {
-    $trail->parent('home.index');
-    $trail->push('Usuarios', route('users.index'));
-});
-// Inicio > Usuarios > Nuevo Usuario
-Breadcrumbs::for('users.create', function ($trail) {
-    $trail->parent('home.index');
-    $trail->push('Usuarios', route('users.index'));
-    $trail->push('Nuevo Usuario', route('users.create'));
-});
-// Inicio > Usuarios > Editar Usuario
-Breadcrumbs::for('users.edit', function ($trail) {
-    $trail->parent('home.index');
-    $trail->push('Usuarios', route('users.index'));
-    $trail->push('Editar Usuario', route('users.edit', $id ?? ''));
-});
-// Inicio > Usuarios > Ver Usuario
-Breadcrumbs::for('users.show', function ($trail) {
-    $trail->parent('home.index');
-    $trail->push('Usuarios', route('users.index'));
-    $trail->push('Ver Usuario', route('users.show', $id ?? ''));
 });

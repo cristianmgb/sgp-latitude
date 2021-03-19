@@ -27,7 +27,7 @@ class AssociateRequest extends FormRequest
             'first_name'     => 'required|string|min:5',
             'last_name'      => 'required|string|min:5',
             'email'          => 'required|email:rfc,dns|unique:associates,email',
-            'identification' => 'required|numeric',
+            'identification' => 'required|numeric|unique:associates,identification',
             'phone'          => 'required|numeric',
             'status'         => 'required'
         ];

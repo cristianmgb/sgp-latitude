@@ -24,24 +24,26 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|min:5',
-            'last_name'  => 'required|string|min:5',
-            'password'   => 'required|min:5',
-            'email'      => 'required|email:rfc,dns|unique:users,email',
-            'status'     => 'required',
-            'rol'        => 'required'
+            'first_name'   => 'required|string|min:5',
+            'last_name'    => 'required|string|min:5',
+            'password'     => 'required|confirmed|min:5',
+            'email'        => 'required|email:rfc,dns|unique:users,email',
+            'status'       => 'required',
+            'rol'          => 'required',
+            'associate_id' => 'required'
         ];
     }
 
     public function attributes()
     {
         return [
-            'first_name' => 'nombres',
-            'last_name'  => 'apellidos',
-            'password'   => 'contraseña',
-            'email'      => 'correo electrónico',
-            'status'     => 'estado',
-            'rol'        => 'rol'
+            'first_name'   => 'nombres',
+            'last_name'    => 'apellidos',
+            'password'     => 'contraseña',
+            'email'        => 'correo electrónico',
+            'status'       => 'estado',
+            'rol'          => 'rol',
+            'associate_id' => 'asociado'
         ];
     }
 }
